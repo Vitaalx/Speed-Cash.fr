@@ -40,7 +40,6 @@ $cart = new panier();
 <?php
 $ids = array_keys($_SESSION['panier']);
 //var_dump($ids);
-unset($_SESSION['panier'][3]);
 
 require "./php/db.php";
 
@@ -82,7 +81,7 @@ try {
             }
             echo '</div>';
             echo '<p class="price">' . $products[$i-1]["prix"] . '€</p>';
-            echo '<button class="add-to-card"><a href="addpanier.php?id=' . $products[$i-1]["id"] .'">Ajouter au panier</a></button>';
+            echo '<button class="delete-to-card"><a href="">Supprimer du panier</a></button>';
             echo '</div>';
             echo '<div class="row-right">';
             echo '<desc class="desc-product"><i>' . $products[$i-1]["description"] .'</i></desc>';
