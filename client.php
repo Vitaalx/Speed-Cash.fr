@@ -26,12 +26,9 @@ $cart = new panier();
 
     <div class="bar-top">
         <img class="logoSpeedCash" src="./icons/logo-speed-cash.png" alt="Speed Cash">
-
-        <div class="social-icon">
-            <img class="discord-icon" src="./icons/Discord-icon.png" alt="Discord">
-            <img class="instagram-icon" src="./icons/Instagram-icon.svg" alt="Instagram">
-            <img class="github-icon" src="./icons/GitHub-icon.svg" alt="GitHub">
-            <img class="tiktok-icon" src="icons/TikTok-icon.svg" alt="TikTok">
+        <div class="btn-type-client">
+        <a class="btn-deconnexion" href="./php/deconnexion.php"><span>Déconnexion</span></a>
+        <a class="cart" href="./panier.php"><i class="uil uil-shopping-bag"></i></a>
         </div>
 
     </div>
@@ -82,10 +79,25 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             echo '</div>';
             echo '<p class="price">' . $products[$i-1]["prix"] . '€</p>';
-            echo '<button class="add-to-card"><a href="addpanier.php?id=' . $products[$i-1]["id"] .'">Ajouter au panier</a></button>';
+            echo '<button class="add-to-card"><a class="addPanier" href="addpanier.php?id=' . $products[$i-1]["id"] .'">Ajouter au panier</a></button>';
             echo '</div>';
             echo '<div class="row-right">';
             echo '<desc class="desc-product"><i>' . $products[$i-1]["description"] .'</i></desc>';
+            echo '<br>';
+            echo '<form method="post" action="php/rating.php" id="ratingForm">';
+            echo '<span><strong>Ma note est de :</strong></span>';
+            echo '<div class="stars-form">';
+            echo '<i class="lar la-star star-form" data-value="1"></i>';
+            echo '<i class="lar la-star star-form" data-value="2"></i>';
+            echo '<i class="lar la-star star-form" data-value="3"></i>';
+            echo '<i class="lar la-star star-form" data-value="4"></i>';
+            echo '<i class="lar la-star star-form" data-value="5"></i>';
+            echo '</div>';
+            echo '<input type="hidden" id="rate" name="note" value="0">';
+            echo '<input type="hidden" id="product_id" value="' . $products[$i-1]["id"] . '">';
+            echo '<input type="hidden" id="user_id" value="' . $_SESSION["id"] . '">';
+            echo '<button class="rate-form" type="submit">Évaluer le produit</button>';
+            echo '</form>';
             echo '</div>';
             echo '</div>';
 
@@ -104,33 +116,68 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 ?>
 </main>
 
-<!--main class="container-thumbnail">
-
-    <div class="thumbnail">
-        <div class="row-left">
-            <img src="https://media.ldlc.com/r1600/ld/products/00/05/53/43/LD0005534357_2.jpg" class="img-souris-razer"
-                 alt="Souris Razer">
-            <p class="text-product">Souris Razer Balistik V2</p>
-            <div class="stars">
-                <i class="lar la-star" data-value="1"></i><i class="lar la-star" data-value="2"></i><i class="lar la-star"
-                                                                                                       data-value="3"></i><i
-                        class="lar la-star" data-value="4"></i><i class="lar la-star" data-value="5"></i>
+<!--div class="modal-rate-form">
+    <div class="container-modal-rate">
+        <span class="close-modal" onclick="closeRateForm()" title="Fermer">&times;</span>
+        <form method="post" action="php/rating.php" id="ratingForm">
+            <span><strong>Ma note est de :</strong></span>
+            <div class="stars-form">
+                <i class="lar la-star star-form" data-value="1"></i>
+                <i class="lar la-star star-form" data-value="2"></i>
+                <i class="lar la-star star-form" data-value="3"></i>
+                <i class="lar la-star star-form" data-value="4"></i>
+                <i class="lar la-star star-form" data-value="5"></i>
             </div>
-            <input type="hidden" name="rate" id="rate" value="5">
-            <p class="price">99€</p>
-            <button class="add-to-card">Ajouter au panier</button>
-        </div>
-        <div class="row-right">
-            <desc class="desc-product"><i>Obtenez un avantage définitif sur vos adversaires avec le Razer Basilisk v2. Doté d'un capteur optique
-                Razer Focus de 20 000 dpi, il vous offre une précision d'une netteté remarquable pour que vous ne manquiez
-                    plus jamais votre cible.</i>
-            </desc>
-
-        </div>
+            <input type="hidden" id="rate" name="note" value="0">
+            <button type="submit" class="rate-form">Envoyer ma note !</button>
+        </form>
     </div>
+</div-->
 
-</main>
-<script src="./js/rating.js"></script-->
+<script type="text/javascript" src="./js/app.js"></script>
+<script type="text/javascript" src="js/modal.js"></script>
+
+
+<script src="./js/rating.js"></script>
+
+<script>
+    // SUR VALIDATION DU FORMULAIRE DE CONNEXION
+    $("#ratingForm").submit(function (event) {
+        // Annulation du submit auto
+        event.preventDefault();
+        // Appel de la fonction dédiée
+        ratingPOST();
+    });
+
+    function ratingPOST() {
+
+        // Création d'un formulaire de données
+        var fd = new FormData();
+        fd.append('note', $("#rate").val());
+        fd.append('produit_id', $("#product_id").val());
+        fd.append('user_id', $("#user_id").val());
+
+        //Post du formulaire via AJAX
+        $.ajax({
+            type: "POST",
+            url: "php/rating.php",
+            contentType: false,
+            processData: false,
+            data: fd,
+            success: function (text) {
+                alert('-' + text + '-');
+                if (text == "success") {
+                    // code .. ( si la note du client à bien été prise en compte )
+
+                } else if (text == "doublon") {
+                    // code... ( si le client à déjà noter un produit )
+                }
+            }
+        });
+
+    }
+</script>
+
 
 </body>
 

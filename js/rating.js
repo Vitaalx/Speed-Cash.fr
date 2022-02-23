@@ -1,6 +1,6 @@
 window.onload = () => {
     // On va chercher toutes les étoiles
-    const stars = document.querySelectorAll(".la-star");
+    const stars = document.querySelectorAll(".star-form");
 
     // On va chercher l'input
     const rate = document.querySelector("#rate");

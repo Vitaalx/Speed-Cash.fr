@@ -1,7 +1,10 @@
 <?php
+session_start();
 require 'panier.class.php';
 $cart = new panier();
 //var_dump($_SESSION);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -23,12 +26,9 @@ $cart = new panier();
 
     <div class="bar-top">
         <img class="logoSpeedCash" src="./icons/logo-speed-cash.png" alt="Speed Cash">
-
-        <div class="social-icon">
-            <img class="discord-icon" src="./icons/Discord-icon.png" alt="Discord">
-            <img class="instagram-icon" src="./icons/Instagram-icon.svg" alt="Instagram">
-            <img class="github-icon" src="./icons/GitHub-icon.svg" alt="GitHub">
-            <img class="tiktok-icon" src="icons/TikTok-icon.svg" alt="TikTok">
+        <div class="btn-type-client">
+            <a class="btn-deconnexion" href="./php/deconnexion.php"><span>Déconnexion</span></a>
+            <a class="cart" href="./panier.php"><i class="uil uil-shopping-bag"></i></a>
         </div>
 
     </div>
@@ -37,70 +37,69 @@ $cart = new panier();
 
 <body>
 
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Nom du produit</th>
+        <th>Prix sans TVA</th>
+        <th>Quantité</th>
+        <th>Prix avec TVA</th>
+        <th>Actions</th>
+    </tr>
 <?php
 $ids = array_keys($_SESSION['panier']);
 //var_dump($ids);
 
 require "./php/db.php";
 
+if(empty($ids)) {
+    $products = array();
+} else {
 
-try {
+    try {
 // Connexion à la BDD
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "SELECT * FROM produits WHERE id IN (" . implode(",",$ids) . ")";
-    //echo $sql;
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $nb = $stmt->rowCount();
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if ($nb > 0) {
+        $sql = "SELECT * FROM produits WHERE id IN (" . implode(",", $ids) . ")";
+        //echo $sql;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $nb = $stmt->rowCount();
 
-        $products = $stmt->fetchAll();
-        //var_dump($products);
+        if ($nb > 0) {
 
-        for ($i = 1; $i <= $nb ; $i++) {
-            echo '<div class="thumbnail">';
-            echo '<div class="row-left">';
-            echo '<img src="images/produit-'.$products[$i-1]["id"].'.jpg" class="img-product"
-                 alt="' . $products[$i-1]["nom"] . '">';
-            echo '<p class="text-product">' . $products[$i-1]["nom"] .'</p>';
-            echo '<div class="stars">';
-            if ($products[$i-1]["note"] > 0) {
-                for ($j = 1; $j <= 5; $j++) {
-                    if ($j <= $products[$i-1]["note"]) {
-                        echo '<i class="las la-star"></i>';
-                    } else {
-                        echo '<i class="lar la-star"></i>';
-                    }
-                }
-            } else  {
-                for ($y = 1; $y != 5; $y++) {
-                    echo '<i class="lar la-star"></i>';
-                }
+            $products = $stmt->fetchAll(PDO::FETCH_OBJ);
+            //var_dump($products);
+
+            foreach ($products as $product) {
+                echo '<tr>';
+                echo '<td><img src="images/produit-'.$product->id.'.jpg" class="img-product"
+                 alt="' . $product->nom . '" style="width: 90px; height: 90px;"></td>';
+                echo '<td>' . $product->nom . '</td>';
+                echo '<td class="price">' . $product->prix . ' €</td>';
+                echo '<td>' . $_SESSION['panier'][$product->id] .'</td>';
+                $priceTVA = $product->prix * 1.2;
+                echo '<td>' . $priceTVA . ' €</td>';
+                echo '<td><a class="delete-to-card" href="panier.php?delPanier=' . $product->id .'"><i class="uil uil-trash-alt"></i></a><a href="#"><i class="uil uil-setting"></i></a></td>';
+                echo '</tr>';
             }
-            echo '</div>';
-            echo '<p class="price">' . $products[$i-1]["prix"] . '€</p>';
-            echo '<button class="delete-to-card"><a href="">Supprimer du panier</a></button>';
-            echo '</div>';
-            echo '<div class="row-right">';
-            echo '<desc class="desc-product"><i>' . $products[$i-1]["description"] .'</i></desc>';
-            echo '</div>';
-            echo '</div>';
 
-
+        } else {
+            die("Vous n'avez aucun produit dans votre panier !");
         }
 
-    } else {
-        die("Vous n'avez aucun produit dans votre panier !");
+    } catch (PDOException $e) {
+        echo $e->getMessage();
     }
-
-} catch (PDOException $e) {
-    echo $e->getMessage();
 }
 
 
 ?>
+</table>
+<div>Nombre d'éléments : <?php $elements = $cart->count(); echo $elements; ?></div>
+<div class="rowtotal">Grand Total : <span class="total"><?php $total = $cart->total() * 1.2; echo $total; ?> €</span></div>
+<div><a href="">Payer</a></div>
 
 </body>
 

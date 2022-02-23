@@ -8,9 +8,52 @@ class panier{
         if(!isset($_SESSION['panier'])) {
             $_SESSION['panier'] = array();
         }
+        if(isset($_GET["delPanier"])) {
+            $this->del($_GET["delPanier"]);
+        }
+    }
+
+    public function count() {
+        return array_sum($_SESSION['panier']);
+    }
+
+    public function total() {
+        include "./php/db.php";
+        $total = 0;
+        $ids = array_keys($_SESSION['panier']);
+        if(empty($ids)) {
+            $products = array();
+        } else {
+            try {
+                // Connexion à la BDD
+                $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $sql = "SELECT id, prix FROM produits WHERE id IN (" . implode(",", $ids) . ")";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $products = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+            foreach ( $products as $product ) {
+                $total += $product->prix * $_SESSION['panier'][$product->id];
+            }
+        }
+
+        return $total;
     }
 
     public function add($product_id) {
-        $_SESSION['panier'][$product_id] = 1;
+        if(isset($_SESSION['panier'][$product_id])) {
+            $_SESSION['panier'][$product_id]++;
+        } else {
+            $_SESSION['panier'][$product_id] = 1;
+        }
+    }
+
+    public function del($product_id) {
+        unset($_SESSION['panier'][$product_id]);
     }
 }

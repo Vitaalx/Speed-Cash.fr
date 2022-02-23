@@ -19,7 +19,6 @@ try {
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $nb = $stmt->rowCount();
-    $UID = $conn -> lastInsertId();
 
     //echo $nb;
 
@@ -34,7 +33,9 @@ try {
         if ($enreg["compteActif"] == "1") {
 
             $_SESSION["emailConn"] = $email;
-            $_SESSION["id"] = $UID;
+            $_SESSION["id"] = $enreg["id"];
+            $_SESSION["auth"] = 1;
+
             echo "success";
 
         } else {

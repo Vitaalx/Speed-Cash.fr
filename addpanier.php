@@ -2,6 +2,7 @@
 require 'panier.class.php';
 include "./php/db.php";
 $cart = new panier();
+$json = array('error' => true);
 if(isset($_GET["id"])) {
 
     try {
@@ -16,16 +17,19 @@ if(isset($_GET["id"])) {
         $products = $stmt->fetchAll(PDO::FETCH_OBJ);
         //var_dump($products);
         if (empty($products)) {
-            die("Ce produit n'existe pas !");
+            $json['message'] = "Ce produit n'existe pas !";
         }
         $cart->add($products[0]->id);
-        die("Le produit a bien été ajouté à votre panier <a href='javascript:history.back()'>retourner sur le catalogue !</a>"); // permet de retourner un cran en arrière
+        $json['error'] = false;
+        $json['message'] = "Le produit a bien été ajouté à votre panier !"; // permet de retourner un cran en arrière
 
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 
 } else {
-    die("Vous n'avez pas sélectionné de produit à ajouter au panier !");
+    $json['message'] = "Vous n'avez pas sélectionné de produit à ajouter au panier !";
 }
+
+echo json_encode($json);
 
