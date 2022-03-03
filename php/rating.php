@@ -4,7 +4,7 @@ include "db.php";
 
 $rate = $_POST["note"];
 $produit_id = $_POST["produit_id"];
-$user_id = $_POST["user_id"];
+$user_id = $_SESSION["id"];
 
 try {
     // Connexion à la BDD
@@ -25,10 +25,13 @@ try {
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
-        echo "success";
+        echo $user_id;
+        echo $produit_id;
+
+        header("Location: ../client.php?success=1");
 
     } else {
-        echo "doublon";
+        header("Location: ../client.php?error=1");
     }
 
     } catch (PDOException $e) {

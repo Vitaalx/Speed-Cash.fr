@@ -16,12 +16,14 @@
 <header>
 
     <div class="bar-top-changemdp">
+        <div class="btns">
         <img class="logoSpeedCash" src="./icons/logo-speed-cash.png" alt="Speed Cash">
         <div class="btn-entreprise">
             Entreprise
         </div>
         <div class="btn-client" onclick="afficheModal()" id="openModal">
             Client
+        </div>
         </div>
 
         <div class="social-icon">

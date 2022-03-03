@@ -1,7 +1,11 @@
 <?php
 session_start();
 require 'panier.class.php';
+include './php/calcul_note.php';
 $cart = new panier();
+if(!isset($_SESSION["emailConn"])) {
+    header("Location: ./index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -84,7 +88,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo '<div class="row-right">';
             echo '<desc class="desc-product"><i>' . $products[$i-1]["description"] .'</i></desc>';
             echo '<br>';
-            echo '<form method="post" action="php/rating.php" id="ratingForm">';
+            echo '<form action="php/rating.php" method="post" id="ratingForm">';
             echo '<span><strong>Ma note est de :</strong></span>';
             echo '<div class="stars-form">';
             echo '<i class="lar la-star star-form" data-value="1"></i>';
@@ -94,8 +98,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo '<i class="lar la-star star-form" data-value="5"></i>';
             echo '</div>';
             echo '<input type="hidden" id="rate" name="note" value="0">';
-            echo '<input type="hidden" id="product_id" value="' . $products[$i-1]["id"] . '">';
-            echo '<input type="hidden" id="user_id" value="' . $_SESSION["id"] . '">';
+            echo '<input type="hidden" id="product_id" name="produit_id" value="' . $products[$i-1]["id"] . '">';
             echo '<button class="rate-form" type="submit">Évaluer le produit</button>';
             echo '</form>';
             echo '</div>';
@@ -103,6 +106,9 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
         }
+
+        if (isset($_GET["success"])) echo "<script>alert('Merci d\'avoir noté notre produit !');</script>";
+        if(isset($_GET["error"])) echo "<script>alert('Vous ne pouvez pas noter deux fois le même produit !');</script>";
 
     } else {
         die("Aucun produit n'est en stock !");
@@ -139,45 +145,6 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 <script src="./js/rating.js"></script>
-
-<script>
-    // SUR VALIDATION DU FORMULAIRE DE CONNEXION
-    $("#ratingForm").submit(function (event) {
-        // Annulation du submit auto
-        event.preventDefault();
-        // Appel de la fonction dédiée
-        ratingPOST();
-    });
-
-    function ratingPOST() {
-
-        // Création d'un formulaire de données
-        var fd = new FormData();
-        fd.append('note', $("#rate").val());
-        fd.append('produit_id', $("#product_id").val());
-        fd.append('user_id', $("#user_id").val());
-
-        //Post du formulaire via AJAX
-        $.ajax({
-            type: "POST",
-            url: "php/rating.php",
-            contentType: false,
-            processData: false,
-            data: fd,
-            success: function (text) {
-                alert('-' + text + '-');
-                if (text == "success") {
-                    // code .. ( si la note du client à bien été prise en compte )
-
-                } else if (text == "doublon") {
-                    // code... ( si le client à déjà noter un produit )
-                }
-            }
-        });
-
-    }
-</script>
-
 
 </body>
 

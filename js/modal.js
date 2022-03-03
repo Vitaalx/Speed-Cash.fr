@@ -6,18 +6,6 @@ function afficheModal() {
 
 function closeModal() {
 
-    document.querySelector(".modal-popUp").style.display = 'none';
-
-}
-
-function afficheRateForm() {
-
-    document.querySelector(".modal-rate-form").style.display = 'block';
-
-}
-
-function closeRateForm() {
-
-    document.querySelector(".modal-rate-form").style.display = 'none';
+    document.querySelector(".modal-container").style.display = 'none';
 
 }

@@ -6,9 +6,14 @@
 
 }
 
+input {
+    color: #828dA0;
+}
+
 html, body {
     padding: 0;
     margin: 0;
+    z-index: -1;
 }
 
 :root {
@@ -19,19 +24,17 @@ html, body {
 /* Logo bar tools */
 
 .logoSpeedCash {
-    width: 8.9%;
+    width: 14%;
 }
 
 /* Boutons BarTools */
 
 .btn-client {
-    position: absolute;
-    left: 389px;
     border-radius: 30px;
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 45px;
-    padding-right: 45px; 
+    padding-right: 45px;
     width: auto;
     color: whitesmoke;
 
@@ -45,8 +48,6 @@ html, body {
 }
 
 .btn-entreprise {
-    position: absolute;
-    left: 180px;
     border-radius: 30px;
     padding-top: 16px;
     padding-bottom: 16px;
@@ -63,6 +64,10 @@ html, body {
 
 }
 
+.btns {
+    display: flex;
+}
+
 .btn-entreprise:hover, .btn-client:hover {
     background: rgba(25, 151, 87, 1);
     cursor: pointer;
@@ -72,6 +77,7 @@ html, body {
 
     position: absolute;
     display: flex;
+    justify-content: space-between;
     width: 100%;
     height: 55px;
     align-items: center;
@@ -85,8 +91,11 @@ html, body {
 
 .bar-top-changemdp {
 
+    position: absolute;
     display: flex;
-    width: auto;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
     height: 55px;
     align-items: center;
 
@@ -102,8 +111,6 @@ html, body {
 
     display: flex;
     justify-content: flex-end;
-    align-items:center;
-    margin-left: 85%;
 
 }
 
@@ -146,9 +153,10 @@ html, body {
 .container {
 
     position: relative;
-    min-height: 1010px;
+    min-height: 899px;
     z-index: -1;
     background: rgba(48, 48, 48, 1);
+    flex-direction: row;
 
 
 }
@@ -164,7 +172,7 @@ html, body {
     width: 670px;
     height: 240px;
     left: 86px;
-    top: 200px;
+    top: 120px;
 
     font-family: Montserrat;
     font-size: 70px;
@@ -184,15 +192,15 @@ html, body {
 /* Marketing phrase */
 
 .marketing-phrase {
-    
+
     position: absolute;
     width: 611px;
     height: 72px;
     left: 83px;
-    top: 500px;
+    top: 420px;
 
     font-family: Montserrat;
-    font-size: 16px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
@@ -212,10 +220,10 @@ html, body {
     width: auto;
     height: auto;
     left: 86px;
-    top: 778px;
+    top: 580px;
 
     font-family: Montserrat;
-    font-size: 15px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 600;
     line-height: 14px;
@@ -228,6 +236,14 @@ html, body {
 
 }
 
+.text-row {
+    display: flex;
+}
+
+.row-left {
+    display: flex;
+}
+
 /* Ellipse 1 */
 
 .ellipse {
@@ -235,8 +251,8 @@ html, body {
     position: absolute;
     width: 555px;
     height: 555px;
-    left: 1130px;
-    top: 248px;
+    left: 904px;
+    top: 149px;
 
     background: linear-gradient(199deg, #2DA771 24.18%, #06E775 80.49%);
     border: 1px solid rgba(241, 252, 255, 0.5);
@@ -253,8 +269,8 @@ html, body {
     position: absolute;
     width: 511px;
     height: 320.5px;
-    left: 1000px;
-    top: 350px;
+    left: 800px;
+    top: 210px;
 
     background: radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
     box-shadow: inset -5px -5px 250px rgba(255, 255, 255, 0.02);
@@ -274,7 +290,7 @@ html, body {
     position: absolute;
     width: auto;
     height: auto;
-    top: 130px;
+    top: 132px;
     left: 40px;
 
     font-family: 'Comfortaa', cursive;
@@ -296,16 +312,16 @@ html, body {
     height: auto;
     top: 220px;
     left: 40px;
-    
+
     font-family: 'Comfortaa', cursive;
     font-size: 9px;
     line-height: 10px;
     /* identical to box height */
-    
+
     text-align: center;
-    
+
     color: #FFFFFF;
-      
+
 
 }
 
@@ -325,7 +341,7 @@ html, body {
     text-align: center;
 
     color: #FFFFFF;
-    
+
 }
 
 .cvv-card {
@@ -380,7 +396,7 @@ html, body {
 
     text-align: center;
 
-    color: #FFFFFF;  
+    color: #FFFFFF;
 
 }
 
@@ -403,6 +419,8 @@ html, body {
 
 }
 
+/* FIN Loyalty Card */
+
 /* Approuvé par plus de 40 millions utilisateurs */
 
 .approuved-byUser {
@@ -411,10 +429,10 @@ html, body {
     width: 384px;
     height: 24px;
     left: 860px;
-    top: 799px;
+    top: 720px;
 
     font-family: Montserrat;
-    font-size: 18px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: 24px;
@@ -426,7 +444,7 @@ html, body {
 
     mix-blend-mode: normal;
     width: auto;
-    
+
 }
 
 /* Flêche invurvée */
@@ -442,13 +460,17 @@ a {
 .appstore-icon {
 
     position: absolute;
-    margin-top: 2%;
-    width: 120px;
-    height: 40px;
+    width: 180px;
+    height: 60px;
     left: 89px;
-    top: 822px;
-    
-    background: #0C0D10;
+    top: 699px;
+    padding: 0;
+    margin: 0;
+
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../icons/appstore.svg");
     mix-blend-mode: normal;
     border-radius: 7px;
 
@@ -459,13 +481,17 @@ a {
 .playstore-icon {
 
     position: absolute;
-    margin-top: 2%;
-    width: 135px;
-    height: 40px;
-    left: 248px;
-    top: 822px;
-    
-    background: #000000;
+    width: 218px;
+    height: 85px;
+    left: 265px;
+    top: 687px;
+    padding: 0;
+    margin: 0;
+
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../icons/google-play-badge.png");
     mix-blend-mode: normal;
     border-radius: 7px;
 
@@ -522,7 +548,7 @@ a {
 
 
 .article-recup {
-   margin-left: 14%;
+    margin-left: 14%;
     margin-top: 6%;
     margin-bottom: 28.8%;
 }
@@ -534,7 +560,7 @@ a {
 
 .modal-container {
     display: none;
-    position: relative;
+    position: absolute;
     z-index: 1;
     width: auto;
     height: auto;
@@ -546,14 +572,29 @@ a {
     top: -45px;
 }
 
-.modal-popUp {
-    height: 100%;
-    width: 100%;
-}
-
 .close-modal {
     cursor: pointer;
-    font-size: 1.8rem;
+    font-size: 1.6em;
+    color: black;
+    position: relative;
+    top: 35px;
+    right: 10px;
+    z-index: 999;
+}
+
+.close-modal-insc {
+    cursor: pointer;
+    font-size: 1.6em;
+    color: black;
+    position: relative;
+    top: 35px;
+    left: 490px;
+    z-index: 999;
+}
+
+.close-modal:hover, .close-modal-insc:hover {
+    color: #06E775;
+    filter: blur(0.5px);
 }
 
 .alert {
@@ -582,10 +623,10 @@ a {
 }
 
 .form-box {
-    z-index: 999;
+    z-index: 1;
     background: #fff;
     box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
-    width: 350px;
+    width: 550px;
     padding-top: 10px;
     padding-bottom: 20px;
     padding-right: 25px;
@@ -602,7 +643,6 @@ a {
 
 .form-box .field {
     display: flex;
-    justify-content: center;
     align-items: center;
     border-bottom: 2px solid #eee;
     margin-bottom: 25px;
@@ -732,8 +772,12 @@ a {
     top: 27.8%;
 }
 
+.sign-in-box {
+    width: 499px;
+}
+
 .imgBox {
-    z-index: 888;
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -793,11 +837,15 @@ a {
     border: none;
     color: #828dA0;
     text-align: left;
+    width: 100%;
 }
 
 footer {
-    position: absolute;
+    display: flex;
     bottom: 0;
+    background-color: rgba(45, 45, 45, 1);
+    color: white;
+    padding: 4%;
 }
 
 @media screen and (max-width: 735px) {

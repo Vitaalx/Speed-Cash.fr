@@ -3,7 +3,8 @@ window.onload = () => {
     const stars = document.querySelectorAll(".star-form");
 
     // On va chercher l'input
-    const rate = document.querySelector("#rate");
+    const rates = document.querySelectorAll("#rate");
+    console.log(rates);
 
     // On boucle sur les étoiles pour y ajouter des écouteurs d'évènements
     for(star of stars) {
@@ -30,11 +31,14 @@ window.onload = () => {
 
         // On écoute le clic
         star.addEventListener("click", function () {
-            rate.value = this.dataset.value;
+            for(rate of rates) {
+                rate.value = this.dataset.value;
+                //EMA - alert (rate.value);
+            }
         });
 
         star.addEventListener("mouseout", function () {
-            resetStars(rate.value);
+            //EMA - resetStars(rate.value);
         });
     }
 
