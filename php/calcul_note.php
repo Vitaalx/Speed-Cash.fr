@@ -8,29 +8,35 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // select produit_id,AVG(note) from note_produits group by produit_id;
-    $sql = "SELECT note FROM note_produits";
+    $sql = "SELECT produit_id,AVG(note) FROM note_produits GROUP BY produit_id";
     //echo $sql;
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $nb = $stmt->rowCount();
-
+    //echo $nb;
     if ($nb > 0) {
-        $rates = $stmt->fetchAll(PDO::FETCH_COLUMN);
-        //var_dump($rates);
-        $len = count($rates);
-        //echo $len;
-        $result = 0;
-        for($i = 0; $i < $len; $i++) {
-            $result += $rates[$i];
-        }
-        $result = $result / $len;
 
-        //echo "La moyenne est de $result";
+        for($i=1; $i <= $nb; $i++) {
+
+            $enreg = $stmt->fetch();
+            //var_dump($enreg);
+            //echo "ok".$enreg["AVG(note)"];
+            //echo "op".$enreg["produit_id"];
+            $sql = "UPDATE produits SET note = '" . $enreg["AVG(note)"] ."' WHERE id='" . $enreg["produit_id"] ."'";
+            //echo $sql;
+            $stmt2 = $conn->prepare($sql);
+            $stmt2->execute();
+
+        }
+
         //echo "success";
 
     } else {
-        echo "erreur";
+        //echo "Mise à jour déjà effectuée !";
     }
+
+
+
 
 } catch (PDOException $e) {
     echo $e->getMessage();

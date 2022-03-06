@@ -132,6 +132,10 @@ html, body {
     justify-content: space-around;
 }
 
+.body-client {
+    background-color: white;
+}
+
 /* Vignette vente */
 
 .thumbnail {
@@ -185,4 +189,8 @@ td {
 footer {
     position: absolute;
     bottom: 0;
+    background-color: rgba(45, 45, 45, 1);
+    color: white;
+    padding: 4%;
+    width: 100%;
 }

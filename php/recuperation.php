@@ -17,7 +17,7 @@
 
     <div class="bar-top-changemdp">
         <div class="btns">
-        <img class="logoSpeedCash" src="./icons/logo-speed-cash.png" alt="Speed Cash">
+        <img class="logoSpeedCash" src="./icons/logo-speed-cash.gif" alt="Speed Cash">
         <div class="btn-entreprise">
             Entreprise
         </div>

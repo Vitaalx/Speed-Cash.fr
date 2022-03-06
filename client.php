@@ -1,11 +1,14 @@
 <?php
 session_start();
-require 'panier.class.php';
+require './panier.class.php';
 include './php/calcul_note.php';
+
 $cart = new panier();
-if(!isset($_SESSION["emailConn"])) {
+if(!isset($_SESSION["email"])) {
     header("Location: ./index.php");
 }
+var_dump($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -29,7 +32,7 @@ if(!isset($_SESSION["emailConn"])) {
 <header>
 
     <div class="bar-top">
-        <img class="logoSpeedCash" src="./icons/logo-speed-cash.png" alt="Speed Cash">
+        <img class="logoSpeedCash" src="./icons/logo-speed-cash.gif" alt="Speed Cash">
         <div class="btn-type-client">
         <a class="btn-deconnexion" href="./php/deconnexion.php"><span>Déconnexion</span></a>
         <a class="cart" href="./panier.php"><i class="uil uil-shopping-bag"></i></a>
@@ -39,7 +42,7 @@ if(!isset($_SESSION["emailConn"])) {
 
 </header>
 
-<body>
+<body class="body-client">
 
 <main class="container-thumbnail">
 
@@ -121,24 +124,6 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 ?>
 </main>
-
-<!--div class="modal-rate-form">
-    <div class="container-modal-rate">
-        <span class="close-modal" onclick="closeRateForm()" title="Fermer">&times;</span>
-        <form method="post" action="php/rating.php" id="ratingForm">
-            <span><strong>Ma note est de :</strong></span>
-            <div class="stars-form">
-                <i class="lar la-star star-form" data-value="1"></i>
-                <i class="lar la-star star-form" data-value="2"></i>
-                <i class="lar la-star star-form" data-value="3"></i>
-                <i class="lar la-star star-form" data-value="4"></i>
-                <i class="lar la-star star-form" data-value="5"></i>
-            </div>
-            <input type="hidden" id="rate" name="note" value="0">
-            <button type="submit" class="rate-form">Envoyer ma note !</button>
-        </form>
-    </div>
-</div-->
 
 <script type="text/javascript" src="./js/app.js"></script>
 <script type="text/javascript" src="js/modal.js"></script>

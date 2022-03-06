@@ -550,7 +550,6 @@ a {
 .article-recup {
     margin-left: 14%;
     margin-top: 6%;
-    margin-bottom: 28.8%;
 }
 
 .titre-recup {
@@ -592,8 +591,8 @@ a {
     z-index: 999;
 }
 
-.close-modal:hover, .close-modal-insc:hover {
-    color: #06E775;
+.close-modal:hover {
+    color: #15CF74;
     filter: blur(0.5px);
 }
 

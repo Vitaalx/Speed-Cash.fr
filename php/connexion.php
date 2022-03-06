@@ -32,7 +32,7 @@ try {
         //echo $enreg["compteActif"];
         if ($enreg["compteActif"] == "1") {
 
-            $_SESSION["emailConn"] = $email;
+            $_SESSION["email"] = $email;
             $_SESSION["id"] = $enreg["id"];
             $_SESSION["auth"] = 1;
 
@@ -47,4 +47,5 @@ try {
     echo $e->getMessage();
 }
 
-?>
+
+

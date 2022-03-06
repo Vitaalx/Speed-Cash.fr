@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+require('./php/config-google.php');
+//var_dump($_SESSION);
+
+?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
@@ -18,7 +25,7 @@
 
     <div class="bar-top">
         <div class="btns">
-            <img class="logoSpeedCash" src="./icons/logo-speed-cash.png" alt="Speed Cash">
+            <img class="logoSpeedCash" src="./icons/logo-speed-cash.gif" alt="Speed Cash">
             <div class="btn-entreprise">
                 Entreprise
             </div>
@@ -53,7 +60,8 @@
                     </div>
                     <div class="field">
                         <i class="uil uil-lock-alt"></i>
-                        <input class="password-input" type="password" id="passwordConn" placeholder="Mot de passe" required>
+                        <input class="password-input" type="password" id="passwordConn" placeholder="Mot de passe"
+                               required>
                         <div class="eye-btn"><i class="uil uil-eye-slash"></i></div>
                     </div>
                     <div class="forgot-link">
@@ -67,8 +75,11 @@
                 <div class="login-options">
                     <p class="text">Ou, se connecter avec...</p>
                     <div class="other-login">
-                        <a href=""><img src="./images/google.png" alt="Se connecter avec Google"></a>
-                        <a href=""><img src="./images/discord.png" alt="Se connecter avec Discord"></a>
+
+                        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&access_type=online&redirect_uri=<?= urlencode('http://localhost:8000/conn-google.php') ?>&response_type=code&client_id=<?= GOOGLE_ID ?>"><img src="./images/google.png" alt="Se connecter avec Google"></a>
+
+                        <a href="./conn-discord.php"><img src="./images/discord.png"
+                                                          alt="Se connecter avec Discord"></a>
                     </div>
                 </div>
             </div>
@@ -94,8 +105,11 @@
                 <h2>Inscription</h2>
                 <div class="login-options">
                     <div class="other-login">
-                        <a href=""><img src="./images/google.png" alt="Se connecter avec Google"></a>
-                        <a href=""><img src="./images/discord.png" alt="Se connecter avec Discord"></a>
+
+                        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&access_type=online&redirect_uri=<?= urlencode('http://localhost:8000/conn-google.php') ?>&response_type=code&client_id=<?= GOOGLE_ID ?>"><img src="./images/google.png" alt="Se connecter avec Google"></a>
+
+                        <a href="./conn-discord.php"><img src="./images/discord.png"
+                                                          alt="Se connecter avec Discord"></a>
                     </div>
                     <p class="text">Ou, s'inscrire avec une e-mail...</p>
                 </div>
@@ -114,12 +128,18 @@
                     </div>
                     <div class="field">
                         <i class="uil uil-lock-alt"></i>
-                        <input type="password" placeholder="Mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins 8 caractères, une minuscule, une majuscule et un chiffre." id="password" required>
+                        <input type="password" placeholder="Mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                               title="Doit contenir au moins 8 caractères, une minuscule, une majuscule et un chiffre."
+                               id="password" required>
                     </div>
-                    <p style="font-size: 0.65em; margin-bottom: 5%; color: #2DA771;">* Votre mot de passe doit contenir au moins 8 caractères, une minuscule, une majuscule et un chiffre !</p>
+                    <p style="font-size: 0.65em; margin-bottom: 5%; color: #2DA771;">* Votre mot de passe doit contenir
+                        au moins 8 caractères, une minuscule, une majuscule et un chiffre !</p>
                     <div class="field">
                         <i class="uil uil-lock-access"></i>
-                        <input type="password" placeholder="Confirmer mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins 8 caractères, une minuscule, une majuscule et un chiffre." id="confirmpass" required>
+                        <input type="password" placeholder="Confirmer mot de passe"
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                               title="Doit contenir au moins 8 caractères, une minuscule, une majuscule et un chiffre."
+                               id="confirmpass" required>
                     </div>
                     <div class="field">
                         <i class="uil uil-lock-alt"></i>
@@ -146,11 +166,14 @@
     <div class="text-row">
         <h1 class="slogan">Achetez grâce à nous, vous y gagnerez</h1>
         <p class="marketing-phrase">
-            <i>Avec une intégration et un portefeuille numérique bien construit, contrôlez votre propre carte et répertoriez tous vos paiements à payer.
-                Définissez votre propre clé de code pour effectuer tous les paiements en une seule action d'approbation.</i>
+            <i>Avec une intégration et un portefeuille numérique bien construit, contrôlez votre propre carte et
+                répertoriez tous vos paiements à payer.
+                Définissez votre propre clé de code pour effectuer tous les paiements en une seule action
+                d'approbation.</i>
         </p>
         <h5 class="details-wallet">
-            <strong>Trouver plus de détails et en savoir plus sur le portefeuille numérique <a href="https://fr.wikipedia.org/wiki/Porte-monnaie_%C3%A9lectronique">içi</a></strong>
+            <strong>Trouver plus de détails et en savoir plus sur le portefeuille numérique <a
+                        href="https://fr.wikipedia.org/wiki/Porte-monnaie_%C3%A9lectronique">içi</a></strong>
         </h5>
 
         <h5 class="approuved-byUser">
@@ -228,7 +251,7 @@
                     //alert("success");
                     $("#alert-connexion").show();
                     $("#alert-connexion").html("<span style='color: #2DA771;'><strong>Connexion établie avec succès !</strong></span>");
-                    window.location.href='./client.php';
+                    window.location.href = './client.php';
 
                 } else if (text == "noninscrit") {
                     //alert("doublon");
