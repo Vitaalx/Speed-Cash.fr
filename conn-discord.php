@@ -1,19 +1,15 @@
 <?php
 
-
-// Connexion avec OAuth2 Discord //
-
-
 require __DIR__ . '/vendor/autoload.php';
 
 session_start();
 
-echo('Main screen turn on!<br/><br/>');
+echo ('Main screen turn on!<br/><br/>');
 
 $provider = new \Wohali\OAuth2\Client\Provider\Discord([
     'clientId' => '949005096858026034',
-    'clientSecret' => 'VBnUxnShF6RtAafUX9aXlCte0NrURWlM',
-    'redirectUri' => 'http://localhost/Website%20PA%20Prod/Website-Test-PA/client.php'
+    'clientSecret' => 'aSo5aFR7qFG0UpeWNwydeGqPX8486QwJ',
+    'redirectUri' => 'http://localhost:8000/conn-discord.php'
 ]);
 
 if (!isset($_GET['code'])) {
@@ -55,13 +51,7 @@ if (!isset($_GET['code'])) {
     } catch (Exception $e) {
 
         // Failed to get user details
-        exit('Oh dear...');
+        exit('Oh dear...'.$e);
 
     }
 }
-
-
-
-// Connexion avec OAuth2 Discord //
-
-?>
