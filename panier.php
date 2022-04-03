@@ -75,10 +75,10 @@ if(empty($ids)) {
                 echo '<td><img src="images/produit-'.$product->id.'.jpg" class="img-product"
                  alt="' . $product->nom . '" style="width: 90px; height: 90px;"></td>';
                 echo '<td>' . $product->nom . '</td>';
-                echo '<td class="price">' . $product->prix . ' €</td>';
+                $priceTVA = $product->prix / 1.2;
+                echo '<td class="price">' . $priceTVA . ' €</td>';
                 echo '<td>' . $_SESSION['panier'][$product->id] .'</td>';
-                $priceTVA = $product->prix * 1.2;
-                echo '<td>' . $priceTVA . ' €</td>';
+                echo '<td>' . $product->prix . ' €</td>';
                 echo '<td><a class="delete-to-card" href="panier.php?delPanier=' . $product->id .'"><i class="uil uil-trash-alt"></i></a><a href="#"><i class="uil uil-setting"></i></a></td>';
                 echo '</tr>';
             }
@@ -96,60 +96,12 @@ if(empty($ids)) {
 ?>
 </table>
 <div>Nombre d'éléments : <?php $elements = $cart->count(); echo $elements; ?></div>
-<div class="rowtotal">Grand Total : <span class="total"><?php $total = $cart->total() * 1.2; echo $total; ?> €</span></div>
-<div onclick="affichePaymentForm()" class="button-payment">Payer</div>
+<div class="rowtotal">Grand Total : <span class="total"><?php $total = $cart->total(); echo $total; ?> €</span></div>
+<div class="button-payment"><a href="paymentCart.php?price=<?= $total..0..0?>">Payer</a></div>
 
-<div class="form-payment">
-    <span class="close-modal-payment" onclick="closePaymentForm()" title="Fermer">&times;</span>
-    <form action="./php/payment.php" class="ui-form" id="payment_form" method="POST">
-        <div class="field">
-            <input type="text" class="input-paiment-email" name="email" placeholder="Votre adresse mail" required>
-        </div>
-        <div class="field">
-            <input type="text" class="input-paiment-name" name="name" placeholder="Votre nom" required>
-        </div>
-        <div class="field">
-            <input type="text" class="input-paiment-cb" placeholder="Votre numéro de carte bleue" data-stripe="number" required>
-        </div>
-        <div class="field">
-            <input type="text" class="input-paiment-month" placeholder="MM" data-stripe="exp_month" required>
-        </div>
-        <div class="field">
-            <input type="text" class="input-paiment-year" placeholder="YY" data-stripe="exp_year" required>
-        </div>
-        <div class="field">
-            <input type="text" class="input-paiment-ccv" placeholder="CVC" data-stripe="cvc" required>
-        </div>
-        <p>
-            <button type="submit" class="ui-button">Acheter</button>
-        </p>
-    </form>
-</div>
-<script src="./js/modal.js"></script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-<script>
-
-    Stripe.setPublishableKey('pk_test_51KcvUWLvgKkU1KjF8NemIX3ml88PMlZvhmyHPMKxQ945epdRuB2ce59Dv2adcBiY0O5kVBR4og932R1mepEq1vgo0060USM5tn');
-    var $form = $('#payment_form');
-    $form.submit(function (e) {
-        e.preventDefault();
-        $form.find('.button').attr('disabled', true);
-        Stripe.card.createToken($form, function(status, response) {
-            if(response.error) {
-                $form.find('.message').remove();
-
-                $form.prepend('<div><p>' + response.error.message + '</p></div>');
-            } else {
-                var token = response.id;
-                $form.append($('<input type="hidden" name ="stripeToken">').val(token));
-                $form.get(0).submit();
-            }
-        });
-    });
-
-</script>
 
 </body>
 

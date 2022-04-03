@@ -114,18 +114,11 @@ html, body {
 
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 
 }
 
-.discord-icon {
-
-    width: 34px;
-    height: 34px;
-    margin-right: 20%;
-
-}
-
-.instagram-icon {
+.discord-icon, .instagram-icon, .tiktok-icon, .github-icon {
 
     width: 30px;
     height: 30px;
@@ -133,23 +126,22 @@ html, body {
 
 }
 
-.tiktok-icon {
+.english-flag {
 
-    width: 30px;
-    height: 30px;
-    margin-right: 20%;
+    margin-right: 30%;
 
 }
 
-.github-icon {
-
-    width: 30px;
-    height: 30px;
+.french-flag {
     margin-right: 20%;
-
 }
 
-.github-icon:hover, .tiktok-icon:hover, .instagram-icon:hover, .discord-icon:hover, .appstore-icon:hover, .playstore-icon:hover {
+.a-french-flag, .a-english-flag {
+    text-decoration: none;
+}
+
+
+.github-icon:hover, .tiktok-icon:hover, .instagram-icon:hover, .discord-icon:hover, .appstore-icon:hover, .playstore-icon:hover, .french-flag:hover, .english-flag:hover {
     cursor: pointer;
 }
 
@@ -215,29 +207,6 @@ html, body {
 
 }
 
-/* More details on wallet */
-
-.details-wallet {
-
-    position: absolute;
-    width: auto;
-    height: auto;
-    left: 86px;
-    top: 580px;
-
-    font-family: Montserrat;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 14px;
-    letter-spacing: 0.5px;
-    text-align: left;
-
-    color: #FFFFFF;
-
-    mix-blend-mode: normal;
-
-}
 
 .text-row {
     display: flex;
@@ -308,6 +277,11 @@ html, body {
 
 }
 
+/*  Flags Langage */
+
+
+
+/* End of Flags Langage */
 .owner-card {
 
     position: absolute;

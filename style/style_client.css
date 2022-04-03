@@ -122,19 +122,6 @@ html, body {
 
 /* Formulaire de paiment */
 
-.input-paiment-cb, .input-paiment-email, .input-paiment-ccv, .input-paiment-month, .input-paiment-year, .input-paiment-name {
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 10px;
-    width: 100%;
-}
-
-.form-payment {
-    display: none;
-    position: absolute;
-    background-color: #15CF74;
-}
-
 .button-payment{
     border: 0.4px solid black;
     width: 6%;
@@ -143,25 +130,6 @@ html, body {
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-}
-
-.close-modal-payment {
-    cursor: pointer;
-    font-size: 1em;
-    color: black;
-    position: relative;
-    left: 200px;
-    z-index: 999;
-}
-
-.button-payment:hover {
-    background-color: #15CF74;
-    color: white;
-}
-
-.close-modal-payment:hover {
-    color: #15CF74;
-    filter: blur(0.5px);
 }
 
 /* Fin formulaire de paiment */
