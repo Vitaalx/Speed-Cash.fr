@@ -2,12 +2,16 @@
 session_start();
 require './panier.class.php';
 include './php/calcul_note.php';
+include("./php/traduction_en.php");
+
+$langue = 0;
+if(isset($_GET['lang'])) $langue = $_GET['lang'];
 
 $cart = new panier();
 if(!isset($_SESSION["email"])) {
     header("Location: ./index.php");
 }
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -22,25 +26,13 @@ var_dump($_SESSION);
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet"
-          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
 
 </head>
 
-<header>
-
-    <div class="bar-top">
-        <img class="logoSpeedCash" src="./icons/logo-speed-cash.gif" alt="Speed Cash">
-        <div class="btn-type-client">
-        <a class="btn-deconnexion" href="./php/deconnexion.php"><span>Déconnexion</span></a>
-        <a class="cart" href="./panier.php"><i class="uil uil-shopping-bag"></i></a>
-        </div>
-
-    </div>
-
-</header>
+<?php include('./php/header_client.php') ?>
 
 <body class="body-client">
 
@@ -65,7 +57,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //var_dump($products);
 
         for ($i = 1; $i <= $nb ; $i++) {
-            echo '<div class="thumbnail">';
+            echo '<div class="thumbnail"> <a class="thumbnail-info-a" href="./produit.php?id='.$products[$i-1]['id'].'">';
             echo '<div class="row-left">';
             echo '<img src="images/produit-'.$products[$i-1]["id"].'.jpg" class="img-product"
                  alt="' . $products[$i-1]["nom"] . '">';
@@ -86,19 +78,20 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             echo '</div>';
             echo '<p class="price">' . $products[$i-1]["prix"] . '€</p>';
-            echo '<button class="add-to-card"><a class="addPanier" href="addpanier.php?id=' . $products[$i-1]["id"] .'">Ajouter au panier</a></button>';
+            echo '<a class="addPanier" href="addpanier.php?id=' . $products[$i-1]["id"] .'"><i class="uil uil-shopping-cart"></i></a>';
             echo '</div>';
             echo '<div class="row-right">';
-            echo '<desc class="desc-product"><i>' . $products[$i-1]["description"] .'</i></desc>';
-            echo '<br>';
+            echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $products[$i-1]["description"] .'</i></desc>';
+            echo '<br />';
+            echo '<br />';
             echo '<form action="php/rating.php" method="post" id="ratingForm">';
-            echo '<span><strong>Ma note est de :</strong></span>';
+            echo '<span style="color: #dcdcdc;">Ma note est de :</span>';
             echo '<div class="stars-form">';
-            echo '<i class="lar la-star star-form" data-value="1"></i>';
-            echo '<i class="lar la-star star-form" data-value="2"></i>';
-            echo '<i class="lar la-star star-form" data-value="3"></i>';
-            echo '<i class="lar la-star star-form" data-value="4"></i>';
-            echo '<i class="lar la-star star-form" data-value="5"></i>';
+            echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="1"></i>';
+            echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="2"></i>';
+            echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="3"></i>';
+            echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="4"></i>';
+            echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="5"></i>';
             echo '</div>';
             echo '<input type="hidden" id="rate" name="note" value="0">';
             echo '<input type="hidden" id="product_id" name="produit_id" value="' . $products[$i-1]["id"] . '">';
@@ -123,6 +116,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 
 ?>
+
 </main>
 
 <script type="text/javascript" src="./js/app.js"></script>
@@ -133,8 +127,6 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 </body>
 
-<footer>
-    © | Speed-Cash | Tous droit réservés |<?php date("Y"); ?>
-</footer>
+<?php include('./php/footer.php') ?>
 
 </html>

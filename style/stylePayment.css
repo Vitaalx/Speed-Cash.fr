@@ -1,3 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+*{
+  box-sizing: border-box;
+}
+
 .StripeElement {
   background-color: white;
   height: 40px;
@@ -20,3 +29,4 @@
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+

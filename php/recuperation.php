@@ -1,8 +1,16 @@
+<?php
+
+$langue = 0;
+if(isset($_GET['lang'])) $langue = $_GET['lang'];
+
+include('./php/traduction_en.php');
+
+?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>Récupération de votre mot de passe</title>
+    <title><?php echo $title_head[$langue]; ?></title>
     <link rel="stylesheet" type="text/css" href="../style/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,55 +21,34 @@
     <script src="../js/popper.min.js"></script>
 </head>
 
-<header>
+<?php include('header.php'); ?>
 
-    <div class="bar-top-changemdp">
-        <div class="btns">
-        <img class="logoSpeedCash" src="./icons/logo-speed-cash.gif" alt="Speed Cash">
-        <div class="btn-entreprise">
-            Entreprise
-        </div>
-        <div class="btn-client" onclick="afficheModal()" id="openModal">
-            Client
-        </div>
-        </div>
-
-        <div class="social-icon">
-            <img class="discord-icon" src="./icons/Discord-icon.png" alt="Discord">
-            <img class="instagram-icon" src="./icons/Instagram-icon.svg" alt="Instagram">
-            <img class="github-icon" src="./icons/GitHub-icon.svg" alt="GitHub">
-            <img class="tiktok-icon" src="icons/TikTok-icon.svg" alt="TikTok">
-        </div>
-
-    </div>
-
-</header>
 
 <body class="body-recup">
 
 <main class="container-fluid recup">
     <article class="article-recup">
-        <h3 class="titre-recup">Récupération de mot de passe :</h3>
+        <h3 class="titre-recup"><?php echo $title_recup[$langue]; ?></h3>
         <?php if ($section == "code") { ?>
-        <i>Un code de vérification vous a été envoyé par mail.</i>
+        <i><?php echo $verif_code[$langue]; ?></i>
             <form method="post" class="form-recup">
-                <input type="text" placeholder="Code de vérification" class="code-changemdp" name="verif_code"/><br/>
-                <input type="submit" value="Valider" class="submit-recup" class="submit-chamgemdp" name="verif_submit"/>
+                <input type="text" placeholder="<?php echo $verif_code_input[$langue]; ?>" class="code-changemdp" name="verif_code"/><br/>
+                <input type="submit" value="<?php echo $validate_button[$langue]; ?>" class="submit-recup" class="submit-chamgemdp" name="verif_submit"/>
             </form>
         <?php } elseif ($section == "changemdp") { ?>
-            Nouveau mot de passe :
+            <?php echo $new_pass_recup[$langue]; ?>
             <form method="post" class="form-recup">
                 <br>
-                <input type="password" placeholder="Nouveau mot de passe" class="password1-changemdp" name="change_mdp"/><br/>
+                <input type="password" placeholder="<?php echo $new_pass_recup_input[$langue]; ?>" class="password1-changemdp" name="change_mdp"/><br/>
                 <br>
-                <input type="password" placeholder="Confirmation du mot de passe" class="password2-changemdp" name="change_mdpc"/><br/>
+                <input type="password" placeholder="<?php echo $confirm_pass_recup_input[$langue]; ?>" class="password2-changemdp" name="change_mdpc"/><br/>
                 <br>
-                <input type="submit" value="Valider" class="submit-recup" class="submit2-changemdp" name="change_submit"/>
+                <input type="submit" value="<?php echo $validate_button[$langue]; ?>" class="submit-recup" class="submit2-changemdp" name="change_submit"/>
             </form>
         <?php } else { ?>
             <form method="post" class="form-recup">
-                <input type="email" placeholder="Votre adresse mail" class="email-changemdp" name="recup_mail"/><br/>
-                <input type="submit" value="Valider" class="submit-recup" class="submit3-changemdp" name="submit_recup"/>
+                <input type="email" placeholder="<?php echo $mail_recup_input[$langue]; ?>" class="email-changemdp" name="recup_mail"/><br/>
+                <input type="submit" value="<?php echo $validate_button[$langue]; ?>" class="submit-recup" class="submit3-changemdp" name="submit_recup"/>
             </form>
         <?php } ?>
         <?php if (isset($error)) {
@@ -73,9 +60,7 @@
 </main>
 
 
-<footer>
-    <h7>© | Speed-Cash | <?= date('Y'); ?> | Tous droit réservés</h7>
-</footer>
+<?php include('footer.php') ?>
 
 </body>
 </html>

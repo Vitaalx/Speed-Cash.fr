@@ -1,8 +1,12 @@
 <?php
 session_start();
 require 'panier.class.php';
+include("./php/traduction_en.php");
 $cart = new panier();
 //var_dump($_SESSION);
+
+$langue = 0;
+if (isset($_GET['lang'])) $langue = $_GET['lang'];
 
 
 ?>
@@ -20,84 +24,88 @@ $cart = new panier();
 
 </head>
 
-<header>
+<style>
+    * {
+        color: whitesmoke;
+    }
+</style>
 
-    <div class="bar-top">
-        <a href="./client.php"><img class="logoSpeedCash" src="./icons/logo-speed-cash.gif" alt="Speed Cash"></a>
-        <div class="btn-type-client">
-            <a class="btn-deconnexion" href="./php/deconnexion.php"><span>Déconnexion</span></a>
-            <a class="cart" href="./panier.php"><i class="uil uil-shopping-bag"></i></a>
-        </div>
+<?php include('./php/header_client.php') ?>
 
-    </div>
+<br />
 
-</header>
+<body class="cart-body">
 
-<body>
+<div class="cart-container">
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Nom du produit</th>
+            <th>Prix sans TVA</th>
+            <th>Quantité</th>
+            <th>Prix avec TVA</th>
+            <th>Actions</th>
+        </tr>
+        <?php
+        $ids = array_keys($_SESSION['panier']);
+        //var_dump($ids);
 
-<table>
-    <tr>
-        <th>Image</th>
-        <th>Nom du produit</th>
-        <th>Prix sans TVA</th>
-        <th>Quantité</th>
-        <th>Prix avec TVA</th>
-        <th>Actions</th>
-    </tr>
-<?php
-$ids = array_keys($_SESSION['panier']);
-//var_dump($ids);
+        require "./php/db.php";
 
-require "./php/db.php";
-
-if(empty($ids)) {
-    $products = array();
-} else {
-
-    try {
-// Connexion à la BDD
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $sql = "SELECT * FROM produits WHERE id IN (" . implode(",", $ids) . ")";
-        //echo $sql;
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $nb = $stmt->rowCount();
-
-        if ($nb > 0) {
-
-            $products = $stmt->fetchAll(PDO::FETCH_OBJ);
-            //var_dump($products);
-
-            foreach ($products as $product) {
-                echo '<tr>';
-                echo '<td><img src="images/produit-'.$product->id.'.jpg" class="img-product"
-                 alt="' . $product->nom . '" style="width: 90px; height: 90px;"></td>';
-                echo '<td>' . $product->nom . '</td>';
-                $priceTVA = $product->prix / 1.2;
-                echo '<td class="price">' . $priceTVA . ' €</td>';
-                echo '<td>' . $_SESSION['panier'][$product->id] .'</td>';
-                echo '<td>' . $product->prix . ' €</td>';
-                echo '<td><a class="delete-to-card" href="panier.php?delPanier=' . $product->id .'"><i class="uil uil-trash-alt"></i></a><a href="#"><i class="uil uil-setting"></i></a></td>';
-                echo '</tr>';
-            }
-
+        if (empty($ids)) {
+            $products = array();
         } else {
-            die("Vous n'avez aucun produit dans votre panier !");
+
+            try {
+// Connexion à la BDD
+                $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $sql = "SELECT * FROM produits WHERE id IN (" . implode(",", $ids) . ")";
+                //echo $sql;
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $nb = $stmt->rowCount();
+
+                if ($nb > 0) {
+
+                    $products = $stmt->fetchAll(PDO::FETCH_OBJ);
+                    //var_dump($products);
+
+                    foreach ($products as $product) {
+                        echo '<tr>';
+                        echo '<td><img src="images/produit-' . $product->id . '.jpg" class="img-product"
+                 alt="' . $product->nom . '" style="width: 70px; height: 70px;"></td>';
+                        echo '<td>' . $product->nom . '</td>';
+                        $priceTVA = $product->prix / 1.2;
+                        echo '<td class="price">' . $priceTVA . ' €</td>';
+                        echo '<td>' . $_SESSION['panier'][$product->id] . '</td>';
+                        echo '<td>' . $product->prix . ' €</td>';
+                        echo '<td><a class="delete-to-card" href="panier.php?delPanier=' . $product->id . '"><i style="color:whitesmoke;" class="uil uil-trash-alt"></i></a></td>';
+                        echo '</tr>';
+                    }
+
+                } else {
+                    die("Vous n'avez aucun produit dans votre panier !");
+                }
+
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
 
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
 
-
-?>
-</table>
-<div>Nombre d'éléments : <?php $elements = $cart->count(); echo $elements; ?></div>
-<div class="rowtotal">Grand Total : <span class="total"><?php $total = $cart->total(); echo $total; ?> €</span></div>
-<div class="button-payment"><a href="paymentCart.php?price=<?= $total..0..0?>">Payer</a></div>
+        ?>
+    </table>
+    <br />
+    <div class="elements-number">Nombre d'éléments : <?php $elements = $cart->count();
+        echo $elements; ?></div>
+    <div class="rowtotal">Grand Total : <span class="total"><?php $total = $cart->total();
+            echo $total; ?> €</span></div>
+    <div class="button-payment"><a class="button-payment-a"
+                                   href="paymentCart.php?price=<?= $total . .0 . .0 ?>">Payer</a>
+    </div>
+</div>
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -105,7 +113,6 @@ if(empty($ids)) {
 
 </body>
 
-<footer>
-    © | Speed-Cash | Tous droit réservés |<?php date("Y"); ?>
-</footer>
+<?php include('./php/footer.php') ?>
+
 </html>

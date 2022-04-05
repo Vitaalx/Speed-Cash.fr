@@ -45,4 +45,5 @@ include('./php/traduction_en.php');
   <script src="https://js.stripe.com/v3/"></script>
   <script src="./js/charge.js"></script>
 </body>
+
 </html>

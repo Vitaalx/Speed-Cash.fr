@@ -46,6 +46,7 @@ html, body {
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
 
 }
 
@@ -63,6 +64,7 @@ html, body {
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
 
 }
 
@@ -74,6 +76,7 @@ html, body {
 .btn-entreprise:hover, .btn-client:hover {
     background: rgba(25, 151, 87, 1);
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .bar-top {
@@ -657,6 +660,7 @@ a {
 
 .eye-btn {
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .eye-btn i:hover {
@@ -688,6 +692,7 @@ a {
     font-weight: 500;
     margin-top: 5px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .login-options {
@@ -746,6 +751,7 @@ a {
 .sign-up-btn, .sign-in-btn {
     position: relative;
     top: 27.8%;
+    transition: all 0.3s ease-in-out;
 }
 
 .sign-in-box {

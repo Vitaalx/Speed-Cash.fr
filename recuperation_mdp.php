@@ -71,7 +71,7 @@ if(isset($_POST["submit_recup"], $_POST["recup_mail"])) {
                         $message = "Bonjour M.$nom, Afin de réinitialiser votre mot de passe veuillez cliquer sur ce lien : \n$url?section=code&code='" . $recup_code . "',\n VOTRE CODE EST : '" . $recup_code . "'";
 
                         mail($recup_mail, "Récupération de mot de passe - Speed-Cash.fr", $message);
-                        header("Location: $url?section=code");
+                        header("Location: $url?&section=code");
                         //var_dump($recup_code);
                     } else {
                         $error = "Cette adresse mail n'est pas enregistrée";
@@ -108,7 +108,7 @@ if(isset($_POST["verif_submit"], $_POST["verif_code"])) {
                 $update = "UPDATE recuperation SET confirme = 1 WHERE mail = ?";
                 $stmt = $conn->prepare($update);
                 $stmt->execute(array($_SESSION["recup_mail"]));
-                header("Location: $url?section=changemdp");
+                header("Location: $url?&section=changemdp");
             } else {
                 $error = "Code invalide";
             }

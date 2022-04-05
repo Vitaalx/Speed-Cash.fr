@@ -5,7 +5,7 @@ require('./php/config-google.php');
 //var_dump($_SESSION);
 
 $langue = 0;
-if(isset($_GET['lang'])) $langue = 1;
+if(isset($_GET['lang'])) $langue = $_GET['lang'];
 
 include('./php/traduction_en.php');
 
@@ -26,35 +26,10 @@ include('./php/traduction_en.php');
 
 </head>
 
-<header>
+<?php include('./php/header.php');
 
-    <div class="bar-top">
-        <div class="btns">
-            <img class="logoSpeedCash" src="./icons/logo-speed-cash.gif" alt="Speed Cash">
-            <div class="btn-entreprise">
-                <?php echo $company[$langue]; ?>
-            </div>
-            <div class="btn-client" onclick="afficheModal()" id="openModal">
-                <?php echo $customer[$langue]; ?>
-            </div>
-        </div>
+?>
 
-        <div class="social-icon">
-            <a class="a-french-flag" href="." >
-                <img class="french-flag" src="images/drapeau-france.png" width="55" height="30" alt="Drapeau Français">
-            </a>
-            <a class="a-english-flag" href="index.php?lang=1" >
-                <img class="english-flag" src="images/drapeau-anglais.png" width="55" height="30" alt="Drapeau Anglais">
-            </a>
-            <img class="discord-icon" src="./icons/Discord-icon.png" alt="Discord">
-            <img class="instagram-icon" src="./icons/Instagram-icon.svg" alt="Instagram">
-            <img class="github-icon" src="./icons/GitHub-icon.svg" alt="GitHub">
-            <img class="tiktok-icon" src="icons/TikTok-icon.svg" alt="TikTok">
-        </div>
-
-    </div>
-
-</header>
 
 <body>
 
@@ -326,8 +301,6 @@ include('./php/traduction_en.php');
 
 </body>
 
-<footer>
-    © | Speed-Cash | Tous droit réservés |<?php date("Y"); ?>
-</footer>
+<?php include('./php/footer.php') ?>
 
 </html>

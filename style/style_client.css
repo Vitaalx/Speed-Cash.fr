@@ -6,6 +6,21 @@
 
 }
 
+:root {
+    --main-dark-color: rgba(58, 58, 58, 1);
+    --footer-dark-color: rgba(45, 45, 45, 1);
+    --main-icons-color: rgba(70, 70, 70, 1);
+    --main-thumbnail-color: #dcdcdc;
+}
+
+/* Page panier.php */
+
+.cart-body {
+    background-color: var(--main-dark-color);
+}
+
+/* Fin page panier.php */
+
 html, body {
     padding: 0;
     margin: 0;
@@ -14,7 +29,6 @@ html, body {
 .bar-top {
 
     position: relative;
-    justify-content: flex-end;
     justify-content: space-between;
     flex-wrap: nowrap;
     display: flex;
@@ -80,15 +94,13 @@ html, body {
     letter-spacing: 1px;
     text-transform: uppercase;
     text-decoration: none;
+    transition: all 0.3s ease-in-out;
 }
 
 .uil-shopping-bag {
     border-radius: 30px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 32px;
+    padding: 4px 15px;
+    font-size: 30px;
     color: whitesmoke;
 }
 
@@ -106,6 +118,7 @@ html, body {
 .btn-deconnexion:hover, .uil-shopping-bag:hover {
     background: rgba(25, 151, 87, 1);
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .github-icon {
@@ -120,6 +133,18 @@ html, body {
     cursor: pointer;
 }
 
+.cart-container {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+tr:nth-child(even) {
+    background-color: #4a4a4a;
+}
+
 /* Formulaire de paiment */
 
 .button-payment{
@@ -127,10 +152,20 @@ html, body {
     width: 6%;
     padding: 0.3%;
     text-align: center;
-    border-radius: 12px;
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    margin-left: 15%;
 }
+.button-payment:hover{
+    background: #15CF74;
+}
+
+.button-payment-a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+
 
 /* Fin formulaire de paiment */
 
@@ -147,16 +182,47 @@ html, body {
 }
 
 .body-client {
-    background-color: white;
+    background-color: var(--main-dark-color);
 }
 
 /* Vignette vente */
 
 .thumbnail {
-    background: #828dA0;
-    width: 25%;
+    background: rgba(50, 50, 50, 1);
     display: flex;
+    width: 25%;
     flex-direction: row;
+    border-radius: 8px;
+    margin-top: 1%;
+    padding: 1%;
+}
+
+.thumbnail-info-a {
+    text-decoration: none;
+    color: var(--main-thumbnail-color);
+}
+
+.thumbnail-info-a:hover {
+    color: #109454;
+    background-color: #109454;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.rate-form {
+    border-radius: 4px;
+    border: none;
+    background-color: var(--main-icons-color);
+    padding: 4%;
+    color: var(--main-thumbnail-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.rate-form:hover {
+    color: white;
+    background-color: #109454;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .row-right {
@@ -168,9 +234,20 @@ html, body {
     height: 240px;
 }
 
-.add-to-card {
-    width: 100%;
-    padding: 2%;
+.uil-shopping-cart::before {
+    font-size: 24px;
+    width: auto;
+    text-align: center;
+    padding: 4%;
+    color: white;
+    border-radius: 8px;
+    background-color: var(--main-icons-color);
+}
+
+.uil-shopping-cart:hover::before {
+    background-color: #109454;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .desc-product {
@@ -185,25 +262,31 @@ html, body {
 
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 70%;
+    margin-left: 15%;
 }
 td, th {
     text-align: left;
 }
 
 td {
-    height: 100px;
+    height: auto
 }
 
 .rowtotal {
     text-align: right;
+    margin-right: 15%;
+}
+
+.elements-number {
+    margin-left: 15%;
 }
 
 
 footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
-    background-color: rgba(45, 45, 45, 1);
+    background-color: var(--footer-dark-color);
     color: white;
     padding: 4%;
     width: 100%;

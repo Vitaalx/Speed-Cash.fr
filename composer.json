@@ -4,6 +4,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "symfony/var-dumper": "^5.4",
       "ext-curl": "*",
-        "stripe/stripe-php": "^7.116"
+        "stripe/stripe-php": "^7.116",
+      "ext-pdo": "*"
     }
 }
