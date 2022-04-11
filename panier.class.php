@@ -34,11 +34,12 @@ class panier{
                 $stmt->execute();
                 $products = $stmt->fetchAll(PDO::FETCH_OBJ);
 
+                foreach ( $products as $product ) {
+                    $total += $product->prix * $_SESSION['panier'][$product->id];
+                }
+
             } catch (PDOException $e) {
                 echo $e->getMessage();
-            }
-            foreach ( $products as $product ) {
-                $total += $product->prix * $_SESSION['panier'][$product->id];
             }
         }
 

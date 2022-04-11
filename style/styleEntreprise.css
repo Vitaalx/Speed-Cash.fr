@@ -1,0 +1,937 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+
+}
+
+/* ScrollBar */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(199deg, #2DA771 24.18%, #06E775 80.49%);
+    border-radius: 25px;
+}
+
+/* FIN ScrollBar */
+
+:root {
+    --main-dark-color: rgba(58, 58, 58, 1);
+    --footer-dark-color: rgba(45, 45, 45, 1);
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+.company-body {
+    background: var(--main-dark-color);
+}
+
+.company-container {
+    flex: 1 0 auto;
+}
+
+.marketing-header {
+    position: relative;
+    top: 100px;
+    align-items: center;
+    justify-content: center;
+}
+                    /* BAR TOP (HEADER) */
+
+.logoSpeedCash {
+    width: 218px;
+    height: 56px;
+    margin-bottom: 15px;
+}
+
+.bar-top {
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 55px;
+    align-items: center;
+
+    background: #15CF74;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.btn-client {
+    border-radius: 30px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 45px;
+    padding-right: 45px;
+    width: auto;
+    color: whitesmoke;
+
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.btn-entreprise {
+    border-radius: 30px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 45px;
+    padding-right: 45px;
+    color: whitesmoke;
+
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.btns {
+    display: flex;
+    align-items: center;
+}
+
+.btn-entreprise:hover, .btn-client:hover {
+    background: rgba(25, 151, 87, 1);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.bar-top-changemdp {
+
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    height: 55px;
+    align-items: center;
+
+    background: #15CF74;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Social icons */
+
+.social-icon {
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.discord-icon, .instagram-icon, .tiktok-icon, .github-icon {
+
+    width: 30px;
+    height: 30px;
+    margin-right: 20%;
+
+}
+
+.english-flag {
+
+    margin-right: 30%;
+
+}
+
+.french-flag {
+    margin-right: 20%;
+}
+
+.a-french-flag, .a-english-flag {
+    text-decoration: none;
+    margin: 6px 40px 0 0;
+}
+
+
+.github-icon:hover, .tiktok-icon:hover, .instagram-icon:hover, .discord-icon:hover, .appstore-icon:hover, .playstore-icon:hover, .french-flag:hover, .english-flag:hover {
+    cursor: pointer;
+}
+
+                    /* FIN BAR TOP (HEADER) */
+
+
+                    /* CSS FOOTER */
+
+footer {
+    position: relative;
+    background-color: var(--footer-dark-color);
+    color: white;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.footer-container {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 16px;
+    padding: 50px 0 100px;
+}
+
+.bloc {
+    width: 25%;
+    margin: 0 30px;
+}
+
+/* bloc contact footer */
+
+.footer-contact h3, .footer-services h3, .footer-social h3 {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.footer-contact p {
+    padding: 5px 0;
+}
+
+/* bloc services footer */
+
+.services-list, .social-list {
+    list-style-type: none;
+}
+
+.services-list li {
+    padding: 2px 0;
+}
+
+.services-list a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.services-list a:hover {
+    color: #15CF74;
+}
+
+.footer-icon-discord, .footer-icon-github, .footer-icon-instagram, .footer-icon-tiktok {
+    width: 20px;
+}
+
+                    /* FIN CSS FOOTER */
+
+.marketing-content-trust {
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 130%;
+    text-align: center;
+    color: #15CF74;
+}
+
+.marketing-content-partner {
+
+    z-index: 999;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 130%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.marketing-content-info {
+    position: relative;
+    width: 1227px;
+    left: 18%;
+    top: 160px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+
+    color: whitesmoke;
+}
+
+.header-offers-info {
+    position: relative;
+    width: 1138px;
+    left: 18%;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.form-insc-offers {
+    position: relative;
+    width: 1138px;
+    height: 45px;
+    top: 0;
+
+    /* Desktop / H2 */
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 130%;
+    /* identical to box height, or 44px */
+
+    text-align: center;
+
+    color: #15CF74;
+}
+
+.info-about-speed {
+    position: relative;
+    width: 1108px;
+    height: 50px;
+    top: 65%;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    /* or 25px */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.more-info-about-speed-offers {
+    position: relative;
+    width: 24%;
+    height: 132px;
+    left: 18%;
+    top: 100%;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 180%;
+
+    color: #15CF74;
+
+}
+
+.info-app-offers {
+    position: relative;
+    width: 395px;
+
+    top: -10px;
+
+    font-style: normal;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 20px;
+    /* or 119% */
+
+
+    color: #FFFFFF;
+}
+
+.button-more-info {
+    position: relative;
+    width: 206px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 25px;
+    /* identical to box height, or 90% */
+    background-color: rgba(46, 46, 46, 1);;
+
+
+    color: #FFFFFF;
+}
+
+.button-more-info:hover {
+    background-color: #15CF74;
+    cursor: pointer;
+}
+
+.button-more-info:active {
+    border: 1px solid #15CF74;
+}
+
+.sentance-first-bubble {
+    position: relative;
+    width: 644px;
+    height: 74px;
+    left: 50%;
+    top: -250px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+
+    color: #FFFFFF;
+}
+
+.sentance-second-bubble {
+    position: relative;
+    width: 644px;
+    height: 69px;
+    left: 50%;
+    top: -320px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+
+    color: #FFFFFF;
+}
+
+.sentance-third-bubble {
+    position: relative;
+    width: 644px;
+    height: 57px;
+    left: 50%;
+    top: -390px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+
+    color: #FFFFFF;
+}
+
+.info-conditions {
+    position: relative;
+    width: 335px;
+    height: 242px;
+    left: 18%;
+    top: -300px;
+
+    background: #15CF74;
+    border: 4px solid rgba(151, 151, 151, 0.33);
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.info-conditions-title {
+    position: relative;
+    width: 125px;
+    height: 38px;
+    left: 8%;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 38px;
+    /* identical to box height, or 173% */
+
+
+    color: #4C4C4C;
+}
+
+.conditons-first-p {
+    position: relative;
+    width: 288px;
+    height: 66px;
+    left: 10%;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    /* or 22px */
+
+
+    color: #FFFFFF;
+}
+
+.conditons-second-p {
+    position: relative;
+    width: 288px;
+    height: 88px;
+    left: 10%;
+    top: -20px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    /* or 22px */
+
+
+    color: #FFFFFF;
+}
+
+.info-procedure {
+    position: relative;
+    width: 335px;
+    height: 242px;
+    left: 18%;
+    top: -250px;
+
+    background: #15CF74;
+    border: 4px solid rgba(151, 151, 151, 0.33);
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.info-procedure-title {
+    position: relative;
+    width: 120px;
+    height: 38px;
+    left: 8%;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 38px;
+    /* identical to box height, or 173% */
+
+
+    color: #4C4C4C;
+}
+
+.procedure-first-p {
+    position: relative;
+    width: 313px;
+    height: 44px;
+    left: 10%;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    /* or 22px */
+
+
+    color: #FFFFFF;
+}
+
+.procedure-second-p {
+    position: relative;
+    width: 288px;
+    height: 88px;
+    left: 10%;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    /* or 22px */
+
+
+    color: #FFFFFF;
+}
+
+/* Formulaire d'abonnement */
+
+.form-container-subscription {
+    position: relative;
+    width: 842px;
+    height: 1100px;
+    left: 40%;
+    top: -783px;
+
+    background: linear-gradient(184.72deg, #15CF74 10.06%, #32A071 49.33%);
+    border-radius: 20px 0 0 20px;
+}
+
+.form-title {
+    position: relative;
+    width: 516px;
+    height: 74px;
+    left: 5%;
+    top: 5%;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #FFFFFF;
+}
+
+.info-form-sentance {
+    position: relative;
+    width: 708px;
+    left: 8%;
+    top: 15px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+
+    color: #FFFFFF;
+}
+
+.where-question {
+    position: relative;
+    left: 8%;
+    top: -65px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
+}
+
+.when-to-when {
+    position: relative;
+    left: 8%;
+    top: -60px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
+}
+
+.word-a {
+    position: relative;
+    left: 11.5%;
+    top: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+
+    color: #FFFFFF;
+}
+
+.more-info-subscription {
+    position: relative;
+    width: 709px;
+    height: 126px;
+    left: 8%;
+    top: -30px;
+
+    font-style: italic;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 21px;
+
+    color: #FFFFFF;
+}
+
+.monthlySub-p, .annualSub-p {
+    color: whitesmoke;
+    margin-left: 2%;
+}
+
+.monthlySubscription, .annualSubscription {
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+}
+
+
+/* Début Input Formulaire */
+
+.nameSubscription {
+    position: relative;
+    width: 38.5%;
+    padding: 10px;
+    left: 5%;
+    top: 80px;
+
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.emailSubscription {
+    position: relative;
+    width: 38.5%;
+    padding: 10px;
+    top: 6px;
+    left: 50%;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+
+}
+
+.phoneSubscription {
+    position: relative;
+    width: 38.5%;
+    padding: 10px;
+    left: 5%;
+    top: 20px;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.companySubscription {
+    position: relative;
+    width: 38.5%;
+    padding: 10px;
+    left: 50%;
+    top: -54px;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.addressSubscription {
+    position: relative;
+    width: 704px;
+    left: 5%;
+    top: -60px;
+    padding: 10px;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.dateAtSubscription {
+    position: relative;
+    width: 158px;
+    padding: 10px;
+    left: 8%;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.timeAtSubscription {
+    position: relative;
+    width: 158px;
+    padding: 10px;
+    left: 9%;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.dateToSubscription {
+    position: relative;
+    width: 158px;
+    padding: 10px;
+    left: 14%;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.timeToSubscription {
+    position: relative;
+    width: 158px;
+    padding: 10px;
+    left: 15%;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.alert-subscription {
+
+    position: absolute;
+    width: 704px;
+    left: 8%;
+    top: 850px;
+    padding: 20px;
+
+    border: none;
+    font-size: 16px;
+    background: #308e68;
+    border-radius: 4px;
+
+}
+
+.submitSubcription {
+    position: relative;
+    width: 726px;
+    height: 60px;
+    left: 5%;
+    top: 60px;
+    text-align: center;
+
+    border: none;
+    font-weight: 400;
+    font-size: 16px;
+    background: rgba(46, 46, 46, 1);
+    border-radius: 40px;
+    color: #FFFFFF;
+}
+
+.submitSubcription:hover {
+    cursor: pointer;
+    background: #15CF74;
+}
+
+#subscriptionForm .field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.field-choose-subscription {
+    position: relative;
+    width: 704px;
+    left: 8%;
+    top: -40px;
+    padding: 15px;
+
+
+
+    font-size: 14px;
+    background: #308e68;
+    border-radius: 4px;
+}
+
+.field-datetime {
+    display: flex;
+    position: relative;
+    top: -45px;
+    margin-bottom: 25px;
+}
+
+.div-checkbox-annual, .div-checkbox-monthly {
+    display: flex;
+    align-items: center;
+}
+
+/* Fin Input Formulaire */
+
+/* Icons Formulaire */
+
+.uil-user, .uil-at, .uil-phone, .uil-location-point, .uil-building {
+    font-size: 22px;
+    color: whitesmoke;
+}
+
+.uil-user {
+    position: relative;
+    left: 46.5%;
+    top: 80px;
+}
+
+.uil-at {
+    position: relative;
+    left: 91.5%;
+    top: 10px;
+}
+
+.uil-phone {
+    position: relative;
+    left: 46.5%;
+    top: 20px;
+}
+
+.uil-building {
+    position: relative;
+    left: 91.5%;
+    top: -50px;
+}
+
+.uil-location-point {
+    position: relative;
+    left: 91.5%;
+    top: -28px;
+}
+
+
+
+/* Fin formulaire d'abonnement */
+
+.subscription-card {
+    position: relative;
+    left: 18%;
+    top: -1170px;
+    z-index: -1;
+}
+
+
+                                    /* Forme */
+
+.first-bubble {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    left: 44%;
+
+    top: -150px;
+}
+
+.second-bubble {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    left: 44%;
+
+    top: -230px;
+}
+
+.third-bubble {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    left: 44%;
+
+    top: -305px;
+}
+
+.icon-coat {
+    position: relative;
+    width: 54px;
+    height: 35px;
+    left: 18%;
+    top: 30px;
+}
+
+.ellipse-1 {
+    position: relative;
+    width: 233px;
+    height: 234px;
+    top: 80%;
+
+    background: linear-gradient(194.7deg, rgba(6, 231, 117, 0.7) 18.97%, rgba(12, 13, 16, 0.7) 71.56%);
+    filter: blur(90px);
+}

@@ -36,7 +36,7 @@ if(!isset($_SESSION["email"])) {
 
 <body class="body-client">
 
-<main class="container-thumbnail">
+<div class="container-thumbnail">
 
 <?php
 
@@ -63,7 +63,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                  alt="' . $products[$i-1]["nom"] . '">';
             echo '<p class="text-product">' . $products[$i-1]["nom"] .'</p>';
             echo '<div class="stars">';
-            if ($products[$i-1]["note"] > 0) {
+            if ($products[$i-1]["note"] >= 0) {
                 for ($j = 1; $j <= 5; $j++) {
                     if ($j <= $products[$i-1]["note"]) {
                         echo '<i class="las la-star"></i>';
@@ -117,7 +117,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 ?>
 
-</main>
+</div>
 
 <script type="text/javascript" src="./js/app.js"></script>
 <script type="text/javascript" src="js/modal.js"></script>

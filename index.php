@@ -54,7 +54,7 @@ include('./php/traduction_en.php');
                         <a href="./recuperation_mdp.php"><?php echo $forget_pass[$langue]; ?></a>
                     </div>
                     <div class="alert-connexion" id="alert-connexion">
-
+                        Veuillez consulter vos mails et activer votre compte.
                     </div>
                     <input class="submit-btn" type="submit" name="submit" value="<?php echo $connexion_button[$langue]; ?>">
                 </form>
@@ -136,10 +136,11 @@ include('./php/traduction_en.php');
                     </div>
                     <h5><?php echo $registration_image[$langue]; ?></h5>
                     <input type="file" id="imgInscription" class="fileInscription" accept="image/jpeg" required>
-                    <div class="alert" id="alert">
-
+                    <div class="alert-inscription" id="alert-inscription">
+                        Votre compte a été créer avec succès ! <br />
+                        Afin de valider votre compte veuillez suivre les instructions envoyées sur votre mail.
                     </div>
-                    <input class="submit-btn" type="submit" name="submit" value="<?php echo $register_button[$langue]; ?>">
+                    <input class="submit-btn-insc" type="submit" name="submit" value="<?php echo $register_button[$langue]; ?>">
                 </form>
             </div>
         </div>
@@ -186,7 +187,8 @@ include('./php/traduction_en.php');
 <script>
 
 
-    $("#alert").hide();
+    $("#alert-inscription").hide();
+    $("#alert-connexion").hide();
     // SUR VALIDATION DU FORMULAIRE D'INSCRIPTION
     $("#inscriptionForm").submit(function (event) {
         // Annulation du submit auto
@@ -225,20 +227,25 @@ include('./php/traduction_en.php');
             data: fd,
             success: function (text) {
                 alert('-' + text + '-');
-                if (text == "success") {
+                if (text === "success") {
                     //alert("success");
                     $("#alert-connexion").show();
-                    $("#alert-connexion").html("<span style='color: #2DA771;'><strong>Connexion établie avec succès !</strong></span>");
-                    window.location.href = './client.php';
-
-                } else if (text == "noninscrit") {
+                    $("#alert-connexion").html("<span style='color: whitesmoke;'>Connexion établie avec succès !</span>");
+                    $("#alert-connexion").fadeOut(4000);
+                    setTimeout(function () {
+                        window.location.href = "index.php";
+                    }, 3000);
+                    setTimeout(() => {window.location.href = "./client.php"}, 1200);
+                } else if (text === "noninscrit") {
                     //alert("doublon");
                     $("#alert-connexion").show();
-                    $("#alert-connexion").html("<span style='color: indianred;'><strong>Compte inconnu, veuillez vous créer un compte !</strong></span>");
-                } else if (text == "pasactif") {
+                    $("#alert-connexion").html("<span style='color:  #C0392B;'>Compte inconnu, veuillez vous créer un compte !</span>");
+                    $("#alert-connexion").fadeOut(4000);
+                } else if (text === "pasactif") {
                     //alert("pasactif");
                     $("#alert-connexion").show();
-                    $("#alert-connexion").html("<span style='color: indianred;'><strong>Veuillez consulter vos mails et activer votre compte.</strong></span>");
+                    $("#alert-connexion").html("<span style='color:  #C0392B;'>Veuillez consulter vos mails et activer votre compte.</span>");
+                    $("#alert-connexion").fadeOut(4000);
                 }
             }
         });
@@ -247,14 +254,13 @@ include('./php/traduction_en.php');
     // Fonction submit dédiée
     function submitInscriptionForm() {
         if (passwordInsc != confirmpassInsc) {
-            $("#alert").show();
-            $("#alert").html("<center class='alert-class'><strong>La confirmation du mot de passe est incorrecte !</strong></center>");
-            $("#alert").css('color', 'indianred');
-            $("#alert").css('font-size', '1em');
+            $("#alert-inscription").show();
+            $("#alert-inscription").html("<center class='alert-class'><strong>La confirmation du mot de passe est incorrecte !</strong></center>");
+            $("#alert-inscription").css('color', '#C0392B');
             $("#confirmpassInsc").val('');
             $("#confirmpassInsc").focus();
         } else {
-            $("#alert").hide();
+            $("#alert-inscription").hide();
             // Création d'un formulaire de données
             var fd = new FormData();
             var file = $('#imgInscription')[0].files[0];
@@ -278,18 +284,18 @@ include('./php/traduction_en.php');
                     alert("-" + text + "-");
                     if (text == "success") {
                         //alert("success");
-                        $("#alert").show();
-                        $("#alert").html("<center class='alert-class'><strong>Votre compte a été créé avec succès ! </strong>" +
+                        $("#alert-inscription").show();
+                        $("#alert-inscription").html("<center class='alert-class'><strong>Votre compte a été créé avec succès ! </strong>" +
                             "<br><i>Afin de valider votre compte veuillez suivre les instructions envoyées sur votre mail.</i></center>");
-                        $("#alert").css('color', '#06E775');
-                        $("#alert").css('font-size', '1em');
+                        $("#alert-inscription").css('color', 'whitesmoke');
+                        $("#alert-inscription").fadeOut(4000);
 
                     } else if (text == "doublon") {
                         //alert("doublon");
-                        $("#alert").show();
-                        $("#alert").html("<center class='alert-class'><strong>Un compte existe déjà avec cette adresse mail !</strong></center>");
-                        $("#alert").css('color', 'indianred');
-                        $("#alert").css('font-size', '1em');
+                        $("#alert-inscription").show();
+                        $("#alert-inscription").html("<center class='alert-class'><strong>Un compte existe déjà avec cette adresse mail !</strong></center>");
+                        $("#alert-inscription").css('color', '#C0392B');
+                        $("#alert-inscription").fadeOut(4000);
                     }
                 }
             });

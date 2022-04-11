@@ -37,7 +37,7 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
 <body class="cart-body">
 
 <div class="cart-container">
-    <table>
+    <table class="cart-table">
         <tr>
             <th>Image</th>
             <th>Nom du produit</th>
@@ -78,6 +78,7 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
                  alt="' . $product->nom . '" style="width: 70px; height: 70px;"></td>';
                         echo '<td>' . $product->nom . '</td>';
                         $priceTVA = $product->prix / 1.2;
+                        $priceTVA = round($priceTVA, 1);
                         echo '<td class="price">' . $priceTVA . ' €</td>';
                         echo '<td>' . $_SESSION['panier'][$product->id] . '</td>';
                         echo '<td>' . $product->prix . ' €</td>';
@@ -98,12 +99,14 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
         ?>
     </table>
     <br />
+    <div class="cart-footer">
     <div class="elements-number">Nombre d'éléments : <?php $elements = $cart->count();
         echo $elements; ?></div>
     <div class="rowtotal">Grand Total : <span class="total"><?php $total = $cart->total();
             echo $total; ?> €</span></div>
     <div class="button-payment"><a class="button-payment-a"
-                                   href="paymentCart.php?price=<?= $total . .0 . .0 ?>">Payer</a>
+                                   href="paymentCart.php?price=<?= $total ?>">Payer</a>
+    </div>
     </div>
 </div>
 

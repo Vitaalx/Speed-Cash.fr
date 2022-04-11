@@ -6,6 +6,19 @@
 
 }
 
+                    /* ScrollBar */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(199deg, #2DA771 24.18%, #06E775 80.49%);
+    border-radius: 25px;
+}
+
+                    /* FIN ScrollBar */
+
 input {
     color: #828dA0;
 }
@@ -18,6 +31,7 @@ html, body {
 
 :root {
     --main-color: #15CF74;
+    --footer-dark-color: rgba(45, 45, 45, 1);
 }
 
 
@@ -141,6 +155,7 @@ html, body {
 
 .a-french-flag, .a-english-flag {
     text-decoration: none;
+    margin: 6px 40px 0 0;
 }
 
 
@@ -155,6 +170,7 @@ html, body {
     z-index: -1;
     background: rgba(48, 48, 48, 1);
     flex-direction: row;
+    flex: 1 0 auto;
 
 
 }
@@ -172,7 +188,6 @@ html, body {
     left: 86px;
     top: 120px;
 
-    font-family: Montserrat;
     font-size: 70px;
     font-style: normal;
     font-weight: 700;
@@ -197,7 +212,6 @@ html, body {
     left: 83px;
     top: 420px;
 
-    font-family: Montserrat;
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
@@ -232,7 +246,7 @@ html, body {
     background: linear-gradient(199deg, #2DA771 24.18%, #06E775 80.49%);
     border: 1px solid rgba(241, 252, 255, 0.5);
     box-sizing: border-box;
-    box-shadow: inset 0px 30px 50px rgba(229, 239, 242, 0.23);
+    box-shadow: inset 0 30px 50px rgba(229, 239, 242, 0.23);
     border-radius: 100%;
 
 }
@@ -576,22 +590,35 @@ a {
     filter: blur(0.5px);
 }
 
-.alert {
-    padding-top: 4%;
-    padding-bottom: 4%;
-    font-family: 'Poppins', sans-serif;
-}
 
-.alert-class {
-    font-size: 0.85em;
+.alert-inscription {
+    width: 404px;
+    padding: 16px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    border: none;
+    font-size: 14px;
+    background: linear-gradient(199deg, #2DA771 24.18%, #04c361 80.49%);
+    border-radius: 4px;
+    z-index: 999;
 }
 
 .alert-connexion {
-    padding-top: 4%;
-    padding-bottom: 4%;
-    font-size: 0.85em;
+    width: 404px;
+    padding: 16px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    border: none;
+    font-size: 14px;
+    background: linear-gradient(199deg, #2DA771 24.18%, #04c361 80.49%);
+    border-radius: 4px;
 }
-
 
 .form-container {
     position: absolute;
@@ -681,11 +708,32 @@ a {
 }
 
 .submit-btn {
+    position: relative;
     background: var(--main-color);
     color: #fff;
     border: none;
     outline: none;
-    width: 120px;
+    width: 100%;
+    top: 10px;
+    text-align: center;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-weight: 500;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.submit-btn-insc {
+    position: relative;
+    background: var(--main-color);
+    color: #fff;
+    border: none;
+    outline: none;
+    width: 100%;
+    top: 10px;
+    text-align: center;
     padding: 10px 30px;
     border-radius: 5px;
     font-size: 0.85em;
@@ -823,11 +871,60 @@ a {
 }
 
 footer {
-    display: flex;
-    bottom: 0;
-    background-color: rgba(45, 45, 45, 1);
+    position: relative;
+    background-color: var(--footer-dark-color);
     color: white;
-    padding: 4%;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.footer-container {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 16px;
+    padding: 50px 0 100px;
+}
+
+.bloc {
+    width: 25%;
+    margin: 0 30px;
+}
+
+/* bloc contact footer */
+
+.footer-contact h3, .footer-services h3, .footer-social h3 {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.footer-contact p {
+    padding: 5px 0;
+}
+
+/* bloc services footer */
+
+.services-list, .social-list {
+    list-style-type: none;
+}
+
+.services-list li {
+    padding: 2px 0;
+}
+
+.services-list a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.services-list a:hover {
+    color: #15CF74;
+}
+
+.footer-icon-discord, .footer-icon-github, .footer-icon-instagram, .footer-icon-tiktok {
+    width: 20px;
 }
 
 @media screen and (max-width: 735px) {

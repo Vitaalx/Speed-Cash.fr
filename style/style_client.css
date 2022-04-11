@@ -6,10 +6,24 @@
 
 }
 
+/* ScrollBar */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(199deg, #2DA771 24.18%, #06E775 80.49%);
+    border-radius: 25px;
+}
+
+/* FIN ScrollBar */
+
 :root {
     --main-dark-color: rgba(58, 58, 58, 1);
     --footer-dark-color: rgba(45, 45, 45, 1);
     --main-icons-color: rgba(70, 70, 70, 1);
+    --main-button-color: rgba(46, 46, 46, 1);
     --main-thumbnail-color: #dcdcdc;
 }
 
@@ -17,6 +31,11 @@
 
 .cart-body {
     background-color: var(--main-dark-color);
+}
+
+.cart-table {
+    background-color: var(--footer-dark-color);
+    border-radius: 10px;
 }
 
 /* Fin page panier.php */
@@ -139,6 +158,8 @@ html, body {
     bottom: 0;
     left: 0;
     right: 0;
+    margin-bottom: 2%;
+    flex: 1 0 auto;
 }
 
 tr:nth-child(even) {
@@ -148,16 +169,17 @@ tr:nth-child(even) {
 /* Formulaire de paiment */
 
 .button-payment{
-    border: 0.4px solid black;
-    width: 6%;
+    width: 5%;
     padding: 0.3%;
     text-align: center;
-    border-radius: 25px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     margin-left: 15%;
+    background-color: var(--main-button-color);
 }
 .button-payment:hover{
+    cursor: pointer;
     background: #15CF74;
 }
 
@@ -178,7 +200,9 @@ tr:nth-child(even) {
 .container-thumbnail {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: row;
+    margin-bottom: 2%;
+    flex: 1 0 auto;
 }
 
 .body-client {
@@ -190,11 +214,16 @@ tr:nth-child(even) {
 .thumbnail {
     background: rgba(50, 50, 50, 1);
     display: flex;
+    flex-basis: auto;
+    flex-shrink: 1;
+    flex-grow: 1;
     width: 25%;
-    flex-direction: row;
     border-radius: 8px;
     margin-top: 1%;
     padding: 1%;
+    margin-right: 2%;
+    margin-left: 2%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
 }
 
 .thumbnail-info-a {
@@ -266,28 +295,87 @@ table {
     margin-left: 15%;
 }
 td, th {
-    text-align: left;
+    text-align: center;
+    padding: 8px;
 }
 
 td {
-    height: auto
+    height: auto;
 }
 
 .rowtotal {
-    text-align: right;
-    margin-right: 15%;
+    text-align: center;
+    margin-left: 74.5%;
+    border-radius: 8px;
+    background-color: var(--main-button-color);
+    padding: 0.3%;
+    width: 10.5%;
 }
 
 .elements-number {
     margin-left: 15%;
+    width: 10.5%;
+    background-color: var(--main-button-color);
+    padding: 0.3%;
+    text-align: center;
+    border-radius: 8px;
+
 }
 
 
 footer {
     position: relative;
-    bottom: 0;
     background-color: var(--footer-dark-color);
     color: white;
-    padding: 4%;
     width: 100%;
+    flex-shrink: 0;
+}
+
+.footer-container {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 16px;
+    padding: 50px 0 100px;
+}
+
+.bloc {
+    width: 25%;
+    margin: 0 30px;
+}
+
+/* bloc contact footer */
+
+.footer-contact h3, .footer-services h3, .footer-social h3 {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.footer-contact p {
+    padding: 5px 0;
+}
+
+/* bloc services footer */
+
+.services-list, .social-list {
+    list-style-type: none;
+}
+
+.services-list li {
+    padding: 2px 0;
+}
+
+.services-list a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.services-list a:hover {
+    color: #15CF74;
+}
+
+.footer-icon-discord, .footer-icon-github, .footer-icon-instagram, .footer-icon-tiktok {
+    width: 20px;
 }
