@@ -38,9 +38,9 @@ html, body {
 /* Logo bar tools */
 
 .logoSpeedCash {
-    width: 218px;
-    height: 56px;
-    margin-bottom: 15px;
+    width: 210px;
+    height: 50px;
+    margin-bottom: 8px;
 }
 
 /* Boutons BarTools */
@@ -868,63 +868,6 @@ a {
     color: #828dA0;
     text-align: left;
     width: 100%;
-}
-
-footer {
-    position: relative;
-    background-color: var(--footer-dark-color);
-    color: white;
-    width: 100%;
-    flex-shrink: 0;
-}
-
-.footer-container {
-    width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    font-size: 16px;
-    padding: 50px 0 100px;
-}
-
-.bloc {
-    width: 25%;
-    margin: 0 30px;
-}
-
-/* bloc contact footer */
-
-.footer-contact h3, .footer-services h3, .footer-social h3 {
-    font-size: 20px;
-    padding-bottom: 20px;
-}
-
-.footer-contact p {
-    padding: 5px 0;
-}
-
-/* bloc services footer */
-
-.services-list, .social-list {
-    list-style-type: none;
-}
-
-.services-list li {
-    padding: 2px 0;
-}
-
-.services-list a {
-    text-decoration: none;
-    color: whitesmoke;
-}
-
-.services-list a:hover {
-    color: #15CF74;
-}
-
-.footer-icon-discord, .footer-icon-github, .footer-icon-instagram, .footer-icon-tiktok {
-    width: 20px;
 }
 
 @media screen and (max-width: 735px) {

@@ -28,10 +28,10 @@ try {
         echo $user_id;
         echo $produit_id;
 
-        header("Location: ../client.php?success=1");
+        header("Location: ../client.php?success=prodnote");
 
     } else {
-        header("Location: ../client.php?error=1");
+        header("Location: ../client.php?error=dejanote");
     }
 
     } catch (PDOException $e) {

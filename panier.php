@@ -16,6 +16,7 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
     <meta charset="UTF-8">
     <title>Votre panier Speed-Cash</title>
     <link rel="stylesheet" type="text/css" href="./style/style_client.css">
+    <link rel="stylesheet" type="text/css" href="./style/styleFooter.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
