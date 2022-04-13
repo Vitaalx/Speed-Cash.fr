@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="scriptsadmin/script.js"></script>
+
+    <a href="index.html">index</a>
+
+    <h3>Gestion des clients</h3>
+    <div id="cusList"></div>
+    <button onclick="listCus()">Rafraichir</button>
+    <script> 
+        setTimeout(listCus(), 1000);
+    </script>
+
+    <h5>Ajout d'un client</h5>
+    <div>
+        <input id="nom" name="name" type="text" placeholder="nom">
+        <input id="prenom" name="sname" type="text" placeholder="prenom">
+        <input id="email" name="mail" type="email" placeholder="email">
+        <input id="nat" name="nat" type="text" placeholder="nationalité">
+        <input id="age" name="age" type="number" placeholder="age">
+        <input id="role" name="role" type="text" placeholder="role">
+    </div>
+    <button onclick="addCus()">Ajouter</button>
+    <h5>Suppression d'un client</h5>
+    <div>
+        <input id="did" name="id" type="text" placeholder="id">
+    </div>
+    <button onclick="deleteCus()">Supprimer</button>
+    
+    <h5>Modification d'un client</h5>
+    <div>
+        <input id="idmodc" type="text" placeholder="id">
+        <input id="newvalue" type="text">
+        <input id="checkname" type="checkbox" value="checkname">
+        <label for="checkname">Nom</label>
+        <input id="checksname" type="checkbox" value="checksname">
+        <label for="checksname">Prenom</label>
+        <input id="checkmail" type="checkbox" value="checkmail">
+        <label for="checkmail">Email</label>
+        <input id="checknat" type="checkbox" value="checknat">
+        <label for="checknat">Nationalité</label>
+        <input id="checkage" type="checkbox" value="checkage">
+        <label for="checkage">Age</label>
+        <input id="checkrole" type="checkbox" value="checkrole">
+        <label for="checkrole">Role</label>
+    </div>
+    <button onclick="modifCus()" > Modifier</button>
+
+    <h3>Gestion des produits</h3>
+    <div id="productsList"></div>
+    <button onclick="listProd()">Rafraichir</button>
+    <script> 
+        setTimeout(listProd(), 1000);
+    </script>
+
+    <h5>Ajout d'un produit</h5>
+    <div>
+        <input id="pnom" name="name" type="text" placeholder="nom">
+        <input id="categorie" name="categorie" type="text" placeholder="categorie">
+        <input id="marque" name="marque" type="text" placeholder="marque">
+        <input id="prix" name="prix" type="text" placeholder="prix">
+    </div>
+    <button onclick="addProd()">Ajouter</button>
+
+    <h5>Suppression d'un produit</h5>
+    <div>
+        <input id="pid" name="id", type="text", placeholder="id">
+    </div>
+    <button onclick="supprProd()">Supprimer</button>
+
+    <h5>Modification d'un produit</h5>
+    <div>
+        <input id="idprodc" type="text" placeholder="id">
+        <input id="newvaluep" type="text">
+        <input id="checknamep" type="checkbox" value="checkname">
+        <label for="checknamep">Nom</label>
+        <input id="checkcatp" type="checkbox" value="checksname">
+        <label for="checkcatp">Categorie</label>
+        <input id="checkbrandp" type="checkbox" value="checkmail">
+        <label for="checkbrandp">Marque</label>
+        <input id="checkpricep" type="checkbox" value="checknat">
+        <label for="checkpricep">Prix</label>
+    </div>
+    <button onclick="modifProd()">Modifier</button>
+
+</body>
+</html>
