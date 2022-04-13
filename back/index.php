@@ -1,0 +1,1 @@
+<?php header('Location: html/ltr/horizontal-menu-template-dark/'); ?>
