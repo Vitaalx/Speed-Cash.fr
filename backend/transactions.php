@@ -1,7 +1,7 @@
 <?php
-  require_once('config/dbPayment.php');
-  require_once('lib/pdo_db.php');
-  require_once('models/Transaction.php');
+  require_once('../config/dbPayment.php');
+  require_once('../lib/pdo_db.php');
+  require_once('../models/Transaction.php');
 
   // Instantiate Transaction
   $transaction = new Transaction();
@@ -50,7 +50,7 @@
       </tbody>
     </table>
     <br>
-    <p><a href="paymentCart.php">Page de paiement</a></p>
+    <p><a href="../paymentCart.php">Page de paiement</a></p>
   </div>
 </body>
 </html>

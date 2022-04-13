@@ -258,6 +258,37 @@ tr:nth-child(even) {
     margin-left: 2.5%;
 }
 
+.success-payment {
+    position: absolute;
+    top: 120px;
+    left: 38%;
+    padding: 14px 18px;
+    background: #15CF74;
+    border-radius: 12px;
+    width: 25%;
+    color: whitesmoke;
+    text-align: center;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+}
+
+.close-popup-payment {
+    font-size: 20px;
+    position: absolute;
+    top: 1%;
+    right: 3%;
+    color: whitesmoke;
+    text-align: center;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+}
+
+.close-popup-payment:hover {
+    cursor: pointer;
+    color: indianred;
+    transition: all 0.3s ease-in-out;
+}
+
 .img-product {
     width: 240px;
     height: 240px;

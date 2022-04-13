@@ -10,3 +10,9 @@ function closeModal() {
 
 }
 
+function closePopUp() {
+
+    document.querySelector("#success-payment").style.display = 'none';
+
+}
+

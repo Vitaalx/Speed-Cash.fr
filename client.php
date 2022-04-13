@@ -130,8 +130,10 @@ if (!isset($_SESSION["email"])) {
 
                 }
 
-                if (isset($_GET["success"]) and $_GET["success"] === "prodnote") echo "<script>alert('Merci d\'avoir noté notre produit !');</script>";
-                if (isset($_GET["error"]) and $_GET["error"] === "dejanote") echo "<script>alert('Vous ne pouvez pas noter deux fois le même produit !');</script>";
+                if (isset($_GET["success"]) and $_GET["success"] === "prodnote") echo "<div class='success-payment' id='success-payment' style='display: block;'><span class='close-popup-payment' onclick='closePopUp()' title='Fermer'>&times;</span>Merci d'avoir noté notre produit !</div>";
+                if (isset($_GET["error"]) and $_GET["error"] === "dejanote") echo "<div class='success-payment' id='success-payment' style='display: block;'><span class='close-popup-payment' onclick='closePopUp()' title='Fermer'>&times;</span>Vous ne pouvez pas noter deux fois le même produit !</div>";
+                if (isset($_GET["payment"]) and $_GET["payment"] === "success") { echo "<div class='success-payment' id='success-payment' style='display: block;'><span class='close-popup-payment' onclick='closePopUp()' title='Fermer'>&times;</span>Merci d'avoir effectué un achat !</div>"; $_SESSION["panier"] = array(); }
+
 
             } else {
                 die("Aucun produit n'est en stock !");
@@ -144,8 +146,6 @@ if (!isset($_SESSION["email"])) {
 
         ?>
 </div>
-
-
 
 <script type="text/javascript" src="./js/app.js"></script>
 <script type="text/javascript" src="js/modal.js"></script>

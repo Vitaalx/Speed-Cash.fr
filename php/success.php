@@ -24,7 +24,7 @@
     <hr>
     <p>Votre transaction ID est <?php echo $tid; ?></p>
     <p>Regardez votre email pour plus d'info</p>
-    <p><a href="../client.php" class="btn btn-light mt-2">Retourner à l'accueil</a></p>
+    <p><a href="../client.php?payment=success" class="btn btn-light mt-2">Retourner à l'accueil</a></p>
   </div>
 </body>
 </html>

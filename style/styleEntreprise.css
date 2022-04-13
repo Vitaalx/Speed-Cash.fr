@@ -873,3 +873,33 @@ html, body {
     background: linear-gradient(194.7deg, rgba(6, 231, 117, 0.7) 18.97%, rgba(12, 13, 16, 0.7) 71.56%);
     filter: blur(90px);
 }
+
+@media screen and (max-width: 1540px) {
+    .company-container {
+
+    }
+
+    .header-offers-info {
+        left: 12%;
+    }
+
+    .marketing-content-info {
+        left: 12%;
+    }
+
+    .content-offers-info {
+        position: relative;
+        right: 4%;
+    }
+
+    .footer-form-offers-info {
+        position: relative;
+        right: 4%;
+    }
+    .form-container-subscription {
+        left: 38%;
+    }
+    .subscription-card {
+        left: 12%;
+    }
+}
