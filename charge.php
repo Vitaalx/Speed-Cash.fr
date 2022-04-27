@@ -16,19 +16,22 @@
  $last_name = $POST['last_name'];
  $email = $POST['email'];
  $token = $POST['stripeToken'];
+ $products_id = $POST['ids'];
+ $price = $POST['price'];
+
+ echo "alert('$first_name');";
 
 // Create Customer In Stripe
 $customer = \Stripe\Customer::create(array(
   "email" => $email,
   "source" => $token
 ));
-$price= $_GET['price'];
 
 // Charge Customer
 $charge = \Stripe\Charge::create(array(
   "amount" => $price,
   "currency" => "eur",
-  "description" => "panier d'achat",
+  "description" => $products_id,
   "customer" => $customer->id
 ));
 
@@ -64,4 +67,4 @@ $transaction = new Transaction();
 $transaction->addTransaction($transactionData);
 
 // Redirect to success
-header('Location: /php/success.php?tid='.$charge->id.'&product='.$charge->description);
+header('Location: /php/success.php?tid='.$charge->id.'&products='.$charge->description.'&amount='.$charge->amount);

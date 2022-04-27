@@ -12,7 +12,7 @@ function closeModal() {
 
 function closePopUp() {
 
-    document.querySelector("#success-payment").style.display = 'none';
+    document.querySelector("#success-notif").style.display = 'none';
 
 }
 

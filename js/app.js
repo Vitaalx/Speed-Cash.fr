@@ -9,7 +9,7 @@
                 if (confirm(data.message + ' Voulez vous consulter votre panier ?')) {
                     location.href = 'panier.php';
                 } else {
-
+                    console.log("error");
                 }
             }
        }, 'json');

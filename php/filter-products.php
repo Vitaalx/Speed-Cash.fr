@@ -9,8 +9,8 @@ if(isset($_POST['categorie']) || isset($_POST['brand'])){
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $category = $_POST['categorie'];
-            $brand = $_POST['brand'];
+            $category = htmlspecialchars($_POST['categorie']);
+            $brand = htmlspecialchars($_POST['brand']);
             if (strlen($category) > 0 && strlen($brand) > 0) {
                 $sql = "SELECT * FROM produits WHERE categorie = '$category' AND marque = '$brand'";
             } elseif (strlen($category) > 0) {

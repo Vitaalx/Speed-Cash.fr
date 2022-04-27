@@ -12,6 +12,8 @@ include('./php/traduction_en.php');
     <meta charset="UTF-8">
     <title><?php echo $title_head[$langue]; ?></title>
     <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <link rel="stylesheet" type="text/css" href="../style/style_client.css">
+    <link rel="stylesheet" type="text/css" href="../style/styleFooter.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
@@ -21,7 +23,7 @@ include('./php/traduction_en.php');
     <script src="../js/popper.min.js"></script>
 </head>
 
-<?php include('header.php'); ?>
+<?php include('header_client.php'); ?>
 
 
 <body class="body-recup">
@@ -39,9 +41,9 @@ include('./php/traduction_en.php');
             <?php echo $new_pass_recup[$langue]; ?>
             <form method="post" class="form-recup">
                 <br>
-                <input type="password" placeholder="<?php echo $new_pass_recup_input[$langue]; ?>" class="password1-changemdp" name="change_mdp"/><br/>
+                <input type="password" placeholder="<?php echo $new_pass_recup_input[$langue]; ?>" class="password1-changemdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins 8 caractères, une minuscule, une majuscule et un chiffre." name="change_mdp"/><br/>
                 <br>
-                <input type="password" placeholder="<?php echo $confirm_pass_recup_input[$langue]; ?>" class="password2-changemdp" name="change_mdpc"/><br/>
+                <input type="password" placeholder="<?php echo $confirm_pass_recup_input[$langue]; ?>" class="password2-changemdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins 8 caractères, une minuscule, une majuscule et un chiffre." name="change_mdpc"/><br/>
                 <br>
                 <input type="submit" value="<?php echo $validate_button[$langue]; ?>" class="submit-recup" class="submit2-changemdp" name="change_submit"/>
             </form>

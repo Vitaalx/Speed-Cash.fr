@@ -537,33 +537,6 @@ html, body {
     color: #FFFFFF;
 }
 
-.when-to-when {
-    position: relative;
-    left: 8%;
-    top: -60px;
-
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height */
-
-
-    color: #FFFFFF;
-}
-
-.word-a {
-    position: relative;
-    left: 11.5%;
-    top: 10px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 21px;
-
-    color: #FFFFFF;
-}
-
 .more-info-subscription {
     position: relative;
     width: 709px;
@@ -579,12 +552,12 @@ html, body {
     color: #FFFFFF;
 }
 
-.monthlySub-p, .annualSub-p {
+.annualSub-p {
     color: whitesmoke;
     margin-left: 2%;
 }
 
-.monthlySubscription, .annualSubscription {
+.annualSubscription {
     border-radius: 10px;
     border: none;
     text-decoration: none;
@@ -593,7 +566,7 @@ html, body {
 
 /* Début Input Formulaire */
 
-.nameSubscription {
+.siretSubscription {
     position: relative;
     width: 38.5%;
     padding: 10px;
@@ -607,13 +580,14 @@ html, body {
     border-radius: 4px;
 }
 
-.emailSubscription {
+.company-type {
     position: relative;
     width: 38.5%;
     padding: 10px;
     top: 6px;
     left: 50%;
 
+    color: #757575;
     border: none;
     font-size: 16px;
     background: #FFFFFF;
@@ -660,54 +634,6 @@ html, body {
     border-radius: 4px;
 }
 
-.dateAtSubscription {
-    position: relative;
-    width: 158px;
-    padding: 10px;
-    left: 8%;
-
-    border: none;
-    font-size: 16px;
-    background: #FFFFFF;
-    border-radius: 4px;
-}
-
-.timeAtSubscription {
-    position: relative;
-    width: 158px;
-    padding: 10px;
-    left: 9%;
-
-    border: none;
-    font-size: 16px;
-    background: #FFFFFF;
-    border-radius: 4px;
-}
-
-.dateToSubscription {
-    position: relative;
-    width: 158px;
-    padding: 10px;
-    left: 14%;
-
-    border: none;
-    font-size: 16px;
-    background: #FFFFFF;
-    border-radius: 4px;
-}
-
-.timeToSubscription {
-    position: relative;
-    width: 158px;
-    padding: 10px;
-    left: 15%;
-
-    border: none;
-    font-size: 16px;
-    background: #FFFFFF;
-    border-radius: 4px;
-}
-
 .alert-subscription {
 
     position: absolute;
@@ -728,7 +654,7 @@ html, body {
     width: 726px;
     height: 60px;
     left: 5%;
-    top: 60px;
+    top: 150px;
     text-align: center;
 
     border: none;
@@ -750,6 +676,26 @@ html, body {
     margin-bottom: 25px;
 }
 
+.field-checkbox-subscription {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 704px;
+    left: 8%;
+    top: -30px;
+    padding: 10px;
+
+    border: none;
+    font-size: 14px;
+    background: #308E68;
+    border-radius: 4px;
+}
+
+.checkboxSub-p {
+    color: white;
+    margin-left: 2%;
+ }
+
 .field-choose-subscription {
     position: relative;
     width: 704px;
@@ -764,14 +710,7 @@ html, body {
     border-radius: 4px;
 }
 
-.field-datetime {
-    display: flex;
-    position: relative;
-    top: -45px;
-    margin-bottom: 25px;
-}
-
-.div-checkbox-annual, .div-checkbox-monthly {
+.div-checkbox-annual {
     display: flex;
     align-items: center;
 }
@@ -780,18 +719,18 @@ html, body {
 
 /* Icons Formulaire */
 
-.uil-user, .uil-at, .uil-phone, .uil-location-point, .uil-building {
+.uil-dialpad-alt, .uil-university, .uil-phone, .uil-location-point, .uil-building {
     font-size: 22px;
     color: whitesmoke;
 }
 
-.uil-user {
+.uil-dialpad-alt {
     position: relative;
     left: 46.5%;
     top: 80px;
 }
 
-.uil-at {
+.uil-university {
     position: relative;
     left: 91.5%;
     top: 10px;
@@ -812,7 +751,7 @@ html, body {
 .uil-location-point {
     position: relative;
     left: 91.5%;
-    top: -28px;
+    top: -58px;
 }
 
 

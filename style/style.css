@@ -26,7 +26,14 @@ input {
 html, body {
     padding: 0;
     margin: 0;
-    z-index: -1;
+}
+
+.body-index {
+    background: rgba(48, 48, 48, 1);
+}
+
+.container-fluid {
+    height: 40vh;
 }
 
 :root {
@@ -64,30 +71,12 @@ html, body {
 
 }
 
-.btn-entreprise {
-    border-radius: 30px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-left: 45px;
-    padding-right: 45px;
-    color: whitesmoke;
-
-    font-family: Montserrat;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
-
-}
-
 .btns {
     display: flex;
     align-items: center;
 }
 
-.btn-entreprise:hover, .btn-client:hover {
+.btn-client:hover {
     background: rgba(25, 151, 87, 1);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -106,6 +95,8 @@ html, body {
     border: 1px solid #000000;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    z-index: 1;
 
 }
 
@@ -167,7 +158,6 @@ html, body {
 
     position: relative;
     min-height: 899px;
-    z-index: -1;
     background: rgba(48, 48, 48, 1);
     flex-direction: row;
     flex: 1 0 auto;
@@ -585,11 +575,56 @@ a {
     z-index: 999;
 }
 
-.close-modal:hover {
+.close-modal:hover, .close-modal-insc:hover {
     color: #15CF74;
     filter: blur(0.5px);
 }
 
+
+.success-notif {
+    position: absolute;
+    top: 140px;
+    left: 38%;
+    padding: 14px 18px;
+    background: #15CF74;
+    border-radius: 12px;
+    width: 25%;
+    color: whitesmoke;
+    text-align: center;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+
+    animation-name: notif;
+    animation-duration: 1s;
+}
+
+@keyframes notif {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.close-popup-notif {
+    font-size: 20px;
+    position: absolute;
+    top: 1%;
+    right: 3%;
+    color: whitesmoke;
+    text-align: center;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+}
+
+.close-popup-notif:hover {
+    cursor: pointer;
+    color: indianred;
+    transition: all 0.3s ease-in-out;
+}
 
 .alert-inscription {
     width: 404px;
@@ -685,12 +720,12 @@ a {
     font-size: 0.85em;
 }
 
-.eye-btn {
+.eye-btn, .eye-btnInsc, .eye-btnConfirmInsc {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
-.eye-btn i:hover {
+.eye-btn i:hover, .eye-btnInsc i:hover, .eye-btnConfirmInsc i:hover {
     color: var(--main-color);
     transition: 0.3s ease;
 }
@@ -738,7 +773,7 @@ a {
     border-radius: 5px;
     font-size: 0.85em;
     font-weight: 500;
-    margin-top: 5px;
+    margin-top: 10%;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }

@@ -20,6 +20,8 @@ if (!isset($_SESSION["email"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page client</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./style/style_client.css">
     <link rel="stylesheet" type="text/css" href="./style/styleFooter.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,8 +31,10 @@ if (!isset($_SESSION["email"])) {
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
 
 </head>
 
@@ -38,113 +42,136 @@ if (!isset($_SESSION["email"])) {
 
 <body class="body-client">
 
-<div class="filter-products-form">
-    <div class="filter-products-header">
-        <h2 style="color: white;">Filtrer les produits</h2>
-        <div class="filter-products-close">
-            <i class="uil uil-tag-alt"></i>
-        </div>
-    </div>
-    <div class="select-filter">
-        <select name="filter-products-by-brand" id="filter-products-by-brand">
-            <option value="" selected="">Marque</option>
-            <option value="Razer">Razer</option>
-            <option value="MSI">MSI</option>
-            <option value="Logitech">Logitech</option>
-            <option value="Asus">Asus</option>
-            <option value="Corsair">Corsair</option>
-        </select>
-        <select name="filter-products-by-category" id="filter-products-by-category">
-            <option value="" selected="">Catégorie</option>
-            <option value="Gamer">Gamer</option>
-            <option value="Bureautique">Bureautique</option>
-            <option value="Portable">Portable</option>
-        </select>
-<button id="filter-products-button">Filtrer</button>
-    </div>
+<div class="navigation-bar-client">
+    <li style="list-style-type: none; width: 100%; text-align: center;"><a class="presta-a" href="all_prestas.php"><i
+                    class="uil uil-bookmark uil-bar-client"></i>Nos prestations</a></li>
+    <li style="list-style-type: none; width: 100%; text-align: center;"><a class="produit-a" href="all_products.php"><i
+                    class="uil uil-tag-alt uil-bar-client"></i>Nos produits</a></li>
 </div>
 
-<div class="container-thumbnail">
-        <?php
-
-        include('./php/db.php');
-
-        try {
-// Connexion à la BDD
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $sql = "SELECT * FROM produits";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $nb = $stmt->rowCount();
-
-            if ($nb > 0) {
-                $products = $stmt->fetchAll();
-                //var_dump($products);
-
-                for ($i = 1; $i <= $nb; $i++) {
-                    echo '<div class="thumbnail"> <a class="thumbnail-info-a" href="./produit.php?id=' . $products[$i - 1]['id'] . '">';
-                    echo '<div class="row-left">';
-                    echo '<img src="images/produit-' . $products[$i - 1]["id"] . '.jpg" class="img-product"
-                 alt="' . $products[$i - 1]["nom"] . '">';
-                    echo '<p class="text-product">' . $products[$i - 1]["nom"] . '</p>';
-                    echo '<div class="stars">';
-                    if ($products[$i - 1]["note"] >= 0) {
-                        for ($j = 1; $j <= 5; $j++) {
-                            if ($j <= $products[$i - 1]["note"]) {
-                                echo '<i class="las la-star"></i>';
-                            } else {
-                                echo '<i class="lar la-star"></i>';
-                            }
-                        }
-                    } else {
-                        for ($y = 1; $y != 5; $y++) {
-                            echo '<i class="lar la-star"></i>';
-                        }
-                    }
-                    echo '</div>';
-                    echo '<p class="price">' . $products[$i - 1]["prix"] . '€</p>';
-                    echo '<a class="addPanier" href="addpanier.php?id=' . $products[$i - 1]["id"] . '"><i class="uil uil-shopping-cart"></i></a>';
-                    echo '</div>';
-                    echo '<div class="row-right">';
-                    echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $products[$i - 1]["description"] . '</i></desc>';
-                    echo '<br />';
-                    echo '<br />';
-                    echo '<form action="php/rating.php" method="post" id="ratingForm">';
-                    echo '<span style="color: #dcdcdc;">Ma note est de :</span>';
-                    echo '<div class="stars-form">';
-                    echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="1"></i>';
-                    echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="2"></i>';
-                    echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="3"></i>';
-                    echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="4"></i>';
-                    echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="5"></i>';
-                    echo '</div>';
-                    echo '<input type="hidden" id="rate" name="note" value="0">';
-                    echo '<input type="hidden" id="product_id" name="produit_id" value="' . $products[$i - 1]["id"] . '">';
-                    echo '<button class="rate-form" type="submit">Évaluer le produit</button>';
-                    echo '</form>';
-                    echo '</div>';
-                    echo '</div>';
+<div class="container-carrousel">
 
 
+    <?php
+
+    // On récupère la date du jour soustrait de 7 jours (Pour récupérer les produits de la semaine)
+    $date_last_product = date('Y-m-d', strtotime('-7 day'));
+    //echo $date;
+
+    try {
+        // Connexion à la BDD
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM produits WHERE date_enter >= '$date_last_product' AND date_enter <= curdate() ORDER BY date_enter DESC";
+        //echo $sql;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $nb = $stmt->rowCount();
+
+        //echo $nb;
+
+        if ($nb >= 1) {
+            $last_products = $stmt->fetchAll();
+
+            // <!-- Carrousel Dernier Produits -->
+            echo '<div id="carouselProducts" class="carousel carousel-dark slide carousel-fade carrousel-products-container" data-bs-ride="carousel1">';
+            echo '<div class="carrousel-header-title">';
+            echo '<h1 class="carrousel-title">Nos derniers produits</h1>';
+            echo '</div>';
+            echo '<div class="carousel-indicators">';
+            for ($i = 1; $i <= $nb; $i++) {
+                if ($i === 1) {
+                    echo '<button type="button" data-bs-target="#carouselProducts" data-bs-slide-to="0" class="active"  aria-label="' . $last_products[$i - 1]["nom"] . '" aria-current="true"></button>';
+                } else {
+                    echo '<button type="button" data-bs-target="#carouselProducts" data-bs-slide-to="' . ($i - 1) . '" aria-label="' . $last_products[$i - 1]["nom"] . '"></button>';
                 }
+            }
+            echo '</div>';
+            echo '<div class="carousel-inner carrousel-products">';
+            for ($i = 1; $i <= $nb; $i++) {
+                if ($i === 1) {
+                    echo '<div class="carousel-item active" data-bs-interval="10000">';
+                } else {
+                    echo '<div class="carousel-item" data-bs-interval="10000">';
+                }
+                echo '<a href="./produit.php?id=' . $last_products[$i - 1]['id'] . '"><img src="images/produit-' . $last_products[$i - 1]["id"] . '.png" class="img-product" alt="' . $last_products[$i - 1]["nom"] . '"></a>';
+                echo '<div class="carousel-caption d-none d-md-block text-caption">';
+                echo '<h5 style="color: #e1e1e1;">' . $last_products[$i - 1]["nom"] . '</h5>';
+                echo '<p style="color: #e1e1e1;">' . $last_products[$i - 1]["description"] . '</p>';
+                echo '</div>';
+                echo '</div>';
 
-                if (isset($_GET["success"]) and $_GET["success"] === "prodnote") echo "<div class='success-payment' id='success-payment' style='display: block;'><span class='close-popup-payment' onclick='closePopUp()' title='Fermer'>&times;</span>Merci d'avoir noté notre produit !</div>";
-                if (isset($_GET["error"]) and $_GET["error"] === "dejanote") echo "<div class='success-payment' id='success-payment' style='display: block;'><span class='close-popup-payment' onclick='closePopUp()' title='Fermer'>&times;</span>Vous ne pouvez pas noter deux fois le même produit !</div>";
-                if (isset($_GET["payment"]) and $_GET["payment"] === "success") { echo "<div class='success-payment' id='success-payment' style='display: block;'><span class='close-popup-payment' onclick='closePopUp()' title='Fermer'>&times;</span>Merci d'avoir effectué un achat !</div>"; $_SESSION["panier"] = array(); }
-
-
-            } else {
-                die("Aucun produit n'est en stock !");
             }
 
+            echo '</div>';
+            echo '<button class="carousel-control-prev" type="button" data-bs-target="#carouselProducts" data-bs-slide="prev">';
+            echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+            echo '<span class="visually-hidden">Previous</span>';
+            echo '</button>';
+            echo '<button class="carousel-control-next" type="button" data-bs-target="#carouselProducts" data-bs-slide="next">';
+            echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+            echo '<span class="visually-hidden">Next</span>';
+            echo '</button>';
+            echo '</div>';
+            // <!-- /Carrousel Dernier Produits -->
 
-        } catch (PDOException $e) {
-            echo $e->getMessage();
         }
 
-        ?>
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    ?>
+
+
+    <!-- Carrousel Dernière Prestations -->
+
+    <div id="carouselPresta" class="carousel carousel-dark slide carousel-fade carrousel-presta-container"
+         data-bs-ride="carousel3">
+        <div class="carrousel-header-title">
+            <h1 class="carrousel-title">Nos dernières prestations</h1>
+        </div>
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide"></button>
+            <button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="1" aria-label="Slide"></button>
+            <button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="2" aria-label="Slide"></button>
+        </div>
+        <div class="carousel-inner carrousel-presta">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <img src="images/produit-3.png" class="img-presta" alt="...">
+                <div class="carousel-caption d-none d-md-block text-caption">
+                    <h5 style="color: white;">First slide label</h5>
+                    <p style="color: white;">Some representative placeholder content for the first slide.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="images/produit-4.png" class="img-presta" alt="...">
+                <div class="carousel-caption d-none d-md-block text-caption">
+                    <h5 style="color: white;">Second slide label</h5>
+                    <p style="color: white;">Some representative placeholder content for the second slide.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/produit-5.png" class="img-presta" alt="...">
+                <div class="carousel-caption d-none d-md-block text-caption">
+                    <h5 style="color: white;">Third slide label</h5>
+                    <p style="color: white;">Some representative placeholder content for the third slide.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPresta" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselPresta" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- /Carrousel Dernière Prestations -->
+
 </div>
 
 <script type="text/javascript" src="./js/app.js"></script>
@@ -152,30 +179,6 @@ if (!isset($_SESSION["email"])) {
 
 
 <script src="./js/rating.js"></script>
-
-<script type="text/javascript">
-
-    $(document).ready(function (){
-        $("#filter-products-button").on('click', function (){
-            var categorie = $("#filter-products-by-category").val();
-            var brand = $("#filter-products-by-brand").val();
-
-            $.ajax({
-                url: "/php/filter-products.php",
-                type: "POST",
-                data: 'categorie=' + categorie + '&brand=' + brand,
-                beforeSend:function() {
-                    $(".container-thumbnail").html("<img src='images/Loading_icon.gif' style='width: 80px; height: 80px;'/>");
-                },
-                success:function(data) {
-                    $(".container-thumbnail").html(data);
-                }
-            });
-        });
-    });
-
-</script>
-
 </body>
 
 <?php include('./php/footer.php') ?>

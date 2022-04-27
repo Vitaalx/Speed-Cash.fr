@@ -10,7 +10,7 @@ if (isset($_GET['id'], $_GET['key']) AND !empty($_GET['id']) AND !empty($_GET['k
 
         $id = htmlspecialchars(urldecode($_GET['id']));
         $key = htmlspecialchars($_GET['key']);
-        $requser = $conn->prepare("SELECT * FROM client WHERE id = ? AND confirmKey = ?");
+        $requser = $conn->prepare("SELECT * FROM users WHERE id = ? AND confirmKey = ?");
         $requser->execute(array($id, $key));
         $userexist = $requser->rowCount();
 
@@ -18,7 +18,7 @@ if (isset($_GET['id'], $_GET['key']) AND !empty($_GET['id']) AND !empty($_GET['k
 
             $user = $requser->fetch();
             if($user['confirme'] == 0) {
-                $updateuser = $conn->prepare("UPDATE client SET compteActif = 1 WHERE id = ? AND confirmKey = ?");
+                $updateuser = $conn->prepare("UPDATE users SET compteActif = 1 WHERE id = ? AND confirmKey = ?");
                 $updateuser->execute(array($id, $key));
                 echo "Votre compte a bien été confirmé !";
                 header("Location: ../index.php");

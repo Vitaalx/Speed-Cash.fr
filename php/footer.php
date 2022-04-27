@@ -3,7 +3,7 @@
     <div class="footer-container">
         <div class="bloc footer-services">
             <h3>Nos Services</h3>
-            <ul class="services-list">
+            <ul class="services-list" style="padding-left: 0;">
                 <li><a href="#">Livraison</a></li>
                 <li><a href="#">Retour</a></li>
                 <li><a href="#">Assistance</a></li>
@@ -12,7 +12,7 @@
         </div>
         <div class="bloc footer-contact">
             <h3>Restons en contact</h3>
-            <ul class="contact-list">
+            <ul class="contact-list" style="padding-left: 0;">
                 <li><a href="tel:+330782249412">55-55-55-55-55</a></li>
                 <li><a href="mailto:contact@speed-cash.fr">contact@speed-cash.fr</a></li>
                 <li><a href="https://www.google.com/maps?ll=48.849167,2.389734&z=15&t=m&hl=en&gl=FR&mapclient=embed&cid=6382120561375786439" target="_blank">6 rue de l'Invention, Paris VII, 75007</a></li>
@@ -20,7 +20,7 @@
         </div>
         <div class="bloc footer-social">
             <h3>Nos réseaux</h3>
-            <ul class="social-list">
+            <ul class="social-list" style="padding-left: 0;">
                 <li><a href="#"><img src="../icons/GitHub-icon.svg" alt="Icon GitHub" class="footer-icon-github">GitHub/speed-cash.fr</a></li>
                 <li><a href="#"><img src="../icons/Discord-icon.svg" alt="Icon Discord" class="footer-icon-discord">Discord/speed-cash.fr</a></li>
                 <li><a href="#"><img src="../icons/Instagram-icon.svg" alt="Icon Instagram" class="footer-icon-instagram">Instagram/speed-cash.fr</a></li>

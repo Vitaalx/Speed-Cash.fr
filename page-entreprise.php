@@ -1,9 +1,16 @@
 <?php
 
+session_start();
+//var_dump($_SESSION);
+
 $langue = 0;
 if(isset($_GET['lang'])) $langue = $_GET['lang'];
 
 include('./php/traduction_en.php');
+
+if (!isset($_SESSION["email"])) {
+    header("Location: ./index.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -12,6 +19,7 @@ include('./php/traduction_en.php');
     <meta charset="UTF-8">
     <title>Website PA</title>
     <link rel="stylesheet" type="text/css" href="./style/styleEntreprise.css">
+    <link rel="stylesheet" type="text/css" href="./style/style_client.css">
     <link rel="stylesheet" type="text/css" href="./style/styleFooter.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +31,7 @@ include('./php/traduction_en.php');
 
 </head>
 
-<?php include('./php/header.php'); ?>
+<?php include('./php/header_client.php'); ?>
 
 <body class="company-body">
 
@@ -95,17 +103,29 @@ include('./php/traduction_en.php');
 
         <div class="form-container-subscription">
             <div class="form-title">
-                <strong>Inscrivez-vous pour souscrire à un
+                <strong>Devenir Entreprise pour souscrire à un
                     abonnement Speed Cash</strong>
             </div>
-            <form role="form" id="subscriptionForm" enctype="multipart/form-data">
+            <form role="form" id="subscriptionForm" action="paymentSubscription.php" method="post">
                 <div class="field">
-                    <i class="uil uil-user"></i>
-                    <input type="text" id="nameSubscription" class="nameSubscription" placeholder="Votre nom" required>
+                    <i class="uil uil-dialpad-alt"></i>
+                    <input type="text" id="siretSubscription" name="nb_siret" class="siretSubscription" placeholder="Votre siret" required>
                 </div>
                 <div class="field">
-                    <i class="uil uil-at"></i>
-                    <input type="email" id="emailSubscription" class="emailSubscription" placeholder="Email ID" required>
+                    <i class="uil uil-university"></i>
+                    <!-- SELECT avec différent type status juridique d'une entreprise -->
+                    <select class="company-type" name="company_type" id="company-type">
+                        <option value="0">Type de société</option>
+                        <option value="SARL">SARL</option>
+                        <option value="SAS">SAS</option>
+                        <option value="SA">SA</option>
+                        <option value="EURL">EURL</option>
+                        <option value="SNC">SNC</option>
+                        <option value="SICAV">SICAV</option>
+                        <option value="SIP">SIP</option>
+                        <option value="SASU">SASU</option>
+                        <option value="EURL">EURL</option>
+                    </select>
                 </div>
 
                 <p class="info-form-sentance">
@@ -114,40 +134,22 @@ include('./php/traduction_en.php');
 
                 <div class="field">
                     <i class="uil uil-phone"></i>
-                    <input type="tel" id="phoneSubscription" class="phoneSubscription" placeholder="Votre numéro de téléphone" required>
+                    <input type="tel" id="phoneSubscription" name="tel_company" class="phoneSubscription" placeholder="Numéro de l'entreprise" required>
                 </div>
                 <div class="field">
                     <i class="uil uil-building"></i>
-                    <input type="text" id="companySubscription" class="companySubscription" placeholder="Nom de l'entreprise" required>
+                    <input type="text" id="companySubscription" name="company_name" class="companySubscription" placeholder="Nom de l'entreprise" required>
                 </div>
 
                 <h2 class="where-question">Où ?</h2>
 
                 <div class="field">
                     <i class="uil uil-location-point"></i>
-                    <input type="text" id="addressSubscription" class="addressSubscription" placeholder="Adresse postale" required>
-                </div>
-
-                <h2 class="when-to-when">De quand à quand ?</h2>
-
-                <div class="field-datetime">
-                    <input type="date" id="dateAtSubscription" class="dateAtSubscription" placeholder="JJ/MM/YYYY" required>
-                    <input type="time" id="timeAtSubscription"  class="timeAtSubscription" placeholder="HH:MM" required>
-
-                    <span class="word-a">à</span>
-
-                    <input type="date" id="dateToSubscription" class="dateToSubscription" placeholder="JJ/MM/YYYY" required>
-                    <input type="time" id="timeToSubscription" class="timeToSubscription" placeholder="HH:MM" required>
+                    <input type="text" id="addressSubscription" name="company_location" class="addressSubscription" placeholder="Adresse postale de l'entreprise" required>
                 </div>
 
                 <div class="field-choose-subscription">
 
-                    <div class="div-checkbox-monthly">
-
-                        <input type="checkbox" id="monthlySubscription" class="monthlySubscription">
-                        <p class="monthlySub-p">Je choisis un abonnement au mois (24.99€ / mois)</p>
-
-                    </div>
                     <div class="div-checkbox-annual">
 
                         <input type="checkbox" id="annualSubscription" class="annualSubscription">
@@ -163,11 +165,13 @@ include('./php/traduction_en.php');
                     3.  The loan is disbursed by SHB Finance - a reputable financial company with an establishment and operation license since 2017 issued by the State Bank of Vietnam.  <text style="color: #15CF74;">// TODO</text> <br />
                 </p>
 
-                <div class="alert-subscription" id="alert-subscription">
-                    Vous ne pouvez pas choisir deux abonnement, veuillez faire un choix.
+                <!-- CheckBox pour acceptation des conditions générales du contrat  -->
+                <div class="field-checkbox-subscription">
+                    <input type="checkbox" id="checkboxSubscription" class="checkboxSubscription">
+                    <p class="checkboxSub-p">J'accepte les <a style="color: #16e581;" href="#" target="_blank">conditions générales du contrat</a></p>
                 </div>
 
-                <input type="submit" name="submitSubcription" class="submitSubcription" value="Je m'abonne !">
+                <input type="submit" name="submitSubcription" class="submitSubcription">
             </form>
         </div>
 
@@ -179,63 +183,10 @@ include('./php/traduction_en.php');
 
 <script>
 
-    $("#alert-subscription").hide();
-    // SUR VALIDATION DU FORMULAIRE D'INSCRIPTION
-    $("#subscriptionForm").submit(function (event) {
-        // Annulation du submit auto
-        event.preventDefault();
-        // Appel de la fonction dédiée
-        submitSubscriptionForm();
+    $("#checkboxSubscription").click(function () {
+        $("#checkboxSubscription").attr("disabled", true);
     });
 
-    function submitSubscriptionForm() {
-
-        $("#alert-subscription").hide();
-        // Création d'un formulaire de données
-        var fd = new FormData();
-        fd.append('nom', $("#nameSubscription").val());
-        fd.append('email', $("#emailSubscription").val());
-        fd.append('phone', $("#phoneSubscription").val());
-        fd.append('company', $("#companySubscription").val());
-        fd.append('address', $("#addressSubscription").val());
-        fd.append('dateAt', $("#dateAtSubscription").val());
-        fd.append('timeAt', $("#timeAtSubscription").val());
-        fd.append('dateTo', $("#dateToSubscription").val());
-        fd.append('timeTo', $("#timeToSubscription").val());
-
-        if($("#annualSubscription").get(0).checked === true) {
-            fd.append('price', 269.99);
-        } else {
-            fd.append('price', 24.99);
-        }
-        if($("#annualSubscription").get(0).checked === true && $("#monthlySubscription").get(0).checked === true) {
-            $("#alert-subscription").show();
-            $("#alert-subscription").html("<span style='color: #C0392B;'>Vous ne pouvez pas choisir deux abonnement, veuillez faire un choix.</span>");
-            $("#alert-subscription").fadeOut(4000);
-        } else {
-            $("#alert-subscription").hide();
-            // Appel de la fonction ajax
-            $.ajax({
-                url: './php/subscription.php',
-                type: 'POST',
-                data: fd,
-                processData: false,
-                contentType: false,
-                success: function (text) {
-                    alert('-' + text + '-');
-                    if (text === "success") {
-                        //alert("success");
-                        $("#alert-subscription").show();
-                        $("#alert-subscription").html("<span style='color: white;'>Votre abonnement à bien été pris en compte, nous vous avons envoyé votre facture par mail.</span>");
-                        $("#alert-subscription").fadeOut(4000);
-                        setTimeout(() => {window.location.href = "./page-entreprise.php"}, 2000);
-                    }
-                }
-            });
-        }
-
-
-    }
 </script>
 
 <?php include("./php/footer.php"); ?>

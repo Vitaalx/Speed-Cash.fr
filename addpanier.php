@@ -19,9 +19,17 @@ if(isset($_GET["id"])) {
         if (empty($products)) {
             $json['message'] = "Ce produit n'existe pas !";
         }
-        $cart->add($products[0]->id);
-        $json['error'] = false;
-        $json['message'] = "Le produit a bien été ajouté à votre panier !"; // permet de retourner un cran en arrière
+        if(isset($_GET["quantity"]) && $_GET["quantity"] > 1) {
+            for($i = 0; $i < $_GET["quantity"]; $i++) {
+                $cart->add($products[0]->id);
+            }
+            $json['error'] = false;
+            $json['message'] = "Les produits ont bien été ajoutés à votre panier !";
+        } else {
+            $cart->add($products[0]->id);
+            $json['error'] = false;
+            $json['message'] = "Le produit a bien été ajouté à votre panier !"; // permet de retourner un cran en arrière
+        }
 
     } catch (PDOException $e) {
         echo $e->getMessage();

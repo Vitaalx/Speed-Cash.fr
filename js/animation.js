@@ -30,7 +30,11 @@ textSelects.forEach(textSelect => {
 //password animation show/hide
 
 const passwordInput = document.querySelector(".password-input");
+let passwordInsc = document.querySelector(".passwordInsc");
+const passwordConfirmInsc = document.querySelector(".passwordConfirmInsc");
 const eyeBtn = document.querySelector(".eye-btn");
+const eyeBtnInsc = document.querySelector(".eye-btnInsc");
+const eyeBtnConfirmInsc = document.querySelector(".eye-btnConfirmInsc");
 
 eyeBtn.addEventListener("click", () => {
    if(passwordInput.type === "password"){
@@ -42,6 +46,25 @@ eyeBtn.addEventListener("click", () => {
    }
 });
 
+eyeBtnInsc.addEventListener("click", () => {
+    if(passwordInsc.type === "password"){
+        passwordInsc.type = "text";
+        eyeBtnInsc.innerHTML = "<i class='uil uil-eye'></i>";
+    } else {
+        passwordInsc.type = "password";
+        eyeBtnInsc.innerHTML = "<i class='uil uil-eye-slash'></i>";
+    }
+});
+
+eyeBtnConfirmInsc.addEventListener("click", () => {
+    if(passwordConfirmInsc.type === "password"){
+        passwordConfirmInsc.type = "text";
+        eyeBtnConfirmInsc.innerHTML = "<i class='uil uil-eye'></i>";
+    } else {
+        passwordConfirmInsc.type = "password";
+        eyeBtnConfirmInsc.innerHTML = "<i class='uil uil-eye-slash'></i>";
+    }
+});
 
 //sliding between sign-in form and sign-up form
 
@@ -61,3 +84,4 @@ signInBtn.addEventListener("click", () => {
     signUpForm.classList.remove("show");
     signInForm.classList.add("show");
 });
+

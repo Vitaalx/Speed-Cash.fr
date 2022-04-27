@@ -9,9 +9,6 @@
         <div class="btns">
             <a href="<?php if($_SERVER["PHP_SELF"] == "/recuperation_mdp.php") echo "./index.php"; elseif($_SERVER["PHP_SELF"] == "/index.php") { echo "./index.php"; }elseif($_SERVER["PHP_SELF"] == "/page-entreprise.php") { echo "./index.php"; } ?>"><img class="logoSpeedCash" src="./icons/logo-speed-cash.gif" alt="Retourner à l'accueil"></a>
             <?php if($_SERVER["PHP_SELF"] == "/index.php") { ?>
-            <a href="../page-entreprise.php" style="text-decoration: none;"><div class="btn-entreprise">
-                <?php echo $company[$langue]; ?>
-            </div></a>
             <div class="btn-client" onclick="afficheModal()" id="openModal">
                 <?php echo $customer[$langue]; ?>
             </div>

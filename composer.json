@@ -5,6 +5,8 @@
         "symfony/var-dumper": "^5.4",
       "ext-curl": "*",
         "stripe/stripe-php": "^7.116",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+      "ext-gd": "*",
+      "ext-exif": "*"
     }
 }

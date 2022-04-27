@@ -74,7 +74,7 @@ $title_div_form = array("Paiement de votre panier d'achat", "Payment of your sho
 $first_name_payment = array("Prénom", "First Name");
 $name_payment = array("Nom", "Name");
 $mail_payment = array("Adresse mail", "Email ID");
-$proceed_payment = array("Procéder au paiment", "Proceed to payment");
+$proceed_payment = array("Procéder au paiement", "Proceed to payment");
 
 
 /* Fin traduction Page de Paiement */

@@ -3,8 +3,8 @@ session_start();
 
 include "db.php";
 
-$email = $_POST["email"];
-$passwordConn = sha1($_POST["password"]);
+$email = htmlspecialchars($_POST["email"]);
+$passwordConn = sha1(htmlspecialchars($_POST["password"]));
 
 //echo $email.$passwordConn;
 
@@ -14,7 +14,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Comptage du nombre de joueurs avec le même pseudo ou email
-    $sql = "SELECT * FROM client WHERE email='" . $email . "' AND motDePasse='" . $passwordConn ."'";
+    $sql = "SELECT * FROM users WHERE email='" . $email . "' AND motDePasse='" . $passwordConn ."'";
     //echo $sql;
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -35,6 +35,8 @@ try {
             $_SESSION["email"] = $email;
             $_SESSION["id"] = $enreg["id"];
             $_SESSION["auth"] = 1;
+            $_SESSION["prénom"] = $enreg["prénom"];
+            $_SESSION["nom"] = $enreg["nom"];
 
             echo "success";
 

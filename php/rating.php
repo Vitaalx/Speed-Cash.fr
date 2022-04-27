@@ -2,8 +2,8 @@
 session_start();
 include "db.php";
 
-$rate = $_POST["note"];
-$produit_id = $_POST["produit_id"];
+$rate = htmlspecialchars($_POST["note"]);
+$produit_id = htmlspecialchars($_POST["produit_id"]);
 $user_id = $_SESSION["id"];
 
 try {
