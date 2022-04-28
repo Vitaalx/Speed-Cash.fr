@@ -11,6 +11,7 @@ if(isset($_POST['categorie']) || isset($_POST['brand'])){
 
             $category = htmlspecialchars($_POST['categorie']);
             $brand = htmlspecialchars($_POST['brand']);
+            $page = $_POST["page"];
             if (strlen($category) > 0 && strlen($brand) > 0) {
                 $sql = "SELECT * FROM produits WHERE categorie = '$category' AND marque = '$brand'";
             } elseif (strlen($category) > 0) {
@@ -81,7 +82,7 @@ if(isset($_POST['categorie']) || isset($_POST['brand'])){
             if (isset($_GET["error"])) echo "<script>alert('Vous ne pouvez pas noter deux fois le même produit !');</script>";
 
         } else {
-            die("<span style='color: whitesmoke'>Il n'y a aucun produit dans cette catégorie ou de cette marque ! <br/><br/><a href='client.php' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
+            die("<span style='color: whitesmoke'>Il n'y a aucun produit dans cette catégorie ou de cette marque ! <br/><br/><a href='../" . $page ."' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
         }
 
 

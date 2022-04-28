@@ -124,53 +124,91 @@ if (!isset($_SESSION["email"])) {
 
     ?>
 
+    <?php
 
-    <!-- Carrousel Dernière Prestations -->
+    // On récupère la date du jour soustrait de 7 jours (Pour récupérer les prestas de la semaine)
+    $date_last_presta = date('Y-m-d', strtotime('-7 day'));
+    //echo $date;
 
-    <div id="carouselPresta" class="carousel carousel-dark slide carousel-fade carrousel-presta-container"
-         data-bs-ride="carousel3">
-        <div class="carrousel-header-title">
-            <h1 class="carrousel-title">Nos dernières prestations</h1>
-        </div>
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide"></button>
-            <button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="1" aria-label="Slide"></button>
-            <button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="2" aria-label="Slide"></button>
-        </div>
-        <div class="carousel-inner carrousel-presta">
-            <div class="carousel-item active" data-bs-interval="10000">
-                <img src="images/produit-3.png" class="img-presta" alt="...">
-                <div class="carousel-caption d-none d-md-block text-caption">
-                    <h5 style="color: white;">First slide label</h5>
-                    <p style="color: white;">Some representative placeholder content for the first slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-                <img src="images/produit-4.png" class="img-presta" alt="...">
-                <div class="carousel-caption d-none d-md-block text-caption">
-                    <h5 style="color: white;">Second slide label</h5>
-                    <p style="color: white;">Some representative placeholder content for the second slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="images/produit-5.png" class="img-presta" alt="...">
-                <div class="carousel-caption d-none d-md-block text-caption">
-                    <h5 style="color: white;">Third slide label</h5>
-                    <p style="color: white;">Some representative placeholder content for the third slide.</p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPresta" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselPresta" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+    try {
+        // Connexion à la BDD
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    <!-- /Carrousel Dernière Prestations -->
+        $sql_presta = "SELECT * FROM prestation WHERE date_enter >= '$date_last_presta' AND date_enter <= curdate() ORDER BY date_enter DESC";
+        //echo $sql;
+        $stmt = $conn->prepare($sql_presta);
+        $stmt->execute();
+        $nb_presta = $stmt->rowCount();
+        //echo $nb_presta;
+
+        if ($nb_presta >= 1) {
+            $last_prestas = $stmt->fetchAll();
+            //var_dump($last_prestas);
+
+            // <!-- Carrousel Dernière Prestations -->
+
+            echo '<div id="carouselPresta" class="carousel carousel-dark slide carousel-fade carrousel-presta-container" data-bs-ride="carousel3">';
+            echo '<div class="carrousel-header-title">';
+            echo '<h1 class="carrousel-title">Nos dernières prestations</h1>';
+            echo '</div>';
+            echo '<div class="carousel-indicators">';
+            for ($i = 1; $i <= $nb_presta; $i++) {
+                if ($i === 1) {
+                    echo '<button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="0" class="active"  aria-label="' . $last_prestas[$i - 1]["nom_presta"] . '" aria-current="true"></button>';
+                } else {
+                    echo '<button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="' . ($i - 1) . '" aria-label="' . $last_prestas[$i - 1]["nom_presta"] . '"></button>';
+                }
+            }
+            echo '</div>';
+            echo '<div class="carousel-inner carrousel-presta">';
+            for ($i = 1; $i <= $nb_presta; $i++) {
+                if ($i === 1) {
+                    echo '<div class="carousel-item active" data-bs-interval="10000">';
+                } else {
+                    echo '<div class="carousel-item" data-bs-interval="10000">';
+                }
+                $remise_on_presta = (1 - $last_prestas[$i - 1]["remise"]) * 100;
+                echo '<a href="./presta.php?id=' . $last_prestas[$i - 1]['id'] . '">';
+                echo '<img src="images/presta-' . $last_prestas[$i - 1]["id"] . '.jpg" class="img-presta-carousel" alt="' . $last_prestas[$i - 1]["nom_presta"] . '">';
+                echo '</a>';
+                echo '<br />';
+                echo '<div class="carousel-caption d-none d-md-block text-caption">';
+                echo '<div style="display: flex; align-content: center; white-space: nowrap;">';
+                echo '<h5 style="color: #e1e1e1;display: flex;align-items: center;">' . $last_prestas[$i - 1]["nom_presta"] . '<span class="badge rounded-pill bg-info text-dark" style="margin-left: 2%">-' . $remise_on_presta .'%</span></h5>';
+                echo '</div>';
+                echo '<p style="color: #e1e1e1;">' . $last_prestas[$i - 1]["description"] . '</p>';
+                echo '</div>';
+                echo '</div>';
+
+            }
+
+            echo '</div>';
+            echo '<button class="carousel-control-prev" type="button" data-bs-target="#carouselPresta" data-bs-slide="prev">';
+            echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+            echo '<span class="visually-hidden">Previous</span>';
+            echo '</button>';
+            echo '<button class="carousel-control-next" type="button" data-bs-target="#carouselPresta" data-bs-slide="next">';
+            echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+            echo '<span class="visually-hidden">Next</span>';
+            echo '</button>';
+            echo '</div>';
+            // <!-- /Carrousel Dernier Prestas -->
+
+
+        } else {
+            die("Il n'y a pas de prestations cette semaine !");
+        }
+
+
+
+
+        } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    ?>
+
 
 </div>
 

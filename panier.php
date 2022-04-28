@@ -78,7 +78,7 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
                     foreach ($products as $product) {
                         echo '<tr>';
                         echo '<td><img src="images/produit-' . $product->id . '.png" class="img-product"
-                 alt="' . $product->nom . '" style="width: 70px; height: 70px;"></td>';
+                        alt="' . $product->nom . '" style="width: 70px; height: 70px;"></td>';
                         echo '<td>' . $product->nom . '</td>';
                         $priceTVA = $product->prix / 1.2;
                         $priceTVA = round($priceTVA, 1);
@@ -104,12 +104,31 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
 
     </table>
     <br />
+
+    <form role="form" action="php/verif-code-promo.php" method="POST">
+        <div class="form-group-promo-code">
+            <input type="text" class="input-code-promo" id="code" name="code_promo" placeholder="Entrez votre code promo">
+            <button type="submit"  name="promo-submit" class="validate-promo-code">Valider</button>
+        </div>
+    </form>
+
+    <?php
+
+    $total_cart = $cart->total(); ;
+    if (isset($_GET["promo"]) and $_GET["promo"] === "true") {
+        $remise = $_GET["remise"];
+        echo '<div class="promo-code-valid">La réduction à bien été appliquée !</div>';
+        $total_cart = $total_cart * $remise;
+    } else if (isset($_GET["promo"]) and $_GET["promo"] === "false") {
+        echo '<div class="promo-code-invalid">Code promo invalide !</div>';
+    }
+    ?>
         <div class="cart-footer">
             <div class="elements-number">Nombre d'éléments :  <?php $elements = $cart->count(); echo $elements; ?></div>
-            <div class="rowtotal">Grand Total : <span class="total"><?php $total = $cart->total(); echo $total; ?> €</span></div>
+            <div class="rowtotal">Grand Total : <span class="total"><?php echo $total_cart; ?> €</span></div>
             <form role="form" action="paymentCart.php" method="post">
 
-                <input type="hidden" name="price" value="<?= $total; ?>">
+                <input type="hidden" name="price" value="<?= $total_cart; ?>">
                 <input type="hidden" name="products" value="<?php echo implode(",", $ids) ?>">
 
             <button type="submit" class="button-payment">Payer</button>

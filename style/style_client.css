@@ -205,6 +205,21 @@ html, body {
     flex: 1 0 auto;
 }
 
+.span-remise-presta {
+    border-radius: 50rem;
+    --bs-bg-opacity: 1;
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: .85em;
+    font-weight: 700;
+    line-height: 1;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #0DCAF0;
+}
+
 
 /* Formulaire de paiment */
 
@@ -215,13 +230,79 @@ html, body {
     text-align: center;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 16px;
     transition: all 0.3s ease-in-out;
     margin-left: 15%;
     background-color: var(--main-button-color);
 }
-.button-payment:hover{
+.button-payment:hover, .validate-promo-code:hover, .button-payment-presta:hover{
     cursor: pointer;
     background: #15CF74;
+}
+
+.button-payment-presta {
+    width: 100px;
+    color: white;
+    padding: 8px;
+    border: none;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 26%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px;
+    margin-left: 0.1%;
+    background-color: var(--main-icons-color);
+}
+
+.promo-code-valid, .promo-code-invalid {
+    margin-left: 15%;
+    margin-bottom: 1%;
+    background-color: var(--main-icons-color);
+    width: 14%;
+    padding: 0.3%;
+    border: none;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.promo-code-valid {
+    color: green;
+}
+.promo-code-invalid {
+    color: red;
+}
+
+.input-code-promo {
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    padding: 0.5%;
+    color: black;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-group-promo-code {
+    margin-left:  15%;
+}
+
+.validate-promo-code {
+    width: 5%;
+    padding: 8px;
+    border: none;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px;
+    margin-left: 0.1%;
+    background-color: var(--main-button-color);
 }
 
 
@@ -328,6 +409,25 @@ html, body {
 }
 
 .img-product:hover, .img-presta:hover {
+    cursor: pointer;
+    background-color: rgb(74, 74, 74, 0.5);
+}
+
+.img-presta-carousel {
+    position: relative;
+    top: -15px;
+    width: auto;
+    height: 400px;
+    object-fit : cover;
+    padding: 1.2%;
+    color: black;
+    border-radius: 40px;
+
+    transition: all 0.3s ease-in-out;
+    background-color: rgb(74, 74, 74, 0.08);
+}
+
+.img-presta-carousel:hover {
     cursor: pointer;
     background-color: rgb(74, 74, 74, 0.5);
 }
@@ -471,8 +571,31 @@ html, body {
     box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
 }
 
+.thumbnail-presta {
+    background: rgba(50, 50, 50, 1);
+    display: flex;
+    width: 680px;
+    border-radius: 8px;
+    margin-top: 1%;
+    padding: 1%;
+    margin-right: 2%;
+    margin-left: 2%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
+}
+
 .img-product-thumbnail {
     width: 240px;
+    height: 240px;
+    object-fit : cover;
+    background-color: var(--main-dark-color);
+    border-radius: 8px;
+    padding: 2%;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.img-presta-thumbnail {
+    width: auto;
     height: 240px;
     object-fit : cover;
     background-color: var(--main-dark-color);
@@ -506,7 +629,7 @@ html, body {
     transition: all 0.3s ease-in-out;
 }
 
-.rate-form:hover {
+.rate-form:hover{
     color: white;
     background-color: #109454;
     cursor: pointer;
@@ -515,6 +638,23 @@ html, body {
 
 .row-right {
     margin-left: 2.5%;
+}
+
+.message-remise-presta {
+    position: absolute;
+    display: flex;
+    left: 40%;
+    padding: 1%;
+    text-align: center;
+    border-radius: 8px;
+    align-items: center;
+    width: 20%;
+    color: white;
+    background-color: #15CF74;
+
+    transition: all 0.3s ease-in-out;
+    animation-name: notif;
+    animation-duration: 1s;
 }
 
 .success-notif {

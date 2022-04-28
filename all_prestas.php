@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require './panier.class.php';
@@ -19,7 +20,7 @@ if (!isset($_SESSION["email"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tous les produits</title>
+    <title>Toutes les prestations</title>
     <link rel="stylesheet" type="text/css" href="./style/style_client.css">
     <link rel="stylesheet" type="text/css" href="./style/styleFooter.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,25 +41,22 @@ if (!isset($_SESSION["email"])) {
 
 <div class="filter-products-form">
     <div class="filter-products-header">
-        <h2 style="color: white;">Filtrer les produits</h2>
+        <h2 style="color: white;">Filtrer les prestations</h2>
         <div class="filter-products-close">
             <i class="uil uil-tag-alt tag-alt-all-products"></i>
         </div>
     </div>
     <div class="select-filter">
-        <select name="filter-products-by-brand" id="filter-products-by-brand">
-            <option value="" selected="">Marque</option>
-            <option value="Razer">Razer</option>
-            <option value="MSI">MSI</option>
-            <option value="Logitech">Logitech</option>
-            <option value="Asus">Asus</option>
-            <option value="Corsair">Corsair</option>
-        </select>
+        <label style="color: white;">Prix</label>
+        <input type="range" name="order-by-price-desc" id="order-by-price-desc" min="0" max="1000" value="0">
         <select name="filter-products-by-category" id="filter-products-by-category">
             <option value="" selected="">Catégorie</option>
-            <option value="Gamer">Gamer</option>
-            <option value="Bureautique">Bureautique</option>
-            <option value="Portable">Portable</option>
+            <option value="Parc Attraction">Parc Attraction</option>
+            <option value="Cinéma">Cinéma</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Bar">Bar</option>
+            <option value="Salle de sport">Salle de sport</option>
+            <option value="Autre">Autre</option>
         </select>
         <button id="filter-products-button">Filtrer</button>
     </div>
@@ -74,70 +72,45 @@ if (!isset($_SESSION["email"])) {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT * FROM produits";
+        $sql = "SELECT * FROM prestation";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $nb = $stmt->rowCount();
 
         if ($nb > 0) {
-            $products = $stmt->fetchAll();
-            //var_dump($products);
+            $prestas = $stmt->fetchAll();
+            //var_dump($prestas);
 
             for ($i = 1; $i <= $nb; $i++) {
-                echo '<div class="thumbnail"> <a class="thumbnail-info-a" href="./produit.php?id=' . $products[$i - 1]['id'] . '">';
+                $remise_on_presta = (1 - $prestas[$i - 1]["remise"]) * 100;
+                echo '<div class="thumbnail-presta"> <a class="thumbnail-info-a" href="./presta.php?id=' . $prestas[$i - 1]['id'] . '">';
                 echo '<div class="row-left">';
-                echo '<img src="images/produit-' . $products[$i - 1]["id"] . '.png" class="img-product-thumbnail"
-                 alt="' . $products[$i - 1]["nom"] . '">';
-                echo '<p class="text-product">' . $products[$i - 1]["nom"] . '</p>';
-                echo '<div class="stars">';
-                if ($products[$i - 1]["note"] >= 0) {
-                    for ($j = 1; $j <= 5; $j++) {
-                        if ($j <= $products[$i - 1]["note"]) {
-                            echo '<i class="las la-star"></i>';
-                        } else {
-                            echo '<i class="lar la-star"></i>';
-                        }
-                    }
-                } else {
-                    for ($y = 1; $y != 5; $y++) {
-                        echo '<i class="lar la-star"></i>';
-                    }
-                }
-                echo '</div>';
-                echo '<p class="price">' . $products[$i - 1]["prix"] . '€</p>';
-                echo '<a class="addPanier" href="addpanier.php?id=' . $products[$i - 1]["id"] . '"><i class="uil uil-shopping-cart"></i></a>';
+                echo '<img src="images/presta-' . $prestas[$i - 1]["id"] . '.jpg" class="img-presta-thumbnail"
+                 alt="' . $prestas[$i - 1]["nom_presta"] . '">';
+                echo '<p class="text-product">' . $prestas[$i - 1]["nom_presta"] . '<span class="span-remise-presta" style="margin-left: 2%">-' . $remise_on_presta .'%</span></p>';
+                echo '<p class="price">' . $prestas[$i - 1]["prix_ht"]*$prestas[$i - 1]["tva"] . '€</p>';
+                echo '</a>';
                 echo '</div>';
                 echo '<div class="row-right">';
-                echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $products[$i - 1]["description"] . '</i></desc>';
+                echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $prestas[$i - 1]["description"] . '</i></desc>';
                 echo '<br />';
                 echo '<br />';
-                echo '<form action="php/rating.php" method="post" id="ratingForm">';
-                echo '<span style="color: #dcdcdc;">Ma note est de :</span>';
-                echo '<div class="stars-form">';
-                echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="1"></i>';
-                echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="2"></i>';
-                echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="3"></i>';
-                echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="4"></i>';
-                echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="5"></i>';
-                echo '</div>';
-                echo '<input type="hidden" id="rate" name="note" value="0">';
-                echo '<input type="hidden" id="product_id" name="produit_id" value="' . $products[$i - 1]["id"] . '">';
-                echo '<button class="rate-form" type="submit">Évaluer le produit</button>';
+                echo '<form role="form" action="paymentPrestaCart.php" method="post">';
+                echo '<input type="hidden" name="price" value=' . ($prestas[$i - 1]["prix_ht"]*$prestas[$i - 1]["tva"]) * $prestas[$i - 1]["remise"] . '>';
+                echo '<input type="hidden" name="prestas" value="' . $prestas[$i - 1]["id"] .'">';
+                echo '<button type="submit" class="button-payment-presta">Payer</button>';
                 echo '</form>';
-                echo '<br />';
                 echo '</div>';
                 echo '</div>';
 
 
             }
 
-            if (isset($_GET["success"]) and $_GET["success"] === "prodnote") echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Merci d'avoir noté notre produit !</div>";
-            if (isset($_GET["error"]) and $_GET["error"] === "dejanote") echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Vous ne pouvez pas noter deux fois le même produit !</div>";
             if (isset($_GET["payment"]) and $_GET["payment"] === "success") { echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Merci d'avoir effectué un achat !</div>"; $_SESSION["panier"] = array(); }
 
 
         } else {
-            die("Aucun produit n'est en stock !");
+            die("Aucune prestation n'est disponible !");
         }
 
 
@@ -152,15 +125,13 @@ if (!isset($_SESSION["email"])) {
 <script type="text/javascript" src="js/modal.js"></script>
 
 
-<script src="./js/rating.js"></script>
-
 <script type="text/javascript">
 
     $(document).ready(function (){
         $("#filter-products-button").on('click', function (){
             var categorie = $("#filter-products-by-category").val();
             var brand = $("#filter-products-by-brand").val();
-            const page = "all_products.php";
+            const page = "all_prestas.php";
 
             $.ajax({
                 url: "/php/filter-products.php",
