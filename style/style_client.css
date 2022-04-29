@@ -248,6 +248,9 @@ html, body {
     text-align: center;
     border-radius: 8px;
     margin-top: 26%;
+    width: 100%;
+    bottom: -160px;
+    position: relative;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     font-size: 16px;
@@ -944,3 +947,13 @@ html, body {
 /* FIN COMPTE */
 
 /* Fin Page profile client */
+
+/* media queries */
+
+@media screen and (max-width: 1540px) {
+    .carrousel-presta-container, .carrousel-products-container {
+        width: 1290px;
+        height: 550px;
+    }
+
+}

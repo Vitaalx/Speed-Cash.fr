@@ -49,7 +49,7 @@ if (!isset($_SESSION["email"])) {
     <div class="select-filter">
         <label style="color: white;">Prix</label>
         <input type="range" name="order-by-price-desc" id="order-by-price-desc" min="0" max="1000" value="0">
-        <select name="filter-products-by-category" id="filter-products-by-category">
+        <select name="filter-prestas-by-category" id="filter-prestas-by-category">
             <option value="" selected="">Catégorie</option>
             <option value="Parc Attraction">Parc Attraction</option>
             <option value="Cinéma">Cinéma</option>
@@ -129,14 +129,14 @@ if (!isset($_SESSION["email"])) {
 
     $(document).ready(function (){
         $("#filter-products-button").on('click', function (){
-            var categorie = $("#filter-products-by-category").val();
-            var brand = $("#filter-products-by-brand").val();
+            var categorie = $("#filter-prestas-by-category").val();
+            var price = $("#order-by-price-desc").val();
             const page = "all_prestas.php";
 
             $.ajax({
                 url: "/php/filter-products.php",
                 type: "POST",
-                data: 'categorie=' + categorie + '&brand=' + brand + '&page=' + page,
+                data: 'categorie=' + categorie + '&price=' + price + '&page=' + page,
                 beforeSend:function() {
                     $(".container-thumbnail").html("<img src='images/Loading_icon.gif' style='width: 80px; height: 80px;'/>");
                 },

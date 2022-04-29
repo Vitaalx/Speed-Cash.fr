@@ -2,7 +2,9 @@
 
 include "db.php";
 
-if(isset($_POST['categorie']) || isset($_POST['brand'])){
+if(isset($_POST['categorie']) && isset($_POST['brand'])){
+
+    //echo "je suis dans produit";
 
     try {
         // Connexion à la BDD
@@ -20,7 +22,7 @@ if(isset($_POST['categorie']) || isset($_POST['brand'])){
                 $sql = "SELECT * FROM produits WHERE marque = '$brand'";
             } else {
                 $sql = "";
-                die("<span style='color: whitesmoke'>Vous n'avez pas sélectionné de filtrage ! <br/><br/><a href='client.php' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
+                die("<span style='color: whitesmoke'>Vous n'avez pas sélectionné de filtrage ! <br/><br/><a href=../" . $page . "' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
             }
             //echo $sql;
             $stmt = $conn->prepare($sql);
@@ -28,19 +30,19 @@ if(isset($_POST['categorie']) || isset($_POST['brand'])){
             $nb = $stmt->rowCount();
 
         if ($nb > 0) {
-            $products = $stmt->fetchAll();
-            //var_dump($products);
+            $prestas = $stmt->fetchAll();
+            //var_dump($prestas);
 
             for ($i = 1; $i <= $nb; $i++) {
-                echo '<div class="thumbnail"> <a class="thumbnail-info-a" href="./produit.php?id=' . $products[$i - 1]['id'] . '">';
+                echo '<div class="thumbnail"> <a class="thumbnail-info-a" href="./produit.php?id=' . $prestas[$i - 1]['id'] . '">';
                 echo '<div class="row-left">';
-                echo '<img src="images/produit-' . $products[$i - 1]["id"] . '.jpg" class="img-product"
-                 alt="' . $products[$i - 1]["nom"] . '">';
-                echo '<p class="text-product">' . $products[$i - 1]["nom"] . '</p>';
+                echo '<img src="images/produit-' . $prestas[$i - 1]["id"] . '.jpg" class="img-product"
+                 alt="' . $prestas[$i - 1]["nom"] . '">';
+                echo '<p class="text-product">' . $prestas[$i - 1]["nom"] . '</p>';
                 echo '<div class="stars">';
-                if ($products[$i - 1]["note"] >= 0) {
+                if ($prestas[$i - 1]["note"] >= 0) {
                     for ($j = 1; $j <= 5; $j++) {
-                        if ($j <= $products[$i - 1]["note"]) {
+                        if ($j <= $prestas[$i - 1]["note"]) {
                             echo '<i class="las la-star"></i>';
                         } else {
                             echo '<i class="lar la-star"></i>';
@@ -52,11 +54,11 @@ if(isset($_POST['categorie']) || isset($_POST['brand'])){
                     }
                 }
                 echo '</div>';
-                echo '<p class="price">' . $products[$i - 1]["prix"] . '€</p>';
-                echo '<a class="addPanier" href="addpanier.php?id=' . $products[$i - 1]["id"] . '"><i class="uil uil-shopping-cart"></i></a>';
+                echo '<p class="price">' . $prestas[$i - 1]["prix"] . '€</p>';
+                echo '<a class="addPanier" href="addpanier.php?id=' . $prestas[$i - 1]["id"] . '"><i class="uil uil-shopping-cart"></i></a>';
                 echo '</div>';
                 echo '<div class="row-right">';
-                echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $products[$i - 1]["description"] . '</i></desc>';
+                echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $prestas[$i - 1]["description"] . '</i></desc>';
                 echo '<br />';
                 echo '<br />';
                 echo '<form action="php/rating.php" method="post" id="ratingForm">';
@@ -69,7 +71,7 @@ if(isset($_POST['categorie']) || isset($_POST['brand'])){
                 echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="5"></i>';
                 echo '</div>';
                 echo '<input type="hidden" id="rate" name="note" value="0">';
-                echo '<input type="hidden" id="product_id" name="produit_id" value="' . $products[$i - 1]["id"] . '">';
+                echo '<input type="hidden" id="product_id" name="produit_id" value="' . $prestas[$i - 1]["id"] . '">';
                 echo '<button class="rate-form" type="submit">Évaluer le produit</button>';
                 echo '</form>';
                 echo '</div>';
@@ -90,6 +92,77 @@ if(isset($_POST['categorie']) || isset($_POST['brand'])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
+
+} else if(isset($_POST['categorie']) && isset($_POST['price'])) {
+
+    //echo "je suis dans prestation";
+
+    try {
+        // Connexion à la BDD
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $category = htmlspecialchars($_POST['categorie']);
+        $price = htmlspecialchars($_POST['price']);
+        $page = $_POST["page"];
+        if (strlen($category) > 0 && $price > 0) {
+            $sql = "SELECT * FROM prestation WHERE categorie = '$category' AND prix_ht = '$price'";
+            //echo $sql;
+        } elseif (strlen($category) > 0) {
+            $sql = "SELECT * FROM prestation WHERE categorie = '$category'";
+            //echo $sql;
+        } elseif ($price == 0) {
+            $sql = "SELECT * FROM prestation WHERE prix_ht = '$price'";
+            //echo $sql;
+        } else {
+            $sql = "";
+            die("<span style='color: whitesmoke'>Vous n'avez pas sélectionné de filtrage ! <br/><br/><a href='../" . $page . "' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
+        }
+        //echo $sql;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $nb = $stmt->rowCount();
+
+        if ($nb > 0) {
+            $prestas = $stmt->fetchAll();
+            //var_dump($prestas);
+
+            for ($i = 1; $i <= $nb; $i++) {
+                $remise_on_presta = (1 - $prestas[$i - 1]["remise"]) * 100;
+                echo '<div class="thumbnail-presta"> <a class="thumbnail-info-a" href="./presta.php?id=' . $prestas[$i - 1]['id'] . '">';
+                echo '<div class="row-left">';
+                echo '<img src="images/presta-' . $prestas[$i - 1]["id"] . '.jpg" class="img-presta-thumbnail"
+                 alt="' . $prestas[$i - 1]["nom_presta"] . '">';
+                echo '<p class="text-product">' . $prestas[$i - 1]["nom_presta"] . '<span class="span-remise-presta" style="margin-left: 2%">-' . $remise_on_presta .'%</span></p>';
+                echo '<p class="price">' . $prestas[$i - 1]["prix_ht"]*$prestas[$i - 1]["tva"] . '€</p>';
+                echo '</a>';
+                echo '</div>';
+                echo '<div class="row-right">';
+                echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $prestas[$i - 1]["description"] . '</i></desc>';
+                echo '<br />';
+                echo '<br />';
+                echo '<form role="form" action="paymentPrestaCart.php" method="post">';
+                echo '<input type="hidden" name="price" value=' . ($prestas[$i - 1]["prix_ht"]*$prestas[$i - 1]["tva"]) * $prestas[$i - 1]["remise"] . '>';
+                echo '<input type="hidden" name="prestas" value="' . $prestas[$i - 1]["id"] .'">';
+                echo '<button type="submit" class="button-payment-presta">Payer</button>';
+                echo '</form>';
+                echo '</div>';
+                echo '</div>';
+
+
+            }
+
+            if (isset($_GET["payment"]) and $_GET["payment"] === "success") { echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Merci d'avoir effectué un achat !</div>"; $_SESSION["panier"] = array(); }
+        } else {
+            die("<span style='color: whitesmoke'>Il n'y a aucune prestation dans cette catégorie ou de cette marque ! <br/><br/><a href='../" . $page ."' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
+        }
+
+
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
 
 } else {
     echo "Error";

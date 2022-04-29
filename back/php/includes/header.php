@@ -1,55 +1,14 @@
-<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
+<?php session_start(); 
+//var_dump($_SESSION);
+if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../php/logout.php');}
+?>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Invoice - Frest - Bootstrap HTML admin template</title>
-    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
-
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
-    <!-- END: Vendor CSS-->
-
-    <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css">
-    <!-- END: Theme CSS-->
-
-    <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/horizontal-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-invoice.css">
-    <!-- END: Page CSS-->
-
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <!-- END: Custom CSS-->
-
-</head>
-<!-- END: Head-->
-
-<!-- BEGIN: Body-->
-
-<body class="horizontal-layout horizontal-menu navbar-static dark-layout 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" data-layout="dark-layout">
-
-    <!-- BEGIN: Header-->
-    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-static-top bg-primary navbar-brand-center">
+<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-static-top bg-primary navbar-brand-center" style="background-color: #15cf74 !important; border-color: #15cf75 !important;">
         <div class="navbar-header d-xl-block d-none">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item"><a class="navbar-brand" href="../../../html/ltr/horizontal-menu-template-dark/index.html">
-                        <div class="brand-logo"><img class="logo" src="../../../app-assets/images/logo/logo-light.png"></div>
-                        <h2 class="brand-text mb-0">Frest</h2>
+                <li class="nav-item"><a class="navbar-brand" href="../../../html/ltr/horizontal-menu-template-dark/index.php">
+                        <div class="brand-logo"><img class="logo" src="../../../app-assets/images/logo/icon-front.png" width="300%" height="300%"></div>
+                        <h2 class="brand-text mb-0">Speed Cash</h2>
                     </a></li>
             </ul>
         </div>
@@ -66,29 +25,9 @@
                             <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-todo.html" data-toggle="tooltip" data-placement="top" title="Todo"><i class="ficon bx bx-check-circle"></i></a></li>
                             <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calendar.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon bx bx-calendar-alt"></i></a></li>
                         </ul>
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"><i class="ficon bx bx-star warning"></i></a>
-                                <div class="bookmark-input search-input">
-                                    <div class="bookmark-input-icon"><i class="bx bx-search primary"></i></div>
-                                    <input class="form-control input" type="text" placeholder="Explore Frest..." tabindex="0" data-search="template-search">
-                                    <ul class="search-list"></ul>
-                                </div>
-                            </li>
-                        </ul>
                     </div>
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
-                        <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language d-lg-inline d-none">English</span></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#" data-language="en"><i class="flag-icon flag-icon-us mr-50"></i>English</a><a class="dropdown-item" href="#" data-language="fr"><i class="flag-icon flag-icon-fr mr-50"></i>French</a><a class="dropdown-item" href="#" data-language="de"><i class="flag-icon flag-icon-de mr-50"></i>German</a><a class="dropdown-item" href="#" data-language="pt"><i class="flag-icon flag-icon-pt mr-50"></i>Portuguese</a></div>
-                        </li>
                         <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon bx bx-fullscreen"></i></a></li>
-                        <li class="nav-item nav-search"><a class="nav-link nav-link-search pt-2"><i class="ficon bx bx-search"></i></a>
-                            <div class="search-input">
-                                <div class="search-input-icon"><i class="bx bx-search primary"></i></div>
-                                <input class="input" type="text" placeholder="Explore Frest..." tabindex="-1" data-search="template-search">
-                                <div class="search-input-close"><i class="bx bx-x"></i></div>
-                                <ul class="search-list"></ul>
-                            </div>
-                        </li>
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
                             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                 <li class="dropdown-menu-header">
@@ -204,10 +143,10 @@
                             </ul>
                         </li>
                         <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-lg-flex d-none"><span class="user-name">John Doe</span><span class="user-status">Available</span></div><span><img class="round" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                                <div class="user-nav d-lg-flex d-none"><span class="user-name"><?php echo $_SESSION['user']['name']; ?></span><span class="user-status">Available</span></div><span><img class="round" src="<?php echo $_SESSION['user']["path"];?>" alt="avatar" height="40" width="40"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right pb-0"><a class="dropdown-item" href="page-user-profile.html"><i class="bx bx-user mr-50"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="bx bx-envelope mr-50"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="bx bx-check-square mr-50"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="bx bx-message mr-50"></i> Chats</a>
-                                <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="auth-login.html"><i class="bx bx-power-off mr-50"></i> Logout</a>
+                            <div class="dropdown-menu dropdown-menu-right pb-0"><a class="dropdown-item" href="#">
+                                <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="../../../php/logout.php"><i class="bx bx-power-off mr-50"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -215,14 +154,11 @@
             </div>
         </div>
     </nav>
-    <!-- END: Header-->
 
-
-    <!-- BEGIN: Main Menu-->
-    <div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-sticky navbar-dark navbar-without-dd-arrow" role="navigation" data-menu="menu-wrapper">
+    <div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-sticky navbar-dark navbar-without-dd-arrow" role="navigation" data-menu="menu-wrapper" style="background-color: #303030 !important">
         <div class="navbar-header d-xl-none d-block">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html">
+                <li class="nav-item mr-auto"><a class="navbar-brand" href="index.php">
                         <div class="brand-logo"><img class="logo" src="../../../app-assets/images/logo/logo.png" /></div>
                         <h2 class="brand-text mb-0">Frest</h2>
                     </a></li>
@@ -234,14 +170,39 @@
         <div class="navbar-container main-menu-content" data-menu="menu-container">
             <!-- include ../../../includes/mixins-->
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="index.html" data-toggle="dropdown"><i class="menu-livicon" data-icon="desktop"></i><span data-i18n="Dashboard">Dashboard</span></a>
-                    <ul class="dropdown-menu">
-                        <li data-menu=""><a class="dropdown-item align-items-center" href="dashboard-ecommerce.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>eCommerce</a>
+                <li class="dropdown nav-item" data-menu="dropdown" style="background-color: #303030 !important"><a class="dropdown-toggle nav-link" href="index.php" data-toggle="dropdown" style="background-color: #303030 !important"><i class="menu-livicon" data-icon="desktop" style="background-color: #303030 !important"></i><span style="color: white">Dashboard</span></a>
+                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                        <li class="active" data-menu=""><a class="dropdown-item align-items-center" href="dashboard-ecommerce.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>eCommerce</a>
                         </li>
                         <li data-menu=""><a class="dropdown-item align-items-center" href="dashboard-analytics.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
                         </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="app-email.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Email</a>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="app-chat.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Chat</a>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="app-todo.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Todo</a>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="app-calendar.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Calendar</a>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="app-kanban.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Kanban</a>
+                        </li>
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt"></i>Invoice</a>
+                            <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice-list.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Invoice List</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Invoice</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice-edit.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Invoice Edit</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice-add.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Invoice Add</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="app-file-manager.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>File Manager</a>
+                        </li>
                     </ul>
                 </li>
+<!--
                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="comments"></i><span>Apps</span></a>
                     <ul class="dropdown-menu">
                         <li data-menu=""><a class="dropdown-item align-items-center" href="app-email.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Email</a>
@@ -258,7 +219,7 @@
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice-list.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Invoice List</a>
                                 </li>
-                                <li class="active" data-menu=""><a class="dropdown-item align-items-center" href="app-invoice.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Invoice</a>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Invoice</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice-edit.html" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Invoice Edit</a>
                                 </li>
@@ -534,314 +495,75 @@
                         </li>
                     </ul>
                 </li>
+-->
+                <!-- PARTENAIRE -->
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="briefcase"></i><span style="color: white">Partenaires</span></a>
+                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="page-contrat-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Contrats</a>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="page-part-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- CLIENT -->
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="morph-folder"></i><span style="color: white">Clients et Entreprises</span></a>
+                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Entreprises</a>
+                            <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-entreprise-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
+                                </li>
+                                <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="page-abo_ent-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Abonnement</a>
+                                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                        <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
+                                        </li>
+                                        <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Clients</a>
+                            <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-users-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
+                                </li>
+                                <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
+                                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                        <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
+                                        </li>
+                                        <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="https://pixinvent.com/demo/frest-clean-bootstrap-admin-dashboard-template/documentation" data-toggle="dropdown" target="_blank"><i class="bx bx-right-arrow-alt"></i>Documentation</a>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="https://pixinvent.ticksy.com/" data-toggle="dropdown" target="_blank"><i class="bx bx-right-arrow-alt"></i>Raise Support</a>
+                        </li>
+                        -->
+                    </ul>
+                </li>
+                <!-- DEPOT -->
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-big"></i><span style="color: white">Produits et Factures</span></a>
+                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Produits</a>
+                            <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-prod-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Liste</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-add-prod.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Ajouter</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>TODO</a>
+                                </li>
+                            </ul>
+                        </li>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Facture</a>
+                        </li>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /horizontal menu content-->
     </div>
-    <!-- END: Main Menu-->
-
-    <!-- BEGIN: Content-->
-    <div class="app-content content">
-        <div class="content-overlay"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
-            <div class="content-body">
-                <!-- app invoice View Page -->
-                <section class="invoice-view-wrapper">
-                    <div class="row">
-                        <!-- invoice view page -->
-                        <div class="col-xl-9 col-md-8 col-12">
-                            <div class="card invoice-print-area">
-                                <div class="card-content">
-                                    <div class="card-body pb-0 mx-25">
-                                        <!-- header section -->
-                                        <div class="row">
-                                            <div class="col-xl-4 col-md-12">
-                                                <span class="invoice-number mr-50">Invoice#</span>
-                                                <span>000756</span>
-                                            </div>
-                                            <div class="col-xl-8 col-md-12">
-                                                <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
-                                                    <div class="mr-3">
-                                                        <small class="text-muted">Date Issue:</small>
-                                                        <span>08/10/2019</span>
-                                                    </div>
-                                                    <div>
-                                                        <small class="text-muted">Date Due:</small>
-                                                        <span>08/10/2019</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- logo and title -->
-                                        <div class="row my-3">
-                                            <div class="col-6">
-                                                <h4 class="text-primary">Invoice</h4>
-                                                <span>Software Development</span>
-                                            </div>
-                                            <div class="col-6 d-flex justify-content-end">
-                                                <img src="../../../app-assets/images/pages/pixinvent-logo.png" alt="logo" height="46" width="164">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <!-- invoice address and contact -->
-                                        <div class="row invoice-info">
-                                            <div class="col-6 mt-1">
-                                                <h6 class="invoice-from">Bill From</h6>
-                                                <div class="mb-1">
-                                                    <span>Clevision PVT. LTD.</span>
-                                                </div>
-                                                <div class="mb-1">
-                                                    <span>9205 Whitemarsh Street New York, NY 10002</span>
-                                                </div>
-                                                <div class="mb-1">
-                                                    <span>hello@clevision.net</span>
-                                                </div>
-                                                <div class="mb-1">
-                                                    <span>601-678-8022</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 mt-1">
-                                                <h6 class="invoice-to">Bill To</h6>
-                                                <div class="mb-1">
-                                                    <span>Pixinvent PVT. LTD.</span>
-                                                </div>
-                                                <div class="mb-1">
-                                                    <span>203 Sussex St. Suite B Waukegan, IL 60085</span>
-                                                </div>
-                                                <div class="mb-1">
-                                                    <span>pixinvent@gmail.com</span>
-                                                </div>
-                                                <div class="mb-1">
-                                                    <span>987-352-5603</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                    <!-- product details table-->
-                                    <div class="invoice-product-details table-responsive mx-md-25">
-                                        <table class="table table-borderless mb-0">
-                                            <thead>
-                                                <tr class="border-0">
-                                                    <th scope="col">Item</th>
-                                                    <th scope="col">Description</th>
-                                                    <th scope="col">Cost</th>
-                                                    <th scope="col">Qty</th>
-                                                    <th scope="col" class="text-right">Price</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Frest Admin</td>
-                                                    <td>HTML Admin Template</td>
-                                                    <td>28</td>
-                                                    <td>1</td>
-                                                    <td class="text-primary text-right font-weight-bold">$28.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Apex Admin</td>
-                                                    <td>Anguler Admin Template</td>
-                                                    <td>24</td>
-                                                    <td>1</td>
-                                                    <td class="text-primary text-right font-weight-bold">$24.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Stack Admin</td>
-                                                    <td>HTML Admin Template</td>
-                                                    <td>24</td>
-                                                    <td>1</td>
-                                                    <td class="text-primary text-right font-weight-bold">$24.00</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <!-- invoice subtotal -->
-                                    <div class="card-body pt-0 mx-25">
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-4 col-sm-6 mt-75">
-                                                <p>Thanks for your business.</p>
-                                            </div>
-                                            <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
-                                                <div class="invoice-subtotal">
-                                                    <div class="invoice-calc d-flex justify-content-between">
-                                                        <span class="invoice-title">Subtotal</span>
-                                                        <span class="invoice-value">$ 76.00</span>
-                                                    </div>
-                                                    <div class="invoice-calc d-flex justify-content-between">
-                                                        <span class="invoice-title">Discount</span>
-                                                        <span class="invoice-value">- $ 09.60</span>
-                                                    </div>
-                                                    <div class="invoice-calc d-flex justify-content-between">
-                                                        <span class="invoice-title">Tax</span>
-                                                        <span class="invoice-value">21%</span>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="invoice-calc d-flex justify-content-between">
-                                                        <span class="invoice-title">Invoice Total</span>
-                                                        <span class="invoice-value">$ 66.40</span>
-                                                    </div>
-                                                    <div class="invoice-calc d-flex justify-content-between">
-                                                        <span class="invoice-title">Paid to date</span>
-                                                        <span class="invoice-value">- $ 00.00</span>
-                                                    </div>
-                                                    <div class="invoice-calc d-flex justify-content-between">
-                                                        <span class="invoice-title">Balance (USD)</span>
-                                                        <span class="invoice-value">$ 10,953</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            $html2pdf = new Html2Pdf('P', 'A4', 'en');
-                            $html2pdf->writeHTML('<h1>HelloWorld</h1>This is my first page');
-                            $html2pdf->output();
-                        </script>
-                        <!-- invoice action  -->
-                        <div class="col-xl-3 col-md-4 col-12">
-                            <div class="card invoice-action-wrapper shadow-none border">
-                                <div class="card-body">
-                                    <div class="invoice-action-btn">
-                                        <button class="btn btn-primary btn-block invoice-send-btn">
-                                            <i class="bx bx-send"></i>
-                                            <span>Send Invoice</span>
-                                        </button>
-                                    </div>
-                                    <div class="invoice-action-btn">
-                                        <button class="btn btn-light-primary btn-block invoice-print">
-                                            <span>print</span>
-                                        </button>
-                                    </div>
-                                    <div class="invoice-action-btn">
-                                        <a href="app-invoice-edit.html" class="btn btn-light-primary btn-block">
-                                            <span>Edit Invoice</span>
-                                        </a>
-                                    </div>
-                                    <div class="invoice-action-btn">
-                                        <button class="btn btn-success btn-block">
-                                            <i class='bx bx-dollar'></i>
-                                            <span>Add Payment</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-    <!-- END: Content-->
-
-    <!-- demo chat-->
-    <div class="widget-chat-demo">
-        <!-- widget chat demo footer button start -->
-        <button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
-        <!-- widget chat demo footer button ends -->
-        <!-- widget chat demo start -->
-        <div class="widget-chat widget-chat-demo d-none">
-            <div class="card mb-0">
-                <div class="card-header border-bottom p-0">
-                    <div class="media m-75">
-                        <a href="JavaScript:void(0);">
-                            <div class="avatar mr-75">
-                                <img src="../../../app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
-                                <span class="avatar-status-online"></span>
-                            </div>
-                        </a>
-                        <div class="media-body">
-                            <h6 class="media-heading mb-0 pt-25"><a href="javaScript:void(0);">Kiara Cruiser</a></h6>
-                            <span class="text-muted font-small-3">Active</span>
-                        </div>
-                        <i class="bx bx-x widget-chat-close float-right my-auto cursor-pointer"></i>
-                    </div>
-                </div>
-                <div class="card-body widget-chat-container widget-chat-demo-scroll">
-                    <div class="chat-content">
-                        <div class="badge badge-pill badge-light-secondary my-1">today</div>
-                        <div class="chat">
-                            <div class="chat-body">
-                                <div class="chat-message">
-                                    <p>How can we help? 😄</p>
-                                    <span class="chat-time">7:45 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat chat-left">
-                            <div class="chat-body">
-                                <div class="chat-message">
-                                    <p>Hey John, I am looking for the best admin template.</p>
-                                    <p>Could you please help me to find it out? 🤔</p>
-                                    <span class="chat-time">7:50 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat">
-                            <div class="chat-body">
-                                <div class="chat-message">
-                                    <p>Stack admin is the responsive bootstrap 4 admin template.</p>
-                                    <span class="chat-time">8:01 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer border-top p-1">
-                    <form class="d-flex" onsubmit="widgetChatMessageDemo();" action="javascript:void(0);">
-                        <input type="text" class="form-control chat-message-demo mr-75" placeholder="Type here...">
-                        <button type="submit" class="btn btn-primary glow px-1"><i class="bx bx-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- widget chat demo ends -->
-
-    </div>
-    <div class="sidenav-overlay"></div>
-    <div class="drag-target"></div>
-
-    <!-- BEGIN: Footer-->
-    <footer class="footer footer-static footer-dark">
-        <p class="clearfix mb-0"><span class="float-left d-inline-block">2020 &copy; PIXINVENT</span><span class="float-right d-sm-inline-block d-none">Crafted with<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a></span>
-            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
-        </p>
-    </footer>
-    <!-- END: Footer-->
-
-
-    <!-- BEGIN: Vendor JS-->
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
-    <script src="../../../app-assets/js/scripts/configs/horizontal-menu.js"></script>
-    <script src="../../../app-assets/js/scripts/configs/vertical-menu-dark.js"></script>
-    <script src="../../../app-assets/js/core/app-menu.js"></script>
-    <script src="../../../app-assets/js/core/app.js"></script>
-    <script src="../../../app-assets/js/scripts/components.js"></script>
-    <script src="../../../app-assets/js/scripts/footer.js"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <script src="../../../app-assets/js/scripts/pages/app-invoice.js"></script>
-    <script src="../../../app-assets/js/scripts/html2pdf/html2pdf.bundle.min.js"></script>
-    <!-- END: Page JS-->
-
-</body>
-<!-- END: Body-->
-
-</html>
