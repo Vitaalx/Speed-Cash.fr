@@ -4,16 +4,20 @@ session_start();
 include "bdd.php";
 
 $email = $_POST["email_login"];
-$passwordConn = $_POST["pass_login"];
+$passwordConn = sha1($_POST["pass_login"]);
 
 //echo $email.$passwordConn;
 
 try {
 
+    // Connexion à la BDD
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     // Comptage du nombre de joueurs avec le même pseudo ou email
     $sql = "SELECT * FROM users WHERE email='" . $email . "' AND motDePasse='" . $passwordConn ."'";
     //echo $sql;
-    $stmt = $db->prepare($sql);
+    $stmt = $conn->prepare($sql);
     $stmt->execute();
     $nb = $stmt->rowCount();
 
@@ -46,6 +50,6 @@ try {
         }
     }
 
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }

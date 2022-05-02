@@ -3,6 +3,7 @@
 $nb_siret = htmlspecialchars($_POST['nb_siret']);
 $company_type = htmlspecialchars($_POST['company_type']);
 $tel_company = htmlspecialchars($_POST['tel_company']);
+$caCompany = htmlspecialchars($_POST['caCompany']);
 $company_name = htmlspecialchars($_POST['company_name']);
 $company_location = htmlspecialchars($_POST['company_location']);
 
@@ -42,6 +43,7 @@ echo $company_location;
             <input type="text" name="last_name" class="form-control mb-3 StripeElement StripeElement--empty" placeholder="Votre nom">
             <input type="email" name="email" class="form-control mb-3 StripeElement StripeElement--empty" placeholder="Votre email">
             <!-- Info importante lié à l'entreprise qui s'abonne -->
+            <input type="hidden" name="caCompany" value="<?php echo $caCompany; ?>">
             <input type="hidden" name="nb_siret" value="<?php echo $nb_siret; ?>">
             <input type="hidden" name="company_type" value="<?php echo $company_type; ?>">
             <input type="hidden" name="tel_company" value="<?php echo $tel_company; ?>">

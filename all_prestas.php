@@ -47,8 +47,10 @@ if (!isset($_SESSION["email"])) {
         </div>
     </div>
     <div class="select-filter">
-        <label style="color: white;">Prix</label>
-        <input type="range" name="order-by-price-desc" id="order-by-price-desc" min="0" max="1000" value="0">
+        <label style="color: white;">Prix Min</label>
+        <input style="width: 50px" type="number" name="order-by-price-min" id="order-by-price-min">
+        <label style="color: white;">Prix Max</label>
+        <input style="width: 50px" type="number" name="order-by-price-max" id="order-by-price-max">
         <select name="filter-prestas-by-category" id="filter-prestas-by-category">
             <option value="" selected="">Catégorie</option>
             <option value="Parc Attraction">Parc Attraction</option>
@@ -72,7 +74,7 @@ if (!isset($_SESSION["email"])) {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT * FROM prestation";
+        $sql = "SELECT * FROM produits WHERE type='prestation' ORDER BY `produits`.`id` ASC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $nb = $stmt->rowCount();
@@ -83,23 +85,21 @@ if (!isset($_SESSION["email"])) {
 
             for ($i = 1; $i <= $nb; $i++) {
                 $remise_on_presta = (1 - $prestas[$i - 1]["remise"]) * 100;
-                echo '<div class="thumbnail-presta"> <a class="thumbnail-info-a" href="./presta.php?id=' . $prestas[$i - 1]['id'] . '">';
+                echo '<div class="thumbnail-presta"> <a class="thumbnail-info-a" href="./produit.php?id=' . $prestas[$i - 1]['id'] . '">';
                 echo '<div class="row-left">';
-                echo '<img src="images/presta-' . $prestas[$i - 1]["id"] . '.jpg" class="img-presta-thumbnail"
-                 alt="' . $prestas[$i - 1]["nom_presta"] . '">';
-                echo '<p class="text-product">' . $prestas[$i - 1]["nom_presta"] . '<span class="span-remise-presta" style="margin-left: 2%">-' . $remise_on_presta .'%</span></p>';
-                echo '<p class="price">' . $prestas[$i - 1]["prix_ht"]*$prestas[$i - 1]["tva"] . '€</p>';
+                echo '<img src="images/presta-' . $prestas[$i - 1]["id"] . '.png" class="img-presta-thumbnail"
+                 alt="' . $prestas[$i - 1]["nom"] . '">';
+                echo '<p class="text-product">' . $prestas[$i - 1]["nom"] . '<span class="span-remise-presta" style="margin-left: 2%">-' . $remise_on_presta .'%</span></p>';
+                echo '<p class="price">' . $prestas[$i - 1]["prix"] . '€</p>';
                 echo '</a>';
                 echo '</div>';
                 echo '<div class="row-right">';
                 echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $prestas[$i - 1]["description"] . '</i></desc>';
                 echo '<br />';
                 echo '<br />';
-                echo '<form role="form" action="paymentPrestaCart.php" method="post">';
-                echo '<input type="hidden" name="price" value=' . ($prestas[$i - 1]["prix_ht"]*$prestas[$i - 1]["tva"]) * $prestas[$i - 1]["remise"] . '>';
+                echo '<input type="hidden" name="price" value=' . ($prestas[$i - 1]["prix"]*$prestas[$i - 1]["TVA"]) * $prestas[$i - 1]["remise"] . '>';
                 echo '<input type="hidden" name="prestas" value="' . $prestas[$i - 1]["id"] .'">';
-                echo '<button type="submit" class="button-payment-presta">Payer</button>';
-                echo '</form>';
+                echo '<a class="addPanier" href="addpanier.php?id=' . $prestas[$i - 1]["id"] . '&type=prestation"><i class="uil uil-shopping-cart"></i></a>';
                 echo '</div>';
                 echo '</div>';
 
@@ -130,13 +130,14 @@ if (!isset($_SESSION["email"])) {
     $(document).ready(function (){
         $("#filter-products-button").on('click', function (){
             var categorie = $("#filter-prestas-by-category").val();
-            var price = $("#order-by-price-desc").val();
+            var priceMin = $("#order-by-price-min").val();
+            var priceMax = $("#order-by-price-max").val();
             const page = "all_prestas.php";
 
             $.ajax({
                 url: "/php/filter-products.php",
                 type: "POST",
-                data: 'categorie=' + categorie + '&price=' + price + '&page=' + page,
+                data: 'categorie=' + categorie + '&priceMin=' + priceMin + '&priceMax=' + priceMax + '&page=' + page,
                 beforeSend:function() {
                     $(".container-thumbnail").html("<img src='images/Loading_icon.gif' style='width: 80px; height: 80px;'/>");
                 },

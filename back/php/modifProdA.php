@@ -1,69 +1,41 @@
 <?php
 
-if(isset($_POST["name"]) && !empty($_POST["name"]) && isset($_POST['id']) && !empty($_POST['id'])) {
-    try{
-        $db = new PDO('mysql:host=localhost;dbname=webBrowerTest', 'root', 'root', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    }catch(Exception $e){
-        die('Erreur : ' . $e->getMessage()); 
-    }
-  $q = $db->prepare('UPDATE products SET nom = ? WHERE id_products = ?');
-  $response = $q->execute([
-    $_POST["name"],
-    $_POST["id"]
-  ]);
-  if($response) {
-    echo "succes";
-  } else {
-    echo "erreur";
-  }
+include 'bdd.php';
 
-}else if(isset($_POST['cat']) && !empty($_POST['cat']) && isset($_POST['id']) && !empty($_POST['id'])){
-    try{
-        $db = new PDO('mysql:host=localhost;dbname=webBrowerTest', 'root', 'root', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    }catch(Exception $e){
-        die('Erreur : ' . $e->getMessage()); 
-    }
-    $q = $db->prepare('UPDATE products SET categorie = ? WHERE id_products = ?');
-    $response = $q->execute([
-      $_POST["cat"],
-      $_POST["id"]
+if(isset($_POST["prix"]) && isset($_POST["description"]) && isset($_POST["remise"]) && isset($_POST["sous_categorie"]) && isset($_POST["stock"]) && isset($_POST["id_fich_tech"])){
+
+try {
+    // Connexion à la BDD
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $q = $conn->prepare('UPDATE produits SET prix = ?, description = ?,remise = ?,sous_categorie = ?,stock = ? WHERE id_fich_tech = ?');
+    //var_dump($q);
+    //echo $_POST['id_fich_tech'];
+    $modif = $q->execute([
+        $_POST['prix'],
+        $_POST['description'],
+        $_POST['remise'],
+        $_POST['sous_categorie'],
+        $_POST['stock'],
+        $_POST["id_fich_tech"],
     ]);
-    if($response) {
-      echo "succes";
-    } else {
-      echo "erreur";
+
+    if($modif){
+        header('location: ../html/ltr/horizontal-menu-template-dark/page-prod-list.php?message=Le Produit à bien été modifié.');
+    }else{
+        echo "<p>Echec de d'update.</p>";
+        header('location: ../html/ltr/horizontal-menu-template-dark/page-prod-list.php?message=error');
     }
-}else if(isset($_POST['brand']) && !empty($_POST['brand']) && isset($_POST['id']) && !empty($_POST['id'])){
-    try{
-        $db = new PDO('mysql:host=localhost;dbname=webBrowerTest', 'root', 'root', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    }catch(Exception $e){
-        die('Erreur : ' . $e->getMessage()); 
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        header('location: ../html/ltr/horizontal-menu-template-dark/page-prod-list.php?message=error');
     }
-    $q = $db->prepare('UPDATE products SET marque = ? WHERE id_products = ?');
-    $response = $q->execute([
-      $_POST["brand"],
-      $_POST["id"]
-    ]);
-    if($response) {
-      echo "succes";
-    } else {
-      echo "erreur";
-    }
-}else if(isset($_POST['price']) && !empty($_POST['price']) && isset($_POST['id']) && !empty($_POST['id'])){
-    try{
-        $db = new PDO('mysql:host=localhost;dbname=webBrowerTest', 'root', 'root', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    }catch(Exception $e){
-        die('Erreur : ' . $e->getMessage()); 
-    }
-    $q = $db->prepare('UPDATE products SET prix = ? WHERE id_products = ?');
-    $response = $q->execute([
-      $_POST["price"],
-      $_POST["id"]
-    ]);
-    if($response) {
-      echo "succes";
-    } else {
-      echo "erreur";
-    }
+
+} else {
+    echo "Echec de la requête.";
+    header('location: ../html/ltr/horizontal-menu-template-dark/page-prod-list.php?message=error');
 }
+
 ?>    

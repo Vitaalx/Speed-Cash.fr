@@ -12,6 +12,58 @@ q.send();
 }
 //setTimeout(listCus, 1000);
 
+    function listCpromo(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('cpromoList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listCpromo.php");
+        q.send();
+    }
+
+    function listFac(){
+        const q3 = new XMLHttpRequest();
+        q3.onreadystatechange = function(){
+            if(q3.readyState === 4){
+                const response3 = q3.responseText;
+                const list = document.getElementById('facList');
+                list.innerHTML = response3;
+            }
+        }
+        q3.open("GET", "../../../php/listFac.php");
+        q3.send();
+    }
+
+    function listCompany(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('companyList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listCompany.php");
+        q.send();
+    }
+
+    function listContrat(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('contratList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listContrat.php");
+        q.send();
+    }
+
 function addCus(){
     const name = document.getElementById('nom');
     const sname = document.getElementById('prenom');

@@ -47,6 +47,8 @@
             // Envoie facture via mail et info concernant commande.
             //mail();
 
+            $_SESSION['panier'] = array();
+
 
         } catch (PDOException $e) {
             echo $e->getMessage();

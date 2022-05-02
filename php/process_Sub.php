@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 require_once '../vendor/autoload.php';
 include "db.php";
@@ -19,6 +19,8 @@ $company_type = htmlspecialchars($_POST["company_type"]);
 $tel_company = htmlspecialchars($_POST["tel_company"]);
 $company_name = htmlspecialchars($_POST["company_name"]);
 $company_location = htmlspecialchars($_POST["company_location"]);
+$caCompany = htmlspecialchars($_POST["caCompany"]);
+$subscription_end = date('Y-m-d', strtotime('+1 year'));
 
 $stripe = new \Stripe\StripeCLient
 (
@@ -50,7 +52,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Insertion des données lié à l'entreprise si le paiement est validé
-    $sql = "INSERT INTO entreprise (id_client, nb_siret, type_societe, tel, nom_entreprise, adresse_entreprise) VALUES (" . $_SESSION["id"] .", '" . $nb_siret ."', '" . $company_type ."', '" . $tel_company ."', '" . $company_name ."', '" . $company_location ."')";
+    $sql = "INSERT INTO entreprise (id_client, nb_siret, type_societe, tel, nom_entreprise, adresse_entreprise, subscription_end,chiffre_affaire) VALUES (" . $_SESSION["id"] .", '" . $nb_siret ."', '" . $company_type ."', '" . $tel_company ."', '" . $company_name ."', '" . $company_location ."', '" . $subscription_end ."', '" . $caCompany ."')";
     //echo $sql;
     $result = $conn->prepare($sql);
     $result->execute();

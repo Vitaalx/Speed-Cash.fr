@@ -63,7 +63,7 @@ if (!isset($_SESSION["email"])) {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT * FROM produits WHERE date_enter >= '$date_last_product' AND date_enter <= curdate() ORDER BY date_enter DESC";
+        $sql = "SELECT * FROM produits WHERE date_enter >= '$date_last_product' AND date_enter <= curdate() AND type='produit' ORDER BY date_enter DESC";
         //echo $sql;
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -135,7 +135,7 @@ if (!isset($_SESSION["email"])) {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql_presta = "SELECT * FROM prestation WHERE date_enter >= '$date_last_presta' AND date_enter <= curdate() ORDER BY date_enter DESC";
+        $sql_presta = "SELECT * FROM produits WHERE date_enter >= '$date_last_presta' AND date_enter <= curdate() AND type='prestation' ORDER BY date_enter DESC";
         //echo $sql;
         $stmt = $conn->prepare($sql_presta);
         $stmt->execute();
@@ -155,9 +155,9 @@ if (!isset($_SESSION["email"])) {
             echo '<div class="carousel-indicators">';
             for ($i = 1; $i <= $nb_presta; $i++) {
                 if ($i === 1) {
-                    echo '<button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="0" class="active"  aria-label="' . $last_prestas[$i - 1]["nom_presta"] . '" aria-current="true"></button>';
+                    echo '<button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="0" class="active"  aria-label="' . $last_prestas[$i - 1]["nom"] . '" aria-current="true"></button>';
                 } else {
-                    echo '<button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="' . ($i - 1) . '" aria-label="' . $last_prestas[$i - 1]["nom_presta"] . '"></button>';
+                    echo '<button type="button" data-bs-target="#carouselPresta" data-bs-slide-to="' . ($i - 1) . '" aria-label="' . $last_prestas[$i - 1]["nom"] . '"></button>';
                 }
             }
             echo '</div>';
@@ -169,13 +169,13 @@ if (!isset($_SESSION["email"])) {
                     echo '<div class="carousel-item" data-bs-interval="10000">';
                 }
                 $remise_on_presta = (1 - $last_prestas[$i - 1]["remise"]) * 100;
-                echo '<a href="./presta.php?id=' . $last_prestas[$i - 1]['id'] . '">';
-                echo '<img src="images/presta-' . $last_prestas[$i - 1]["id"] . '.jpg" class="img-presta-carousel" alt="' . $last_prestas[$i - 1]["nom_presta"] . '">';
+                echo '<a href="./produit.php?id=' . $last_prestas[$i - 1]['id'] . '">';
+                echo '<img src="images/presta-' . $last_prestas[$i - 1]["id"] . '.png" class="img-presta-carousel" alt="' . $last_prestas[$i - 1]["nom"] . '">';
                 echo '</a>';
                 echo '<br />';
                 echo '<div class="carousel-caption d-none d-md-block text-caption">';
                 echo '<div style="display: flex; align-content: center; white-space: nowrap;">';
-                echo '<h5 style="color: #e1e1e1;display: flex;align-items: center;">' . $last_prestas[$i - 1]["nom_presta"] . '<span class="badge rounded-pill bg-info text-dark" style="margin-left: 2%">-' . $remise_on_presta .'%</span></h5>';
+                echo '<h5 style="color: #e1e1e1;display: flex;align-items: center;">' . $last_prestas[$i - 1]["nom"] . '<span class="badge rounded-pill bg-info text-dark" style="margin-left: 2%">-' . $remise_on_presta .'%</span></h5>';
                 echo '</div>';
                 echo '<p style="color: #e1e1e1;">' . $last_prestas[$i - 1]["description"] . '</p>';
                 echo '</div>';

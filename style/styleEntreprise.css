@@ -634,6 +634,19 @@ html, body {
     border-radius: 4px;
 }
 
+.caCompany {
+    position: relative;
+    width: 704px;
+    left: 7.5%;
+    top: -60px;
+    padding: 10px;
+
+    border: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
 .alert-subscription {
 
     position: absolute;
@@ -719,7 +732,7 @@ html, body {
 
 /* Icons Formulaire */
 
-.uil-dialpad-alt, .uil-university, .uil-phone, .uil-location-point, .uil-building {
+.uil-dialpad-alt, .uil-university, .uil-phone, .uil-location-point, .uil-building, .uil-euro-circle {
     font-size: 22px;
     color: whitesmoke;
 }
@@ -728,6 +741,12 @@ html, body {
     position: relative;
     left: 46.5%;
     top: 80px;
+}
+
+.uil-euro-circle {
+    position: relative;
+    left: 7%;
+    top: -60px;
 }
 
 .uil-university {

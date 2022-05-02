@@ -12,6 +12,7 @@ if (!isset($_SESSION["email"])) {
     header("Location: ./index.php");
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -146,6 +147,10 @@ if (!isset($_SESSION["email"])) {
                 <div class="field">
                     <i class="uil uil-location-point"></i>
                     <input type="text" id="addressSubscription" name="company_location" class="addressSubscription" placeholder="Adresse postale de l'entreprise" required>
+                </div>
+                <div class="field">
+                    <input type="number" id="caCompany" name="caCompany" class="caCompany" placeholder="Chiffre d'affaire de l'entreprise" required>
+                    <i class="uil uil-euro-circle" style="margin-left: 1%;"></i>
                 </div>
 
                 <div class="field-choose-subscription">

@@ -29,13 +29,17 @@ class panier{
                 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $sql = "SELECT id, prix FROM produits WHERE id IN (" . implode(",", $ids) . ")";
+                $sql = "SELECT id, prix, remise FROM produits WHERE id IN (" . implode(",", $ids) . ")";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
                 $products = $stmt->fetchAll(PDO::FETCH_OBJ);
 
                 foreach ( $products as $product ) {
-                    $total += $product->prix * $_SESSION['panier'][$product->id];
+                    if($product->remise > 0) {
+                        $total += ($product->prix * $product->remise) * $_SESSION['panier'][$product->id];
+                    } else {
+                        $total += $product->prix * $_SESSION['panier'][$product->id];
+                    }
                 }
 
             } catch (PDOException $e) {

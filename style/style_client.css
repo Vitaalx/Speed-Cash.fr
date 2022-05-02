@@ -220,6 +220,16 @@ html, body {
     background-color: #0DCAF0;
 }
 
+.table-my-orders {
+    border-radius: 10px;
+    background-color: #575757;
+}
+
+.table-my-orders td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid grey;
+}
 
 /* Formulaire de paiment */
 
@@ -247,7 +257,7 @@ html, body {
     border: none;
     text-align: center;
     border-radius: 8px;
-    margin-top: 26%;
+    margin-top: 40px;
     width: 100%;
     bottom: -160px;
     position: relative;

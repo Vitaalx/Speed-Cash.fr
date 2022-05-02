@@ -82,7 +82,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Prix</label>
+                                                            <label>Prix avec TVA</label>
                                                             <input type="number" class="form-control touchspin data-bts-decimals" name="prix" placeholder="0,00€" required data-validation-required-message="Prix requis">
                                                         </div>
                                                     </div>
@@ -127,7 +127,7 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>TVA</label>
-                                                            <input type="number" class="form-control" name="TVA" placeholder="Ex: 5,5%" required data-validation-required-message="TVA requise">
+                                                            <input type="text" class="form-control" name="TVA" placeholder="Ex: 5,5%" required data-validation-required-message="TVA requise">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,12 +163,10 @@
                                                         </div>
                                                     </div>
                                                     <div id="file-uploader">
-                                                    <form action="../../../../images/" class="dropzone">
+                                                        <input type="file" name="file-produit" id="imgProduit" multiple />
                                                         <div class="fallback">
-                                                            <input type="file" name="file-produit" id="imgProduit" multiple />
                                                             <img id="previewImgProduit" class="img-thumbnail" style="width: 400px; height: 400px; border-radius: 12px;">
                                                         </div>
-                                                    </form>
                                                     </div>
 
                                                 </div>
@@ -215,8 +213,6 @@
                     $("#previewImgProduit").attr('src', e.target.result);
                 };
                 reader.readAsDataURL(this.files[0]);
-                // Bandeau alerte masqué
-                $("#alert-inscription").hide();
                 $("#previewImgProduit").show();
             } else {
                 $("#imgProduit").val('');

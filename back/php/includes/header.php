@@ -536,6 +536,14 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                                 </li>
                             </ul>
                         </li>
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Code promo</a>
+                            <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-cpromo-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-add-cpromo.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Ajout</a>
+                                </li>
+                            </ul>
+                        </li>
                         <!--
                         <li data-menu=""><a class="dropdown-item align-items-center" href="https://pixinvent.com/demo/frest-clean-bootstrap-admin-dashboard-template/documentation" data-toggle="dropdown" target="_blank"><i class="bx bx-right-arrow-alt"></i>Documentation</a>
                         </li>
@@ -545,7 +553,7 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                     </ul>
                 </li>
                 <!-- DEPOT -->
-                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-big"></i><span style="color: white">Produits et Factures</span></a>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-big"></i><span style="color: white">Produits et Prestations</span></a>
                     <ul class="dropdown-menu" style="background-color: #303030 !important">
                         <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Produits</a>
                             <ul class="dropdown-menu" style="background-color: #303030 !important">
@@ -553,14 +561,25 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                                 </li>
                                 <li data-menu=""><a class="dropdown-item align-items-center" href="page-add-prod.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Ajouter</a>
                                 </li>
-                                <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>TODO</a>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Prestations</a>
+                            <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-presta-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Liste</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-add-presta.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Ajouter</a>
                                 </li>
                             </ul>
                         </li>
-                        </li>
-                        <li data-menu=""><a class="dropdown-item align-items-center" href="app-invoice-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Facture</a>
-                        </li>
-                        </li>
+                    </ul>
+                </li>
+                <!-- Prestation -->
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-small"></i><span style="color: white">Facture</span></a>
+                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-facture-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Liste</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-add-facture.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Ajouter</a>
+                                </li>
                     </ul>
                 </li>
             </ul>

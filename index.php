@@ -185,6 +185,7 @@ include('./php/traduction_en.php');
     <?php
 
     if (isset($_GET["suppr"]) and $_GET["suppr"] === "success") echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Votre compte à bien été supprimé !</div>";
+    if (isset($_GET["deco"]) and $_GET["deco"] == 1) echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Déconnexion réussi !</div>";
 
     ?>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
@@ -36,6 +36,8 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
     <!-- END: Custom CSS-->
+    <script src="../../../../js/jquery-3.3.1.min.js"></script>
+    <script src="../../../../js/popper.min.js"></script>
 
 </head>
 <!-- END: Head-->
@@ -78,6 +80,19 @@ function listProd(){
                             <div class="card-content">
                                 <div class="card-body">
                                     <!-- datatable start -->
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label>Dépôt</label>
+                                            <select class="form-control" id="filter_depot" name="filter_on_depot">
+                                                <option selected="selected">Dépôt</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="table-responsive">
                                         <table id="users-list-datatable" class="table">
                                             <thead>
@@ -111,6 +126,38 @@ function listProd(){
     <!-- END: Content-->
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
+
+    <script type="text/javascript">
+        function confirmDelete() {
+            if ( confirm( "Êtes vous sûr de vouloir supprimer ce produit ?" ) ) {
+                // Code à éxécuter si le l'utilisateur clique sur "OK"
+
+                location.href = "deleteProd.php";
+                return true;
+            } else {
+                // Code à éxécuter si l'utilisateur clique sur "Annuler"
+                //alert("Suppression annulée");
+                return false;
+            }
+
+        }
+
+        $("#filter_depot").change(function (e) {
+            let id_depot = document.getElementById("filter_depot").options[document.getElementById('filter_depot').selectedIndex].text;
+            console.log(id_depot);
+
+            $.ajax({
+                url: '../../../php/listFilterDepotProd.php',
+                type: 'POST',
+                data: 'depot=' + id_depot,
+                success: function (data) {
+                    $('#productsList').html(data);
+                }
+            });
+
+        });
+
+    </script>
 
     <!-- BEGIN: Footer-->
     <?php require '../../../php/includes/footer.php'; ?>

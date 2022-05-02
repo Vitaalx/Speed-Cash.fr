@@ -1,9 +1,6 @@
-<<?php
-
-try{
-    $db = new PDO('mysql:host=localhost;dbname=speed-cash', 'root', 'root');
-}catch(Exception $e){
-    die('Erreur : ' . $e->getMessage()); 
-}
-
+<?php
+$servername = "localhost:3306";
+$username = "root";
+$password = "root";
+$dbname = "speed-cash";
 ?>

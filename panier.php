@@ -77,14 +77,22 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
 
                     foreach ($products as $product) {
                         echo '<tr>';
-                        echo '<td><img src="images/produit-' . $product->id . '.png" class="img-product"
+                        if($product->type != "produit") {
+                            echo '<td><img src="images/presta-' . $product->id . '.png" class="img-product"
                         alt="' . $product->nom . '" style="width: 70px; height: 70px;"></td>';
+                        } else {
+                            echo '<td><img src="images/produit-' . $product->id . '.png" class="img-product"
+                        alt="' . $product->nom . '" style="width: 70px; height: 70px;"></td>';
+                        }
                         echo '<td>' . $product->nom . '</td>';
-                        $priceTVA = $product->prix / 1.2;
-                        $priceTVA = round($priceTVA, 1);
-                        echo '<td class="price">' . $priceTVA . ' €</td>';
+                        $pricewithoutTVA = (1- ($product->TVA - 1)) * $product->prix;
+                        echo '<td class="price">' . $pricewithoutTVA . ' €</td>';
                         echo '<td>' . $_SESSION['panier'][$product->id] . '</td>';
-                        echo '<td>' . $product->prix . ' €</td>';
+                        if($product->remise > 0) {
+                            echo '<td>' . $product->prix * $product->remise . ' €</td>';
+                        } else {
+                            echo '<td>' . $product->prix . ' €</td>';
+                        }
                         echo '<td><a class="delete-to-card" href="panier.php?delPanier=' . $product->id . '"><i style="color:whitesmoke;" class="uil uil-trash-alt"></i></a></td>';
                         echo '</tr>';
                     }

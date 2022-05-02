@@ -70,7 +70,11 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo '<div class="row align-items-center">';
         echo '<div class="col-6 left-column">';
         echo '<div class="product-image">';
-        echo '<img src="images/produit-' . $produit[0]["id"] .'.png" width="400" height="400" alt="image produit">';
+        if($produit[0]['type'] != "produit") {
+            echo '<img src="images/presta-' . $produit[0]["id"] .'.png" width="400" height="400" alt="image produit">';
+        } else {
+            echo '<img src="images/produit-' . $produit[0]["id"] .'.png" width="400" height="400" alt="image produit">';
+        }
         echo '</div>';
         echo '</div>';
         echo '<div class="col-6 right-column">';

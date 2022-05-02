@@ -15,11 +15,11 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
             $brand = htmlspecialchars($_POST['brand']);
             $page = $_POST["page"];
             if (strlen($category) > 0 && strlen($brand) > 0) {
-                $sql = "SELECT * FROM produits WHERE categorie = '$category' AND marque = '$brand'";
+                $sql = "SELECT * FROM produits WHERE categorie = '$category' AND marque = '$brand' AND type='produit'";
             } elseif (strlen($category) > 0) {
-                $sql = "SELECT * FROM produits WHERE categorie = '$category'";
+                $sql = "SELECT * FROM produits WHERE categorie = '$category' AND type='produit'";
             } elseif (strlen($brand) > 0) {
-                $sql = "SELECT * FROM produits WHERE marque = '$brand'";
+                $sql = "SELECT * FROM produits WHERE marque = '$brand' AND type='produit'";
             } else {
                 $sql = "";
                 die("<span style='color: whitesmoke'>Vous n'avez pas sélectionné de filtrage ! <br/><br/><a href=../" . $page . "' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
@@ -93,7 +93,7 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
         echo $e->getMessage();
     }
 
-} else if(isset($_POST['categorie']) && isset($_POST['price'])) {
+} else if(isset($_POST['categorie']) && isset($_POST['priceMin']) && isset($_POST['priceMax'])) {
 
     //echo "je suis dans prestation";
 
@@ -103,16 +103,17 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $category = htmlspecialchars($_POST['categorie']);
-        $price = htmlspecialchars($_POST['price']);
+        $priceMin = htmlspecialchars($_POST['priceMin']);
+        $priceMax = htmlspecialchars($_POST['priceMax']);
         $page = $_POST["page"];
-        if (strlen($category) > 0 && $price > 0) {
-            $sql = "SELECT * FROM prestation WHERE categorie = '$category' AND prix_ht = '$price'";
+        if (strlen($category) > 0 && $priceMin > 0 && $priceMax > 0) {
+            $sql = "SELECT * FROM produits WHERE categorie = '$category' AND prix >= '$priceMin' AND prix <= '$priceMax' AND type='prestation'";
             //echo $sql;
         } elseif (strlen($category) > 0) {
-            $sql = "SELECT * FROM prestation WHERE categorie = '$category'";
+            $sql = "SELECT * FROM produits WHERE categorie = '$category' AND type='prestation'";
             //echo $sql;
-        } elseif ($price == 0) {
-            $sql = "SELECT * FROM prestation WHERE prix_ht = '$price'";
+        } elseif ($priceMin > 0 && $priceMax > 0) {
+            $sql = "SELECT * FROM produits WHERE prix >= '$priceMin' AND prix <= '$priceMax' AND type='prestation'";
             //echo $sql;
         } else {
             $sql = "";
@@ -129,23 +130,21 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
 
             for ($i = 1; $i <= $nb; $i++) {
                 $remise_on_presta = (1 - $prestas[$i - 1]["remise"]) * 100;
-                echo '<div class="thumbnail-presta"> <a class="thumbnail-info-a" href="./presta.php?id=' . $prestas[$i - 1]['id'] . '">';
+                echo '<div class="thumbnail-presta"> <a class="thumbnail-info-a" href="./produit.php?id=' . $prestas[$i - 1]['id'] . '">';
                 echo '<div class="row-left">';
-                echo '<img src="images/presta-' . $prestas[$i - 1]["id"] . '.jpg" class="img-presta-thumbnail"
-                 alt="' . $prestas[$i - 1]["nom_presta"] . '">';
-                echo '<p class="text-product">' . $prestas[$i - 1]["nom_presta"] . '<span class="span-remise-presta" style="margin-left: 2%">-' . $remise_on_presta .'%</span></p>';
-                echo '<p class="price">' . $prestas[$i - 1]["prix_ht"]*$prestas[$i - 1]["tva"] . '€</p>';
+                echo '<img src="images/presta-' . $prestas[$i - 1]["id"] . '.png" class="img-presta-thumbnail"
+                 alt="' . $prestas[$i - 1]["nom"] . '">';
+                echo '<p class="text-product">' . $prestas[$i - 1]["nom"] . '<span class="span-remise-presta" style="margin-left: 2%">-' . $remise_on_presta .'%</span></p>';
+                echo '<p class="price">' . $prestas[$i - 1]["prix"]*$prestas[$i - 1]["TVA"] . '€</p>';
                 echo '</a>';
                 echo '</div>';
                 echo '<div class="row-right">';
                 echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $prestas[$i - 1]["description"] . '</i></desc>';
                 echo '<br />';
                 echo '<br />';
-                echo '<form role="form" action="paymentPrestaCart.php" method="post">';
-                echo '<input type="hidden" name="price" value=' . ($prestas[$i - 1]["prix_ht"]*$prestas[$i - 1]["tva"]) * $prestas[$i - 1]["remise"] . '>';
+                echo '<input type="hidden" name="price" value=' . ($prestas[$i - 1]["prix"]*$prestas[$i - 1]["TVA"]) * $prestas[$i - 1]["remise"] . '>';
                 echo '<input type="hidden" name="prestas" value="' . $prestas[$i - 1]["id"] .'">';
-                echo '<button type="submit" class="button-payment-presta">Payer</button>';
-                echo '</form>';
+                echo '<a class="addPanier" href="addpanier.php?id=' . $prestas[$i - 1]["id"] . '"><i class="uil uil-shopping-cart"></i></a>';
                 echo '</div>';
                 echo '</div>';
 

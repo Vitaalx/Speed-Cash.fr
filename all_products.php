@@ -74,7 +74,7 @@ if (!isset($_SESSION["email"])) {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT * FROM produits";
+        $sql = "SELECT * FROM produits WHERE type='produit'";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $nb = $stmt->rowCount();

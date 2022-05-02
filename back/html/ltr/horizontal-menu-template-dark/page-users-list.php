@@ -66,14 +66,14 @@
                                         <table id="users-list-datatable" class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>id</th>
-                                                    <th>name</th>
-                                                    <th>email</th>
-                                                    <th>nationality</th>
-                                                    <th>years</th>
-                                                    <th>status</th>
-                                                    <th>role</th>
-                                                    <th>edit</th>
+                                                    <th>ID</th>
+                                                    <th>Nom</th>
+                                                    <th>E-mail</th>
+                                                    <th>Nationalité</th>
+                                                    <th>Année(s)</th>
+                                                    <th>Status</th>
+                                                    <th>Rôle</th>
+                                                    <th>Modifier</th>
                                                 </tr>
                                             </thead>
                                             <script src="../../../js/script.js"></script>
@@ -94,6 +94,22 @@
         </div>
     </div>
     <!-- END: Content-->
+
+    <script>
+        function confirmDelete() {
+            if ( confirm( "Êtes vous sûr de vouloir supprimer cet utilisateur ?" ) ) {
+                // Code à éxécuter si le l'utilisateur clique sur "OK"
+
+                location.href = "delete_user.php";
+                return true;
+            } else {
+                // Code à éxécuter si l'utilisateur clique sur "Annuler"
+                //alert("Suppression annulée");
+                return false;
+            }
+
+        }
+    </script>
     
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>

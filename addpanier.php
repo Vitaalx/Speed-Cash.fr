@@ -14,6 +14,8 @@ if(isset($_GET["id"])) {
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         //echo $sql;
+
+
         $products = $stmt->fetchAll(PDO::FETCH_OBJ);
         //var_dump($products);
         if (empty($products)) {

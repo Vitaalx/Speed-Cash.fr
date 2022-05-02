@@ -39,7 +39,7 @@ if (!isset($_SESSION["email"])) {
     <?php include("./php/navigation-bar-profile.php"); ?>
 
     <div class="my-orders-card">
-        <table>
+        <table class="table-my-orders">
             <tr>
                 <th>ID</th>
                 <th>Heure de commande</th>
@@ -58,7 +58,7 @@ if (!isset($_SESSION["email"])) {
                 $products_ids = "";
 
 // Récupération des commandes de l'utilisateur
-                $sql = ("SELECT * FROM commandes WHERE id_client = " . $_SESSION["id"] . " ORDER BY dateCommande DESC");
+                $sql = ("SELECT * FROM commandes WHERE id_client = " . $_SESSION["id"] . " ORDER BY id DESC");
 //echo $sql;
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
@@ -70,6 +70,7 @@ if (!isset($_SESSION["email"])) {
                     //var_dump($commandes);
                     for ($i = 1; $i <= $nb; $i++) {
                         $sql = ("SELECT * FROM produits_commandes WHERE commande_id = " . $commandes[$i - 1]['id']);
+                        //echo $sql;
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $nb_products_orderer = $stmt->rowCount();
@@ -80,12 +81,17 @@ if (!isset($_SESSION["email"])) {
                         echo '<td>' . $commandes[$i - 1]["id"] . '</td>';
                         echo '<td>' . $commandes[$i - 1]["heureCommande"] . '</td>';
                         echo '<td>' . $commandes[$i - 1]["dateCommande"] . '</td>';
-                        echo '<td>' . $commandes[$i - 1]["montant"] . '</td>';
+                        echo '<td>' . $commandes[$i - 1]["montant"] . '€</td>';
                         echo '<td>';
 
                         for ($j = 1; $j <= $nb_products_orderer; $j++) {
                             $products_ids = $stmt->fetch()['produit_id'];
-                            echo $products_ids. ", ";
+                            echo '<a href="produit.php?id=' . $products_ids . '">' . $products_ids . '</a>';
+                            if($j < $nb_products_orderer){
+                                echo ", ";
+                            } else {
+                                echo ".";
+                            }
                         }
 
                         echo '</td>';
