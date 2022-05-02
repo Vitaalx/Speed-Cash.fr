@@ -33,7 +33,7 @@ try {
         }
       }
 
-      echo '<td><a href="../../../html/ltr/horizontal-menu-template-dark/page-prod-edit.php?id='.$response['id'].'"><i class="bx bx-edit-alt"></i></a><a href="../../../php/deleteProd.php?id=' . $response['id'] . '"><i class="bx bxs-trash" onclick="return confirmDelete()"></i></a></td>';
+      echo '<td><a href="../../../html/ltr/horizontal-menu-template-dark/page-prod-edit.php?id='.$response['id'].'"><i class="bx bx-edit-alt"></i></a><a href="../../../php/deleteProd.php?id=' . $response['id'] . '"><i class="bx bxs-trash" onclick="return confirmDelete()"></i></a><a href="../../../html/ltr/horizontal-menu-template-dark/page-changeDepotProd-edit.php?id='.$response['id'].'"><i class="bx bx-package"></i></a></td>';
       echo "</tr>";
     }
 

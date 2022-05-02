@@ -1,5 +1,29 @@
+<?php
+include '../../../php/bdd.php';
+
+try {
+// Connexion à la BDD
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$q = $conn->query("SELECT * FROM entreprise WHERE id = '".$_GET['id']."'");
+$responses = $q->fetchAll(PDO::FETCH_ASSOC);
+$size = count($responses);
+
+
+if ($size > 1) {
+  echo "<p>Erreur, plusieurs produits ont l'id ".$_GET['id']."</p>";
+}
+
+
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+
+?>
+
 <!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr" xmlns="http://www.w3.org/1999/html">
+<html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
 <head>
@@ -9,7 +33,7 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Ajout de produit - Speed-Cash.fr</title>
+    <title>Modification abonnement - <?php echo $responses[0]['nom_entreprise']; ?></title>
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -37,8 +61,6 @@
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <script src="../../../../js/jquery-3.3.1.min.js"></script>
-    <script src="../../../../js/popper.min.js"></script>
     <!-- END: Custom CSS-->
 
 </head>
@@ -47,8 +69,10 @@
 <!-- BEGIN: Body-->
 
 <body class="horizontal-layout horizontal-menu navbar-static dark-layout 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" data-layout="dark-layout">
-
-    <?php include '../../../php/includes/header.php'; ?>
+<script src="../../../js/script.js"></script>
+    <!-- BEGIN: Header-->
+    <?php include '../../../php/includes/header.php' ?>
+    <!-- END: Main Menu-->
 
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -65,33 +89,31 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active fade show" id="account" aria-labelledby="account-tab" role="tabpanel">
                                         <!-- users edit account form start -->
-                                        <form role="form" method="post" action="../../../php/addCpromo.php" enctype="multipart/form-data">
+                                        <form role="form" method="post" action="../../../php/modifSubscription.php" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
-
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Nom du Code promo</label>
-                                                            <input type="text" class="form-control" name="code_name" placeholder="Ex: ESGI2022">
+                                                            <label>Type d'abonnement</label>
+                                                            <select class="form-control" name="type_abonnement">
+                                                                <option value="annuel" <?php if($responses[0]['type_abonnement'] == "annuel") { echo 'selected';} ?>>Annuel</option>
+                                                                <option value="mensuel" <?php if($responses[0]['type_abonnement'] == "mensuel") { echo 'selected';} ?>>Mensuel</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Réduction</label>
-                                                            <input type="number" class="form-control form-label-group char-textarea" name="reduction" placeholder="Ex: 50% (Sans le %)" required data-validation-required-message="Description requise">
+                                                            <label>Fin de l'abonnement</label>
+                                                            <input type="text" class="form-control form-label-group char-textarea" name="subscription_end" placeholder="<?php if ($responses[0]['subscription_end'] == null) {echo 'None';} else {echo $responses[0]["subscription_end"];} ?>" required data-validation-required-message="Fin de l'abonnement requis"></input>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="controls">
-                                                            <label>Date d'expiration</label>
-                                                            <input type="text" class="form-control touchspin data-bts-decimals" name="date_expiry" placeholder="Ex: 2022-12-28" required data-validation-required-message="Prix requis">
-                                                        </div>
-                                                    </div>
-                                            </div>
+                                                    <input type="hidden" name="id" value="<?php echo $_GET["id"];?>">
+                                                </div>
                                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                    <button type="submit" class="btn btn-success glow mb-1 mb-sm-0 mr-0 mr-sm-1">Ajouter</button>
+                                                    <button type="submit" class="btn btn-success glow mb-1 mb-sm-0 mr-0 mr-sm-1">Modifier</button>
                                                     <button type="reset" class="btn btn-danger">Annuler</button>
                                                 </div>
+                                            </div>
                                         </form>
                                         <!-- users edit account form ends -->
                                     </div>
@@ -109,38 +131,10 @@
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
-    <?php include '../../../php/includes/footer.php'; ?>
+    <!-- BEGIN: Footer-->
+    <?php require '../../../php/includes/footer.php'; ?>
+    <!-- END: Footer-->
 
-    <!-- BEGIN: MyCode-->
-
-    <script>
-
-        var imgPreviewProduit = $("#previewImgProduit");
-        // SUR CHANGE SUR INPUT FILE
-        imgPreviewProduit.hide();
-        $("#imgProduit").change(function (e) { //e correspond à l'événement
-            var fileName = e.target.files[0].name;
-            var fileType = e.target.files[0].type;
-            var fileSize = e.target.files[0].size;
-            // Vérification type et taille de l'image
-            if (((fileType == 'image/png') || (fileType == 'image/jpg')) && (fileSize <= 2048000)) {
-                // Affichage du preview
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#previewImgProduit").attr('src', e.target.result);
-                };
-                reader.readAsDataURL(this.files[0]);
-                // Bandeau alerte masqué
-                $("#alert-inscription").hide();
-                $("#previewImgProduit").show();
-            } else {
-                $("#imgProduit").val('');
-                $("#previewImgProduit").attr('src', '');
-            }
-        });
-    </script>
-
-    <!-- END: MyCode-->
 
     <!-- BEGIN: Vendor JS-->
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>

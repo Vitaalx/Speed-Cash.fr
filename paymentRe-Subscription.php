@@ -2,12 +2,8 @@
 
 include "./php/db.php";
 
-$nb_siret = htmlspecialchars($_POST['nb_siret']);
-$company_type = htmlspecialchars($_POST['company_type']);
-$tel_company = htmlspecialchars($_POST['tel_company']);
 $caCompany = htmlspecialchars($_POST['caCompany']);
-$company_name = htmlspecialchars($_POST['company_name']);
-$company_location = htmlspecialchars($_POST['company_location']);
+
 
 /*
 echo $nb_siret;
@@ -62,18 +58,13 @@ $sql = "SELECT pourcentage_cotisation FROM calcul_cotisation WHERE '" . $caCompa
     <h2 class="my-4 text-center">Abonnement annuel <?php echo $price_to_paid; ?>€ / an</h2>
     <a class="a-french-flag" href="./paymentSubscription.php" ><img style="margin-bottom: 1%;" class="french-flag" src="../images/drapeau-france.png" width="55" height="30" alt="Drapeau Français"></a>
     <a class="a-english-flag" href="./paymentSubscription.php?lang=1" ><img style="margin-bottom: 1%;" class="english-flag" src="../images/drapeau-anglais.png" width="55" height="30" alt="Drapeau Anglais"></a>
-    <form action="./php/process_Sub.php" method="post" id="payment-form">
+    <form action="./php/process_Re-Sub.php" method="post" id="payment-form">
         <div class="form-row">
             <input type="text" name="first_name" class="form-control mb-3 StripeElement StripeElement--empty" placeholder="Votre prénom">
             <input type="text" name="last_name" class="form-control mb-3 StripeElement StripeElement--empty" placeholder="Votre nom">
             <input type="email" name="email" class="form-control mb-3 StripeElement StripeElement--empty" placeholder="Votre email">
             <!-- Info importante lié à l'entreprise qui s'abonne -->
             <input type="hidden" name="caCompany" value="<?php echo $caCompany; ?>">
-            <input type="hidden" name="nb_siret" value="<?php echo $nb_siret; ?>">
-            <input type="hidden" name="company_type" value="<?php echo $company_type; ?>">
-            <input type="hidden" name="tel_company" value="<?php echo $tel_company; ?>">
-            <input type="hidden" name="company_name" value="<?php echo $company_name; ?>">
-            <input type="hidden" name="company_location" value="<?php echo $company_location; ?>">
             <!-- Info importante lié à l'entreprise qui s'abonne -->
             <div id="card-element" class="form-control">
                 <!-- a Stripe Element will be inserted here. -->

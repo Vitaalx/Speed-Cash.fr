@@ -1,7 +1,9 @@
 <?php
 
+include "./php/db.php";
+
 session_start();
-//var_dump($_SESSION);
+var_dump($_SESSION);
 
 $langue = 0;
 if(isset($_GET['lang'])) $langue = $_GET['lang'];
@@ -11,6 +13,31 @@ include('./php/traduction_en.php');
 if (!isset($_SESSION["email"])) {
     header("Location: ./index.php");
 }
+
+
+try {
+// Connexion à la BDD
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$sql = "SELECT * FROM entreprise WHERE id_client = '".$_SESSION["id"]."'";
+//echo $sql;
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$nb = $stmt->rowCount();
+
+if ($nb === 0) {
+    $entreprise = $stmt->fetchAll();
+    $subscription = "false";
+} else {
+    $entreprise = $stmt->fetchAll();
+    $subscription = "true";
+}
+
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+
 
 
 ?>
@@ -102,6 +129,17 @@ if (!isset($_SESSION["email"])) {
             </div>
         </div>
 
+        <?php
+
+        if (isset($_GET["subscription"]) and $_GET["subscription"] === "success") echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Votre abonnement à bien été pris en compte !</div>";
+        if (isset($_GET["subscription"]) and $_GET["subscription"] === "error") echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Erreur lors de la tentative d'abonnement !</div>";
+        if (isset($_GET["re-subscription"]) and $_GET["re-subscription"] === "success") echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Votre renouvellement d'abonnement à bien été pris en compte !</div>";
+        if (isset($_GET["re-subscription"]) and $_GET["re-subscription"] === "error") echo "<div class='success-notif' id='success-notif' style='display: block;'><span class='close-popup-notif' onclick='closePopUp()' title='Fermer'>&times;</span>Erreur lors de la tentative de renouvellement d'abonnement !</div>";
+
+        ?>
+
+        <?php if($subscription === "false") { ?>
+
         <div class="form-container-subscription">
             <div class="form-title">
                 <strong>Devenir Entreprise pour souscrire à un
@@ -153,17 +191,6 @@ if (!isset($_SESSION["email"])) {
                     <i class="uil uil-euro-circle" style="margin-left: 1%;"></i>
                 </div>
 
-                <div class="field-choose-subscription">
-
-                    <div class="div-checkbox-annual">
-
-                        <input type="checkbox" id="annualSubscription" class="annualSubscription">
-                        <p class="annualSub-p">Je choisis un abonnement à l'année (269.99€ / an)</p>
-
-                    </div>
-
-                </div>
-
                 <p class="more-info-subscription">
                     1.  The maximum limit is up to 10 million VND, the loan term is up to 6 months.  <text style="color: #15CF74;">// TODO</text> <br />
                     2.  Require income from only 3 million VND, no need to prove financial or mortgage assets.  <text style="color: #15CF74;">// TODO</text> <br />
@@ -172,7 +199,7 @@ if (!isset($_SESSION["email"])) {
 
                 <!-- CheckBox pour acceptation des conditions générales du contrat  -->
                 <div class="field-checkbox-subscription">
-                    <input type="checkbox" id="checkboxSubscription" class="checkboxSubscription">
+                    <input type="checkbox" id="checkboxSubscription" class="checkboxSubscription" title="Vous devez accepter les conditions générales du contrat" required>
                     <p class="checkboxSub-p">J'accepte les <a style="color: #16e581;" href="#" target="_blank">conditions générales du contrat</a></p>
                 </div>
 
@@ -180,12 +207,66 @@ if (!isset($_SESSION["email"])) {
             </form>
         </div>
 
+        <?php } else if ($subscription === "true" && $entreprise[0]['subscription_end'] < date('Y-m-d')){ ?>
+
+            <div class="form-container-subscription" style="height: 880px">
+                <div class="form-title">
+                    <strong>Votre abonnement est passé, veuillez le renouveler !</strong>
+                </div>
+                <form role="form" id="re-subscriptionForm" action="paymentRe-Subscription.php" method="post">
+                    <div class="field">
+                        <input type="number" id="caCompany" name="caCompany" class="caCompany" placeholder="Chiffre d'affaire de l'entreprise" style="top: 100px" required>
+                        <i class="uil uil-euro-circle" style="margin-left: 1%;top: 100px;"></i>
+                    </div>
+
+                    <p class="more-info-subscription" style="top:100px">
+                        1.  The maximum limit is up to 10 million VND, the loan term is up to 6 months.  <text style="color: #15CF74;">// TODO</text> <br />
+                        2.  Require income from only 3 million VND, no need to prove financial or mortgage assets.  <text style="color: #15CF74;">// TODO</text> <br />
+                        3.  The loan is disbursed by SHB Finance - a reputable financial company with an establishment and operation license since 2017 issued by the State Bank of Vietnam.  <text style="color: #15CF74;">// TODO</text> <br />
+                    </p>
+
+                    <!-- CheckBox pour acceptation des conditions générales du contrat  -->
+                    <div class="field-checkbox-subscription" style="top:100px">
+                        <input type="checkbox" id="checkboxSubscription" class="checkboxSubscription" title="Vous devez accepter les conditions générales du contrat" required>
+                        <p class="checkboxSub-p">J'accepte les <a style="color: #16e581;" href="#" target="_blank">conditions générales du contrat</a></p>
+                    </div>
+
+                    <input type="submit" name="submitSubcription" class="submitSubcription" style="top:400px">
+                </form>
+            </div>
+
+        <?php } else if ($subscription=== "true") { ?>
+
+            <div class="form-container-subscription" style="height: 900px;align-items: center;">
+                <div class="form-title">
+                    <strong>Votre abonnement en cours :</strong>
+                </div>
+                <table class="table-info-subscription">
+                    <tr>
+                        <th>Nom entreprise</th>
+                        <th>Type d'abonnement</th>
+                        <th>Montant payé</th>
+                        <th>Prochain renouvellement le :</th>
+                    </tr>
+                    <tr>
+                        <td><?php echo $entreprise[0]["nom_entreprise"]; ?></td>
+                        <td><?php echo $entreprise[0]["type_abonnement"]; ?></td>
+                        <td><?php echo $entreprise[0]["montant_payé"]; ?>€</td>
+                        <td><?php echo $entreprise[0]["subscription_end"]; ?></td>
+                    </tr>
+                </table>
+            </div>
+
+        <?php } ?>
+
         <img src="images/subscription-card.png" class="subscription-card">
 
     </div>
 
 </div>
 
+
+<script src="./js/modal.js"></script>
 <script>
 
     $("#checkboxSubscription").click(function () {

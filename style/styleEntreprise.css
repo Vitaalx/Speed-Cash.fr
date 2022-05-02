@@ -482,8 +482,28 @@ html, body {
 
 /* Formulaire d'abonnement */
 
+.table-info-subscription {
+    position: relative;
+    top: 80px;
+    padding: 4%;
+    border-radius: 14px;
+    background-color: #00bd60;
+    color: whitesmoke;
+}
+
+.table-info-subscription td {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.table-info-subscription th {
+    border-bottom: 1px solid rgba(22, 107, 63, 0.73);
+}
+
 .form-container-subscription {
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 842px;
     height: 1100px;
     left: 40%;

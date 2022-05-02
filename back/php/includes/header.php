@@ -499,9 +499,13 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                 <!-- PARTENAIRE -->
                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="briefcase"></i><span style="color: white">Partenaires</span></a>
                     <ul class="dropdown-menu" style="background-color: #303030 !important">
-                        <li data-menu=""><a class="dropdown-item align-items-center" href="page-contrat-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Contrats</a>
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="page-partenaire-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
                         </li>
-                        <li data-menu=""><a class="dropdown-item align-items-center" href="page-part-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Contrat</a>
+                            <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-contrat-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
@@ -514,9 +518,7 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                                 </li>
                                 <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="page-abo_ent-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Abonnement</a>
                                     <ul class="dropdown-menu" style="background-color: #303030 !important">
-                                        <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
-                                        </li>
-                                        <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
+                                        <li data-menu=""><a class="dropdown-item align-items-center" href="page-subscription-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -526,13 +528,7 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                             <ul class="dropdown-menu" style="background-color: #303030 !important">
                                 <li data-menu=""><a class="dropdown-item align-items-center" href="page-users-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
                                 </li>
-                                <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
-                                    <ul class="dropdown-menu" style="background-color: #303030 !important">
-                                        <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
-                                        </li>
-                                        <li data-menu=""><a class="dropdown-item align-items-center" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>TODO</a>
-                                        </li>
-                                    </ul>
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-add-user.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Ajout</a>
                                 </li>
                             </ul>
                         </li>

@@ -65,28 +65,72 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active fade show" id="account" aria-labelledby="account-tab" role="tabpanel">
                                         <!-- users edit account form start -->
-                                        <form role="form" method="post" action="../../../php/addCpromo.php" enctype="multipart/form-data">
+                                        <form role="form" method="post" action="../../../php/addUser.php" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
 
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Nom du Code promo</label>
-                                                            <input type="text" class="form-control" name="code_name" placeholder="Ex: ESGI2022">
+                                                            <label>Nom</label>
+                                                            <input type="text" class="form-control" name="nom" placeholder="Ex: Macquaire" required data-validation-required-message="Nom requis">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Réduction</label>
-                                                            <input type="number" class="form-control form-label-group char-textarea" name="reduction" placeholder="Ex: 50% (Sans le %)" required data-validation-required-message="Description requise">
+                                                            <label>Prénom</label>
+                                                            <input type="text" class="form-control form-label-group" name="prenom" placeholder="Ex: Liam" required data-validation-required-message="Prénom requis">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Date d'expiration</label>
-                                                            <input type="text" class="form-control touchspin data-bts-decimals" name="date_expiry" placeholder="Ex: 2022-12-28" required data-validation-required-message="Prix requis">
+                                                            <label>E-mail</label>
+                                                            <input type="text" class="form-control email-action" name="email" placeholder="Ex: lmacquaire@myges.fr" required data-validation-required-message="E-mail requis">
                                                         </div>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label>Mot de passe</label>
+                                                            <input type="password" class="form-control" name="password" placeholder="Ex: **** (root)" required data-validation-required-message="Password requis">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label>Âge</label>
+                                                            <input type="number" class="form-control" name="age" placeholder="Ex: 20 (ans)" required data-validation-required-message="Âge requis">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label>Nationalité</label>
+                                                            <input type="text" class="form-control" name="nationality" placeholder="Ex: FR (française)" required data-validation-required-message="Nationalité requise">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Status du compte</label>
+                                                        <select class="form-control" id="status_compte" name="status_compte">
+                                                            <option value="1">Activé</option>
+                                                            <option value="0">Non-confirmé</option>
+                                                            <option value="2">Désactivé</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label>Point de fidélité</label>
+                                                            <input type="number" class="form-control" name="point_fidelite" placeholder="Ex: 10 000" required data-validation-required-message="Point de fidélité requise">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Rôle</label>
+                                                        <select class="form-control" id="role" name="role">
+                                                            <option value="client">Client</option>
+                                                            <option value="administrateur">Admin</option>
+                                                            <option value="entreprise">Entreprise</option>
+                                                            <option value="partenaire">Partenaire</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                     <button type="submit" class="btn btn-success glow mb-1 mb-sm-0 mr-0 mr-sm-1">Ajouter</button>

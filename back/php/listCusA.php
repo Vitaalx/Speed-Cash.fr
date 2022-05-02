@@ -16,7 +16,7 @@ foreach($responses as $response) {
   echo '<td><a href="page-users-edit.php?id=' . $response['id'] . '">' . $response['prénom'] . " " . $response['nom'] . '</a></td>';
   echo "<td>" . $response['email'] . "</td>";
   echo "<td>" . $response['nationalité'] . "</td>";
-  echo "<td>" . $response['age'] . "</td>";
+  echo "<td>" . $response['age'] . " ans</td>";
   if ($response['compteActif'] == 1) {
     echo '<td><span class="badge badge-light-success">Confirmé</span></td>';
   }

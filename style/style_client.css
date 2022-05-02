@@ -671,7 +671,7 @@ html, body {
 }
 
 .success-notif {
-    position: absolute;
+    position: fixed;
     top: 140px;
     left: 38%;
     padding: 14px 18px;

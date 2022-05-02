@@ -9,7 +9,7 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Users List - Frest - Bootstrap HTML admin template</title>
+    <title>Liste des abonnements</title>
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -42,7 +42,7 @@
 
 <!-- BEGIN: Body-->
 
-<body onload="listCus()" class="horizontal-layout horizontal-menu navbar-static dark-layout 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" data-layout="dark-layout">
+<body onload="listSubscription()" class="horizontal-layout horizontal-menu navbar-static dark-layout 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" data-layout="dark-layout">
 
     <!-- BEGIN: Header-->
     <?php require '../../../php/includes/header.php'; ?>
@@ -67,21 +67,19 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Nom</th>
-                                                    <th>E-mail</th>
-                                                    <th>Nationalité</th>
-                                                    <th>Âge</th>
-                                                    <th>Status</th>
-                                                    <th>Rôle</th>
+                                                    <th>Client_ID</th>
+                                                    <th>Nom de l'entreprise</th>
+                                                    <th>Montant payé</th>
+                                                    <th>Type d'abonnement</th>
+                                                    <th>Fin de l'abonnement</th>
                                                     <th>Modifier</th>
                                                 </tr>
                                             </thead>
                                             <script src="../../../js/script.js"></script>
-                                            <tbody id="cusList">
+                                            <tbody id="subscriptionList">
                                                 
                                             </tbody>
                                         </table>
-                                        <!--<button onclick="listCus()" class="btn btn-primary btn-block glow mb-0">print list</button>-->
                                     </div>
                                     <!-- datatable ends -->
                                 </div>
@@ -97,10 +95,10 @@
 
     <script>
         function confirmDelete() {
-            if ( confirm( "Êtes vous sûr de vouloir supprimer cet utilisateur ?" ) ) {
+            if ( confirm( "Êtes vous sûr de vouloir supprimer cet abonnement ?" ) ) {
                 // Code à éxécuter si le l'utilisateur clique sur "OK"
 
-                location.href = "delete_user.php";
+                location.href = "deleteSubscription.php";
                 return true;
             } else {
                 // Code à éxécuter si l'utilisateur clique sur "Annuler"

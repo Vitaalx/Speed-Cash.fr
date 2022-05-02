@@ -51,6 +51,32 @@ q.send();
         q.send();
     }
 
+    function listPart(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('partenaireList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listPart.php");
+        q.send();
+    }
+
+    function listSubscription(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('subscriptionList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listSubscription.php");
+        q.send();
+    }
+
     function listContrat(){
         const q = new XMLHttpRequest();
         q.onreadystatechange = function() {

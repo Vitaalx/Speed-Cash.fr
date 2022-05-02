@@ -13,13 +13,9 @@ $email = htmlspecialchars($_POST["email"]);
 $token = htmlspecialchars($_POST["stripeToken"]);
 
 
-// Info important pour l'insertion des données lié à l'entreprise si le paiement est validé (+ changement de rôle du client --> entreprise)
-$nb_siret = htmlspecialchars($_POST["nb_siret"]);
-$company_type = htmlspecialchars($_POST["company_type"]);
-$tel_company = htmlspecialchars($_POST["tel_company"]);
-$company_name = htmlspecialchars($_POST["company_name"]);
-$company_location = htmlspecialchars($_POST["company_location"]);
+// Info important pour update des données lié à l'entreprise si le paiement est validé
 $caCompany = htmlspecialchars($_POST["caCompany"]);
+$id_client = $_SESSION['id'];
 $subscription_end = date('Y-m-d', strtotime('+1 year'));
 
 $stripe = new \Stripe\StripeCLient
@@ -83,41 +79,32 @@ try {
                 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $sql_verif = "SELECT * FROM entreprise WHERE nb_siret = '" . $nb_siret . "'";
-                //echo $sql_verif;
-                $verif = $conn->prepare($sql_verif);
-                $verif->execute();
-                $nb = $verif->rowCount();
 
-                if ($nb == 0) {
+                    // Update des données lié à l'entreprise si le paiement est validé
+                    $sql_update = "UPDATE entreprise SET subscription_end = '" . $subscription_end ."', chiffre_affaire = '" . $caCompany ."', montant_payé = '" . $price_to_paid ."' WHERE id_client = '" . $_SESSION['id'] ."'";
+                    //echo $sql_update;
+                    $update_company = $conn->prepare($sql_update);
+                    $update_company->execute();
 
-                    // Insertion des données lié à l'entreprise si le paiement est validé
-                    $sql_insert = "INSERT INTO entreprise (id_client, nb_siret, type_societe, tel, nom_entreprise, adresse_entreprise, subscription_end,chiffre_affaire, montant_payé) VALUES (" . $_SESSION["id"] . ", '" . $nb_siret . "', '" . $company_type . "', '" . $tel_company . "', '" . $company_name . "', '" . $company_location . "', '" . $subscription_end . "', '" . $caCompany . "', '" . $price_to_paid . "')";
-                    //echo $sql;
-                    $result = $conn->prepare($sql_insert);
-                    $result->execute();
 
-                    $update_status_client_to_entreprise = "UPDATE users SET role = 'entreprise' WHERE id = " . $_SESSION["id"];
-                    //echo $update_status_client_to_entreprise;
-                    $result = $conn->prepare($update_status_client_to_entreprise);
-                    $result->execute();
+                    header("Location: ../page-entreprise.php?re-subscription=success");
 
-                    header("Location: ../page-entreprise.php?subscription=success");
-
-                } else {
-                    $error = "Vous êtes déjà inscrit à Speed-Cash.fr";
-                    header("Location: ../page-entreprise.php?subscription=error");
-                }
 
             } catch (PDOException $e) {
                 echo $e->getMessage();
-                header("Location: ../page-entreprise.php?subscription=error");
+                header("Location: ../page-entreprise.php?re-subscription=error");
             }
 
 
         } else {
+
+            $update_status_entreprise_to_client = "UPDATE users SET role = 'client' WHERE id = " . $_SESSION["id"];
+            //echo $update_status_client_to_entreprise;
+            $result = $conn->prepare($update_status_entreprise_to_client);
+            $result->execute();
+
             echo "Erreur lors de paiement !";
-            header("Location: ../page-entreprise.php?subscription=error");
+            header("Location: ../page-entreprise.php?re-subscription=error");
         }
 
     } else {
