@@ -569,13 +569,26 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                         </li>
                     </ul>
                 </li>
-                <!-- Prestation -->
+                <!-- Facture -->
                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-small"></i><span style="color: white">Facture</span></a>
                     <ul class="dropdown-menu" style="background-color: #303030 !important">
                                 <li data-menu=""><a class="dropdown-item align-items-center" href="page-facture-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Liste</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item align-items-center" href="page-add-facture.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Ajouter</a>
                                 </li>
+                    </ul>
+                </li>
+                <!-- Cartes clients -->
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-small"></i><span style="color: white">Cartes</span></a>
+                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="page-cards-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Liste</a>
+                        </li>
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="page-abo_ent-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Demandes de cartes</a>
+                            <ul class="dropdown-menu" style="background-color: #303030 !important">
+                                <li data-menu=""><a class="dropdown-item align-items-center" href="page-request-card-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </ul>

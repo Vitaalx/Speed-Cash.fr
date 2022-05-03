@@ -131,15 +131,33 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
         echo '<div class="promo-code-invalid">Code promo invalide !</div>';
     }
     ?>
+
+    <?php
+    $elements = $cart->count();
+    $can_paid = "false";
+    if ($elements > 0 ){
+        $can_paid = "true";
+    } else {
+        $can_paid = "false";
+    }
+
+    //echo $can_paid;
+
+    ?>
+
         <div class="cart-footer">
-            <div class="elements-number">Nombre d'éléments :  <?php $elements = $cart->count(); echo $elements; ?></div>
+            <div class="elements-number">Nombre d'éléments :  <?php echo $elements; ?></div>
             <div class="rowtotal">Grand Total : <span class="total"><?php echo $total_cart; ?> €</span></div>
             <form role="form" action="paymentCart.php" method="post">
 
                 <input type="hidden" name="price" value="<?= $total_cart; ?>">
                 <input type="hidden" name="products" value="<?php echo implode(",", $ids) ?>">
 
-            <button type="submit" class="button-payment">Payer</button>
+            <?php if($can_paid === "false") { ?>
+            <button type="submit" class="button-payment" disabled>Payer</button>
+            <?php } else if($can_paid === "true") { ?>
+                <button type="submit" class="button-payment">Payer</button>
+            <?php } ?>
             </form>
         </div>
     </div>

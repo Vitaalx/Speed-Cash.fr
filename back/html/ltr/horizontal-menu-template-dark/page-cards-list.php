@@ -9,7 +9,7 @@
     <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Listes des partenaires - Speed-Cash.fr</title>
+    <title>Listes des cartes clients - Speed-Cash.fr</title>
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -42,7 +42,7 @@
 
 <!-- BEGIN: Body-->
 
-<body onload="listPart()" class="horizontal-layout horizontal-menu navbar-static dark-layout 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" data-layout="dark-layout">
+<body onload="listCards()" class="horizontal-layout horizontal-menu navbar-static dark-layout 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" data-layout="dark-layout">
 
     <!-- BEGIN: Header-->
     <?php require '../../../php/includes/header.php'; ?>
@@ -67,14 +67,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Partenaire_ID</th>
-                                                    <th>Nom du partenaire</th>
-                                                    <th>Contrat_ID</th>
-                                                    <th>Modifier</th>
+                                                    <th>Client_ID</th>
+                                                    <th>Numéro de carte</th>
+                                                    <th>CVC</th>
+                                                    <th>Date d'expiration</th>
+                                                    <th>Action(s)</th>
                                                 </tr>
                                             </thead>
                                             <script src="../../../js/script.js"></script>
-                                            <tbody id="partenaireList">
+                                            <tbody id="cardsList">
                                                 
                                             </tbody>
                                         </table>
@@ -93,26 +94,10 @@
 
     <script>
         function confirmDelete() {
-            if ( confirm( "Êtes vous sûr de vouloir supprimer ce partenaire ?" ) ) {
+            if ( confirm( "Êtes vous sûr de vouloir supprimer cet cartes ?" ) ) {
                 // Code à éxécuter si le l'utilisateur clique sur "OK"
 
-                location.href = "deletePartenaire.php";
-                return true;
-            } else {
-                // Code à éxécuter si l'utilisateur clique sur "Annuler"
-                //alert("Suppression annulée");
-                return false;
-            }
-
-        }
-    </script>
-
-    <script>
-        function confirmDelete() {
-            if ( confirm( "Êtes vous sûr de vouloir supprimer cet entreprise ?" ) ) {
-                // Code à éxécuter si le l'utilisateur clique sur "OK"
-
-                location.href = "deleteCompany.php";
+                location.href = "deleteCardClient.php";
                 return true;
             } else {
                 // Code à éxécuter si l'utilisateur clique sur "Annuler"

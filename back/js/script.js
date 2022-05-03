@@ -51,6 +51,32 @@ q.send();
         q.send();
     }
 
+    function listRequestCard(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('requestCardList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listRequestCard.php");
+        q.send();
+    }
+
+    function listCards(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('cardsList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listCards.php");
+        q.send();
+    }
+
     function listPart(){
         const q = new XMLHttpRequest();
         q.onreadystatechange = function() {

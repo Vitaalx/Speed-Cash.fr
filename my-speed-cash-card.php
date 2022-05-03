@@ -117,7 +117,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         <?php } else { ?>
 
         <div class="your-card">
-            <h2>Vos/votre carte</h2>
+            <h2 style="color: whitesmoke;">Vos/votre carte</h2>
             <div class="card-container">
 
                 <?php
@@ -126,18 +126,18 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                     echo '<div class="card-front">';
                     echo '<img src="./images/carte-speed-cash-front.png" alt="Carte de fidélité Speed-Cash">';
-                    echo '<p>Votre numéro de carte : <span id="code-card-front">' . $cards[$i - 1]["card_number"] . '</span></p>';
-                    echo '<p>Votre code : <span id="code-card-front">' . $cards[$i - 1]["code"] . '</span></p>';
-                    echo '<p>Date d\'expiration : <span id="date-card-front">' . $cards[$i - 1]["date_expiry"] .'</span></p>';
+                    echo '<p style="color: whitesmoke;">Votre numéro de carte : <span id="code-card-front">' . $cards[$i - 1]["card_number"] . '</span></p>';
+                    echo '<p style="color: whitesmoke;">Votre code : <span id="code-card-front">' . $cards[$i - 1]["code"] . '</span></p>';
+                    echo '<p style="color: whitesmoke;">Date d\'expiration : <span id="date-card-front">' . $cards[$i - 1]["date_expiry"] .'</span></p>';
                     echo '</div>';
                     echo '<div class="card-back">';
                     echo '<img src="./images/carte-speed-cash-back.png" alt="Carte de fidélité Speed-Cash">';
-                    echo '<p>Votre code CVC : <span id="code-card-back">' . $cards[$i - 1]["cvc"] . '</span></p>';
+                    echo '<p style="color: whitesmoke;">Votre code CVC : <span id="code-card-back">' . $cards[$i - 1]["cvc"] . '</span></p>';
                     echo '</div>';
                     echo '<div class="separator-cards"></div>';
                 }
 
-                if ($nb == 0) echo '<p>Vous n\'avez pas encore enregistré de carte sur notre site.</p>';
+                if ($nb == 0) echo '<p style="color: whitesmoke;">Vous n\'avez pas encore enregistré de carte sur notre site.</p>';
 
                 ?>
                     </div>
