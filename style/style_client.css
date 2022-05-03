@@ -898,6 +898,11 @@ html, body {
     height: auto;
 }
 
+.my-speed-cash-card-card p {
+    padding: 0;
+    margin: 0;
+}
+
 
 .private-data-card-right {
     margin-right: 40%;
@@ -948,7 +953,7 @@ html, body {
 .separator-cards {
     margin-top: 5%;
     margin-bottom: 5%;
-    width: 40%;
+    width: 60%;
     height: 1px;
     background-color: #E5E5E5;
 }

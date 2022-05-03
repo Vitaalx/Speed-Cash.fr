@@ -18,7 +18,7 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Récupération des cartes
-    $sql = "SELECT * FROM cards_client WHERE client_id = '".$_SESSION["id"]."'";
+    $sql = "SELECT * FROM request_card WHERE client_id = '".$_SESSION["id"]."'";
     //echo $sql;
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -27,11 +27,26 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if ($nb > 0) {
 
         $cards = $stmt->fetchAll();
-        //var_dump($cards);
+
+        $sql_card_client = "SELECT * FROM request_card WHERE client_id = '".$_SESSION["id"]."' AND status = 1";
+        //echo $sql;
+        $stmt = $conn->prepare($sql_card_client);
+        $stmt->execute();
+        $nb_card_client = $stmt->rowCount();
+
+        if ($nb_card_client > 0 ) {
+            $have_card = "true";
+        } else {
+            $have_card = "false";
+        }
 
     } else {
 
+        $have_card = "false";
+
     }
+
+    //echo $have_card;
 
 
 
@@ -67,6 +82,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     <div class="my-speed-cash-card-card">
 
+        <?php if($have_card === "false") { ?>
         <form role="form" action="" id="requestCardForm" enctype="multipart/form-data">
             <h2>Demande de carte</h2>
             <div class="form-group">
@@ -93,26 +109,30 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             <h2>Vos/votre carte</h2>
             <div class="card-container">
 
+                <p>Vous n'avez pas encore enregistré de carte sur notre site.</p>
+
+            </div>
+        </div>
+
+        <?php } else { ?>
+
+        <div class="your-card">
+            <h2>Vos/votre carte</h2>
+            <div class="card-container">
+
                 <?php
 
                 for ($i = 1; $i <=$nb; $i++) {
 
                     echo '<div class="card-front">';
-                    echo '<div class="card-front-logo">';
-                    echo '<img src="./images/" alt="Carte de fidélité Speed-Cash">';
-                    echo '</div>';
-                    echo '<div class="card-front-code">';
-                    echo '<p>Votre code : <span id="code-card-front">' . $cards[$i - 1]["number"] . '</span></p>';
-                    echo '<p>Date d\'expiration : <span id="date-card-front">' . $cards[$i - 1]["expiry_date"] .'</span></p>';
-                    echo '</div>';
+                    echo '<img src="./images/carte-speed-cash-front.png" alt="Carte de fidélité Speed-Cash">';
+                    echo '<p>Votre numéro de carte : <span id="code-card-front">' . $cards[$i - 1]["card_number"] . '</span></p>';
+                    echo '<p>Votre code : <span id="code-card-front">' . $cards[$i - 1]["code"] . '</span></p>';
+                    echo '<p>Date d\'expiration : <span id="date-card-front">' . $cards[$i - 1]["date_expiry"] .'</span></p>';
                     echo '</div>';
                     echo '<div class="card-back">';
-                    echo '<div class="card-back-logo">';
-                    echo '<img src="./images/" alt="Carte de fidélité Speed-Cash">';
-                    echo '</div>';
-                    echo '<div class="card-back-code">';
+                    echo '<img src="./images/carte-speed-cash-back.png" alt="Carte de fidélité Speed-Cash">';
                     echo '<p>Votre code CVC : <span id="code-card-back">' . $cards[$i - 1]["cvc"] . '</span></p>';
-                    echo '</div>';
                     echo '</div>';
                     echo '<div class="separator-cards"></div>';
                 }
@@ -122,6 +142,9 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 ?>
                     </div>
                 </div>
+
+        <?php } ?>
+
             </div>
         </div>
 
@@ -129,6 +152,8 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 </div>
+
+<script src="./js/modal.js"></script>
 
 <script>
 
@@ -157,9 +182,6 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             contentType: false,
             processData: false,
             data: fd,
-            beforeSend:function() {
-                $(".my-speed-cash-card-container").html("<img src='images/Loading_icon.gif' style='width: 80px; height: 80px;'/>");
-            },
             success: function (text) {
                 alert("-" + text + "-");
                 if (text == "success") {
@@ -168,6 +190,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $("#alert-requestCard").html("<strong>Succès!</strong> Votre demande de carte à bien été prise en compte.");
                     $("#alert-requestCard").css('color', 'whitesmoke');
                     $("#alert-requestCard").fadeOut(4000);
+                    setTimeout(() => {window.location.href = "./my-speed-cash-card.php?message=success"}, 1200);
 
                 } else {
                     //alert("fail");
@@ -175,6 +198,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $("#alert-requestCard").html("<strong>Erreur!</strong> Votre demande de carte n'a pas pu être prise en compte.");
                     $("#alert-requestCard").css('color', 'red');
                     $("#alert-requestCard").fadeOut(4000);
+                    window.location.href = "./my-speed-cash-card.php?message=error";
                 }
             }
         });
