@@ -46,6 +46,9 @@ if (!isset($_SESSION["email"])) {
         </div>
     </div>
     <div class="select-filter">
+        <!-- Barre de recherche -->
+        <input type="text" id="search-on-product" value="" placeholder="Rechercher un produit">
+
         <select name="filter-products-by-brand" id="filter-products-by-brand">
             <option value="" selected="">Marque</option>
             <option value="Razer">Razer</option>
@@ -64,7 +67,7 @@ if (!isset($_SESSION["email"])) {
     </div>
 </div>
 
-<div class="container-thumbnail">
+<div class="container-thumbnail" id="container-result-search">
     <?php
 
     include('./php/db.php');
@@ -157,6 +160,31 @@ if (!isset($_SESSION["email"])) {
 <script type="text/javascript">
 
     $(document).ready(function (){
+
+        $('#search-on-product').keyup(function () {
+           var product_name = $(this).val();
+
+           if(product_name !== "") {
+               $.ajax({
+                    type: 'GET',
+                    url: 'php/search-on-product-name.php',
+                    data: 'product=' + encodeURIComponent(product_name),
+                    success: function(data) {
+
+                        if(data != "") {
+                            $(".container-thumbnail").html(data);
+                        } else {
+                            document.getElementById('container-result-search').innerHTML = "<div style='margin-top: 60.5px;margin-bottom: 99px;'><h3>Aucun résultat trouvé pour cette recherche !</h3></div>";
+                        }
+
+                    }
+
+               });
+           }
+
+
+        });
+
         $("#filter-products-button").on('click', function (){
             var categorie = $("#filter-products-by-category").val();
             var brand = $("#filter-products-by-brand").val();

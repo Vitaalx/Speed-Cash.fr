@@ -47,6 +47,10 @@ if (!isset($_SESSION["email"])) {
         </div>
     </div>
     <div class="select-filter">
+
+        <!-- Barre de recherche -->
+        <input type="text" id="search-on-presta" value="" placeholder="Rechercher une prestation">
+
         <label style="color: white;">Prix Min</label>
         <input style="width: 50px" type="number" name="order-by-price-min" id="order-by-price-min">
         <label style="color: white;">Prix Max</label>
@@ -64,7 +68,7 @@ if (!isset($_SESSION["email"])) {
     </div>
 </div>
 
-<div class="container-thumbnail">
+<div class="container-thumbnail" id="container-result-search">
     <?php
 
     include('./php/db.php');
@@ -128,6 +132,32 @@ if (!isset($_SESSION["email"])) {
 <script type="text/javascript">
 
     $(document).ready(function (){
+
+        $('#search-on-presta').keyup(function () {
+            var presta_name = $(this).val();
+
+            if(presta_name !== "") {
+                $.ajax({
+                    type: 'GET',
+                    url: 'php/search-on-presta-name.php',
+                    data: 'presta=' + encodeURIComponent(presta_name),
+                    success: function(data) {
+
+                        if(data != "") {
+                            $(".container-thumbnail").html(data);
+                        } else {
+                            document.getElementById('container-result-search').innerHTML = "<div style='margin-top: 60.5px;margin-bottom: 99px;'><h3>Aucun résultat trouvé pour cette recherche !</h3></div>";
+                        }
+
+                    }
+
+                });
+            }
+
+
+        });
+
+
         $("#filter-products-button").on('click', function (){
             var categorie = $("#filter-prestas-by-category").val();
             var priceMin = $("#order-by-price-min").val();
