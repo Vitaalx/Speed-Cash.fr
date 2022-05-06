@@ -3,7 +3,7 @@
 include "./php/db.php";
 
 session_start();
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 $langue = 0;
 if(isset($_GET['lang'])) $langue = $_GET['lang'];

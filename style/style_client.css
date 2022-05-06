@@ -334,7 +334,6 @@ html, body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 2%;
     flex: 1 0 auto;
     margin-top: 60.5px;
     margin-bottom: 99px;
@@ -485,6 +484,13 @@ html, body {
     flex: 1 0 auto;
 
     background-color: rgba(50, 50, 50, 1);
+}
+
+.comment-card {
+    background: #3b3b3b;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 2%;
 }
 
 .table-product-details {

@@ -155,10 +155,11 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         <div class="row">
             <div class="col-12">
                 <h2>Rédiger un commentaire</h2>
-                <form method="post" action="">
+                <form method="post" action="php/add_comment.php">
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Votre commentaire :</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="commentaire"></textarea>
+                        <label for="Comment">Votre commentaire :</label>
+                        <textarea class="form-control" id="comment" rows="3" name="comment"></textarea>
+                        <input type="hidden" name="id_produit" value="<?php echo $_GET["id"]; ?>">
                     </div>
                     <button type="submit" class="btn-send-comment">Envoyer</button>
                 </form>
@@ -166,43 +167,65 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         </div>
 
     <!-- Page d'affichage des commentaires du produit -->
-    <div class="product-comments">
-        <h2>Commentaires</h2>
-        <div class="comment-container">
-            <div class="comment-card">
-                <div class="comment-image">
-                    <i class="uil uil-user"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                </div>
-                <div class="comment-content">
-                    <p>Ce produit est très bien, je le recommande vivement !</p>
-                </div>
-            </div>
-            <div class="comment-card">
-                <div class="comment-image">
-                    <i class="uil uil-user"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                </div>
-                <div class="comment-content">
-                    <p>J'ai changé mon ancienne souris avec celle-ci et voilà que je suis super content !</p>
-                </div>
-            </div>
-            <div class="comment-card">
-                <div class="comment-image">
-                    <i class="uil uil-user"></i>
-                    <i class="las la-star"></i>
-                    <i class="las la-star"></i>
-                </div>
-                <div class="comment-content">
-                    <p>Lorem ispum ser content for the third slide et voilà que je suis super content </p>
-                </div>
-            </div>
+
+        <div class="product-comments">
+            <h2>Commentaires</h2>
+            <div class="comment-container">
+
+        <?php
+
+        include "./php/db.php";
+
+        try {
+        // Connexion à la BDD
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+        $sql = "SELECT * FROM commentaire WHERE id_produit = " . $_GET["id"] . " ORDER BY `commentaire`.`date` DESC";
+        //echo $sql;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $nb_comment = $stmt->rowCount();
+        //echo $nb_comment;
+
+        if ($nb_comment > 0) {
+
+            $comment = $stmt->fetchAll();
+
+            for ($i = 1; $i <= $nb_comment; $i++) {
+
+                echo '<div class="comment-card">';
+                echo '<div class="comment-image">';
+                echo '<span style="color: #15CF74"><i class="uil uil-user"></i>'. $comment[$i - 1]["user"] .' |</span>';
+                echo '<span style="color: #989898">';
+                // <!-- Affichage de la date du message et de l'heure -->
+                echo '<span class="comment-date">';
+                echo '| <i class="uil uil-clock"></i>' . $comment[$i - 1]["date"];
+                echo '</span>';
+                echo '</span>';
+                echo '</div>';
+                echo '<div class="comment-content">';
+                echo '<p>'. $comment[$i - 1]["contenue"] .'</p>';
+                echo '</div>';
+                echo '</div>';
+
+            }
+
+        } else {
+            echo '<br />';
+            echo '<div class="comment-card">';
+            echo '<p>Aucun commentaire n\'a été rédiger sur cet article !</p>';
+            echo '</div>';
+        }
+
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        ?>
+
         </div>
 
 </div>

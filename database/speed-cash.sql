@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 27 avr. 2022 à 20:42
+-- Généré le : ven. 06 mai 2022 à 21:36
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.4.1
 
@@ -25,6 +25,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `calcul_cotisation`
+--
+
+CREATE TABLE `calcul_cotisation` (
+  `id` int(11) NOT NULL,
+  `min` int(11) NOT NULL,
+  `max` bigint(11) NOT NULL,
+  `pourcentage_cotisation` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `calcul_cotisation`
+--
+
+INSERT INTO `calcul_cotisation` (`id`, `min`, `max`, `pourcentage_cotisation`) VALUES
+(1, 0, 200000, 0),
+(2, 200000, 800000, 0.8),
+(3, 800000, 1500000, 0.6),
+(4, 1500000, 3000000, 0.4),
+(5, 3000000, 100000000000, 0.3);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cards_client`
 --
 
@@ -42,8 +66,7 @@ CREATE TABLE `cards_client` (
 --
 
 INSERT INTO `cards_client` (`id`, `number`, `expiry_date`, `delivry_date`, `client_id`, `cvc`) VALUES
-(6, '4242424242424242', '2022-01', NULL, 91, 209),
-(7, '6262626262626262', '2022-01', NULL, 91, 92);
+(6, '4242424242424242', '2022-01', NULL, 91, 209);
 
 -- --------------------------------------------------------
 
@@ -55,8 +78,16 @@ CREATE TABLE `code_promo` (
   `id` int(11) NOT NULL,
   `code_name` varchar(255) NOT NULL,
   `reduction` float DEFAULT '1',
-  `status` int(11) NOT NULL DEFAULT '0'
+  `date_expiry` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `code_promo`
+--
+
+INSERT INTO `code_promo` (`id`, `code_name`, `reduction`, `date_expiry`) VALUES
+(4, 'LIAM2023', 0.8, '2023-09-30'),
+(5, 'liam', 1, '2022-05-26');
 
 -- --------------------------------------------------------
 
@@ -91,7 +122,10 @@ INSERT INTO `commandes` (`id`, `heureCommande`, `dateCommande`, `montant`, `id_c
 (33, '01:54:40', '2022-04-21', 336, 100, 'ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'RF#5477784'),
 (34, '01:54:51', '2022-04-21', 336, 100, 'ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'RF#9769390'),
 (35, '01:54:52', '2022-04-21', 336, 100, 'ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'RF#3872681'),
-(36, '01:54:55', '2022-04-21', 336, 100, 'ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'RF#1241122');
+(36, '01:54:55', '2022-04-21', 336, 100, 'ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'RF#1241122'),
+(37, '15:49:29', '2022-05-01', 1572, 100, 'ch_3Kud9QLvgKkU1KjF19rNyMzt', 'RF#5505776'),
+(38, '15:49:47', '2022-05-01', 1572, 100, 'ch_3Kud9QLvgKkU1KjF19rNyMzt', 'RF#9367291'),
+(39, '15:56:48', '2022-05-01', 72, 100, 'ch_3KudGVLvgKkU1KjF1czrewc1', 'RF#7339356');
 
 -- --------------------------------------------------------
 
@@ -101,13 +135,24 @@ INSERT INTO `commandes` (`id`, `heureCommande`, `dateCommande`, `montant`, `id_c
 
 CREATE TABLE `commentaire` (
   `id` int(11) NOT NULL,
-  `id_envoie` int(11) NOT NULL,
+  `id_produit` int(11) NOT NULL,
   `contenue` text NOT NULL,
-  `date` text NOT NULL,
-  `note` int(5) NOT NULL DEFAULT '0',
-  `signaler` int(11) NOT NULL,
-  `nb_note` int(11) NOT NULL
+  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user` varchar(60) NOT NULL,
+  `signaler` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `commentaire`
+--
+
+INSERT INTO `commentaire` (`id`, `id_produit`, `contenue`, `date`, `user`, `signaler`) VALUES
+(1, 4, 'Super cette souris est vraiment top, je la recommande vivement 5/5 !', '2022-05-06 20:56:05', 'Macquaire Liam', 0),
+(2, 17, 'Rien à dire, un DisneyLand classique comme on connais...', '2022-05-06 20:57:07', 'Macquaire Liam', 0),
+(3, 18, 'Super, je suis allé voir le tout dernier Spiderman grâce à cette réduction, Merci Speed-Cash !', '2022-05-06 20:58:01', 'Macquaire Liam', 0),
+(4, 13, 'Super souris MSI pour débuter dans le gaming, niveau rapport qualité/prix, rien à dire je la recommande !', '2022-05-06 20:58:38', 'Macquaire Liam', 0),
+(6, 13, 'J\'ai acheté cette souris pour mon fils il en est super content !', '2022-05-06 23:21:49', 'Igor DeSgore', 0),
+(7, 13, 'Je suis super content de cette achat merci Speed-Cash !', '2022-05-06 23:21:49', 'Florence Magny', 0);
 
 -- --------------------------------------------------------
 
@@ -123,6 +168,14 @@ CREATE TABLE `contrat` (
   `type` int(11) NOT NULL,
   `path_contrat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `contrat`
+--
+
+INSERT INTO `contrat` (`id`, `id_entreprise_part`, `date_crea`, `date_fin`, `type`, `path_contrat`) VALUES
+(1, 1, '2022-04-30', '2023-04-30', 12, 'contrat/entreprise-disney.png'),
+(2, 2, '2022-04-28', '2023-04-28', 7, '../path/contrat');
 
 -- --------------------------------------------------------
 
@@ -143,6 +196,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `created_at`) VALUES
+('cus_LbqrJCmpo0J2dJ', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-01 15:49:29'),
+('cus_Lbqy0otUjpbt8G', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-01 15:56:48'),
 ('cus_LPxkOn62qHQKA3', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-30 22:09:20'),
 ('cus_LQF3E7A0acAja0', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-31 16:02:15'),
 ('cus_LQF7sbnpBeldYb', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-31 16:05:26'),
@@ -225,17 +280,19 @@ CREATE TABLE `entreprise` (
   `nom_entreprise` varchar(255) NOT NULL,
   `adresse_entreprise` varchar(255) NOT NULL,
   `type_abonnement` varchar(55) NOT NULL DEFAULT 'annuel',
-  `subscription_end` datetime DEFAULT NULL,
+  `subscription_end` date DEFAULT NULL,
   `payer_id` varchar(255) DEFAULT NULL,
-  `profile_id` varchar(255) DEFAULT NULL
+  `profile_id` varchar(255) DEFAULT NULL,
+  `chiffre_affaire` bigint(20) NOT NULL,
+  `montant_payé` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `entreprise`
 --
 
-INSERT INTO `entreprise` (`id`, `id_client`, `nb_siret`, `type_societe`, `tel`, `nom_entreprise`, `adresse_entreprise`, `type_abonnement`, `subscription_end`, `payer_id`, `profile_id`) VALUES
-(1, 100, '10928374898765', 'SARL', '0782249412', 'ESGI', '242 rue du faubourg', 'annuel', NULL, NULL, NULL);
+INSERT INTO `entreprise` (`id`, `id_client`, `nb_siret`, `type_societe`, `tel`, `nom_entreprise`, `adresse_entreprise`, `type_abonnement`, `subscription_end`, `payer_id`, `profile_id`, `chiffre_affaire`, `montant_payé`) VALUES
+(20, 100, '623784623784', 'SARL', '07282932', 'LIAMCORP', '8 avenue leballeur', 'annuel', '2023-05-02', NULL, NULL, 10000000, 30000);
 
 -- --------------------------------------------------------
 
@@ -255,7 +312,8 @@ CREATE TABLE `entreprise_part` (
 --
 
 INSERT INTO `entreprise_part` (`id`, `id_user_part`, `nom`, `id_contrat_part`) VALUES
-(1, 101, 'Disney', 1);
+(1, 101, 'Disney', 1),
+(2, 102, 'Grand-Rex', 2);
 
 -- --------------------------------------------------------
 
@@ -268,6 +326,13 @@ CREATE TABLE `facture` (
   `ref_article` varchar(30) NOT NULL,
   `id_commande` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `facture`
+--
+
+INSERT INTO `facture` (`id`, `ref_article`, `id_commande`) VALUES
+(1, 'RF#FR100001', 3);
 
 -- --------------------------------------------------------
 
@@ -317,33 +382,6 @@ INSERT INTO `note_produits` (`id`, `user_id`, `produit_id`, `note`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `prestation`
---
-
-CREATE TABLE `prestation` (
-  `id` int(11) NOT NULL,
-  `nom_presta` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  `date_enter` date NOT NULL,
-  `date_end` date NOT NULL,
-  `categorie` varchar(255) NOT NULL,
-  `prix` double NOT NULL,
-  `remise` float NOT NULL,
-  `tva` float NOT NULL,
-  `id_part` int(11) NOT NULL,
-  `stock` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `prestation`
---
-
-INSERT INTO `prestation` (`id`, `nom_presta`, `description`, `date_enter`, `date_end`, `categorie`, `prix`, `remise`, `tva`, `id_part`, `stock`) VALUES
-(1, 'Billet de DisneyLand', 'Grâce à nous vous pouvez aller voyager dans l\'univers de Mickey', '2022-04-27', '2022-05-11', 'Parc Attraction', 62, 0.8, 0.9, 1, 10);
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `produits`
 --
 
@@ -351,36 +389,41 @@ CREATE TABLE `produits` (
   `id` int(11) NOT NULL,
   `prix` float NOT NULL,
   `nom` varchar(30) NOT NULL,
-  `note` float NOT NULL DEFAULT '0',
+  `note` float DEFAULT '0',
   `description` varchar(300) NOT NULL,
   `categorie` text,
   `depot` int(11) DEFAULT NULL,
   `marque` text,
   `ref_fournisseur` text,
-  `remise` int(11) DEFAULT '0',
-  `TVA` int(11) DEFAULT NULL,
+  `remise` float DEFAULT '0',
+  `TVA` float DEFAULT NULL,
   `sous_categorie` text,
   `fournisseur` text,
   `modele` text,
   `date_enter` date DEFAULT NULL,
   `stock` int(11) DEFAULT '0',
-  `id_fich_tech` int(11) NOT NULL
+  `id_fich_tech` int(11) DEFAULT NULL,
+  `date_end` date DEFAULT NULL,
+  `id_part` int(11) DEFAULT NULL,
+  `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `produits`
 --
 
-INSERT INTO `produits` (`id`, `prix`, `nom`, `note`, `description`, `categorie`, `depot`, `marque`, `ref_fournisseur`, `remise`, `TVA`, `sous_categorie`, `fournisseur`, `modele`, `date_enter`, `stock`, `id_fich_tech`) VALUES
-(3, 99, 'Souris Razer Basilisk V2', 2, 'Obtenez un avantage définitif sur vos adversaires avec le Razer Basilisk v2. Doté d\'un capteur optique Razer Focus de 20 000 dpi, il vous offre une précision d\'une netteté remarquable pour ne plus manquer vos cible.\r\n', 'Gamer', NULL, 'Razer', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-17', 10, 0),
-(4, 69, 'Souris Razer DeathAdderV2', 2, 'Avec le Razer DeathAdder v2, vous disposerez d\'une arme redoutable pour affronter les adversaires les plus coriaces. Le DeathAdder v2 est doté d\'un capteur optique Razer Focus de 20 000 ppp pour une précision inégalée.', 'Gamer', NULL, 'Razer', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-20', 10, 0),
-(5, 159.95, 'ASUS ROG Spatha X', 0, 'Pour vous mesurer à vos adversaires, la souris ASUS ROG Spatha X sera un allié de poids. Sans fil via la connectivité RF 2.4 GHz ou filaire, cette souris offre 12 boutons programmables, un capteur optique de 12000 DPI et un rétroéclairage RGB personnalisable.', 'Gamer', NULL, 'ASUS', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-18', 10, 0),
-(10, 79.96, 'Corsair Gaming Nightsword', 2, '8 boutons programmables, éclairage LED RGB  4 zones, poids ajustable de 119 gr à 141 gr et sensibilité réglable au DPI près, la Corsair Nightsword RGB vous permettra de relever tous les défis en s\'adaptant à votre style de jeu. ', 'Gamer', NULL, 'Corsair', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-06', 10, 0),
-(11, 149.95, 'Logitech Pro X Superlight', 5, 'Foncez vers la victoire grâce à la souris Logitech Wireless Gaming Pro X Superlight. Nouvelle arme de prédilection des meilleurs athlètes professionnels d\'eSports, elle pèse moins de 63 grammes et offre un glissement sans l moindre friction.', 'Gamer', NULL, 'Logitech', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-19', 0, 0),
-(12, 99.95, 'LogitechG G502 Lightspeed', 0, 'Disposant d\'une conception sans fil avec technologie Lightspeed, la Logitech G502 Lightspeed fera de vous une machine redoutable et redoutée. En effet, elle est équipée d\'un capteur optique HERO de 16000 dpi pour une précision et une réactivité optimale.', 'Gamer', NULL, 'Logitech', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-06', 10, 0),
-(13, 69.95, 'MSI Clutch GM50', 5, 'Gardez la main sur votre jeu avec la souris gaming MSI Clutch GM50 ! Parfaite pour les FPS, elle s\'appuie sur une conception minutieuse pour vous offrir une nouvelle expérience de jeu. Son capteur optique PMW-3330 permet de réaliser des mouvements d\'une très grande précision.', 'Gamer', NULL, 'MSI', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-06', 10, 0),
-(14, 69.95, 'Razer Atheris (Mercury)', 0, 'Optimisée à la fois pour le travail et le jeu, la souris sans fil Razer Atheris vous permettra de tirer le meilleur de vous-même. Cette souris de poche vous sera utile pour jongler entre les réunions et le champ de bataille grâce notamment à une double connectivité et à une autonomie longue durée.', 'Gamer', NULL, 'Razer', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-06', 10, 0),
-(15, 79.94, 'Razer Basilisk v3', 0, 'Devenez imbattable grâce à la souris pour gamer Razer Basilisk v3. Embarquant un capteur optique Razer Focus+ de 26 000 dpi, elle vous offre une précision féroce afin que vous ne ratiez plus jamais votre cible. Et avec 11 boutons programmables, vous disposez d\'un arsenal de commandes à portée.', 'Gamer', NULL, 'Razer', NULL, 0, 1, 'Informatique', NULL, NULL, '2022-04-06', 10, 0);
+INSERT INTO `produits` (`id`, `prix`, `nom`, `note`, `description`, `categorie`, `depot`, `marque`, `ref_fournisseur`, `remise`, `TVA`, `sous_categorie`, `fournisseur`, `modele`, `date_enter`, `stock`, `id_fich_tech`, `date_end`, `id_part`, `type`) VALUES
+(3, 99, 'Souris Razer Basilisk V2', 2, 'Quel que soit le type de jeu ou encore votre style de jeu, la Razer Basilisk V2 répond toujours présente. Sans fil, cette souris dispose de deux modes de fonctionnement pour vous garantir une liberté incroyable.', 'Gamer', 1, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-27', 1000, 123, NULL, NULL, 'produit'),
+(4, 109, 'Souris Razer DeathAdderV2', 2, 'Venez à bout des adversaires les plus coriaces avec la souris Razer DeathAdder v2 Pro et sa double connectivité sans fil RF 2.4 GHz/Bluetooth 5.0. Offrant une totale liberté de mouvement et de contrôle, elle intègre un capteur optique Razer Focus+ de 20000 dpi et 8 boutons programmables.', 'Gamer', 1, 'Razer', NULL, 0, 1.1, 'PC', NULL, NULL, '2022-04-26', 1000, 121, NULL, NULL, 'produit'),
+(5, 129, 'ASUS ROG Spatha X', 0, 'Pour vous mesurer à vos adversaires, la souris ASUS ROG Spatha X sera un allié de poids. Sans fil via la connectivité RF 2.4 GHz ou filaire, cette souris offre 12 boutons programmables, un capteur optique de 12000 DPI et un rétroéclairage RGB personnalisable. ', 'Gamer', 2, 'ASUS', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-29', 1000, 122, NULL, NULL, 'produit'),
+(10, 179, 'Corsair Gaming Nightsword', 2, '8 boutons programmables, éclairage LED RGB  4 zones, poids ajustable de 119 gr à 141 gr et sensibilité réglable au DPI près, la Corsair Nightsword RGB vous permettra de relever tous les défis en s\'adaptant à votre style de jeu. ', 'Gamer', 2, 'Corsair', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-30', 1000, 119, NULL, NULL, 'produit'),
+(11, 79, 'Logitech Pro X Superlight', 5, 'Foncez vers la victoire grâce à la souris Logitech Wireless Gaming Pro X Superlight. Nouvelle arme de prédilection des meilleurs athlètes professionnels d\'eSports, elle pèse moins de 63 grammes et offre un glissement sans l moindre friction.', 'Gamer', 2, 'Logitech', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-01', 1000, 120, NULL, NULL, 'produit'),
+(12, 89, 'LogitechG G502 Lightspeed', 0, 'Disposant d\'une conception sans fil avec technologie Lightspeed, la Logitech G502 Lightspeed fera de vous une machine redoutable et redoutée. En effet, elle est équipée d\'un capteur optique HERO de 16000 dpi pour une précision et une réactivité optimale.', 'Gamer', 3, 'Logitech', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-02', 1000, 118, NULL, NULL, 'produit'),
+(13, 59, 'MSI Clutch GM50', 5, 'Gardez la main sur votre jeu avec la souris gaming MSI Clutch GM50 ! Parfaite pour les FPS, elle s\'appuie sur une conception minutieuse pour vous offrir une nouvelle expérience de jeu. Son capteur optique PMW-3330 permet de réaliser des mouvements d\'une très grande précision.', 'Gamer', 4, 'MSI', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 117, NULL, NULL, 'produit'),
+(14, 199, 'Razer Atheris (Mercury)', 0, 'Optimisée à la fois pour le travail et le jeu, la souris sans fil Razer Atheris vous permettra de tirer le meilleur de vous-même. Cette souris de poche vous sera utile pour jongler entre les réunions et le champ de bataille grâce notamment à une double connectivité et à une autonomie longue durée.', 'Gamer', 5, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 116, NULL, NULL, 'produit'),
+(15, 159, 'Razer Basilisk v3', 0, 'Devenez imbattable grâce à la souris pour gamer Razer Basilisk v3. Embarquant un capteur optique Razer Focus+ de 26 000 dpi, elle vous offre une précision féroce afin que vous ne ratiez plus jamais votre cible. Et avec 11 boutons programmables, vous disposez d\'un arsenal de commandes à portée.', 'Gamer', 3, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 115, NULL, NULL, 'produit'),
+(17, 62, 'Billet de DisneyLand', 0, 'Grâce à nous vous pouvez aller voyager dans l\'univers de Mickey', 'Parc Attraction', NULL, NULL, NULL, 0.8, 1.05, NULL, NULL, NULL, '2022-04-27', 10, NULL, '2022-05-11', 1, 'prestation'),
+(18, 10, 'Billet cinéma Grand-Rex', 0, 'Vous pouvez obtenir des places au cinéma le Grand-rex à prix réduit !', 'Cinéma', NULL, NULL, NULL, 0.7, 1.1, NULL, NULL, NULL, '2022-04-28', 10, NULL, '2022-05-12', 2, 'prestation');
 
 -- --------------------------------------------------------
 
@@ -419,7 +462,15 @@ INSERT INTO `produits_commandes` (`id`, `produit_id`, `commande_id`) VALUES
 (26, 3, 35),
 (27, 4, 35),
 (28, 3, 36),
-(29, 4, 36);
+(29, 4, 36),
+(30, 17, 37),
+(31, 18, 37),
+(32, 3, 37),
+(33, 17, 38),
+(34, 18, 38),
+(35, 3, 38),
+(36, 17, 39),
+(37, 18, 39);
 
 -- --------------------------------------------------------
 
@@ -454,7 +505,7 @@ CREATE TABLE `recuperation` (
 INSERT INTO `recuperation` (`id`, `mail`, `code`, `confirme`) VALUES
 (2, 'quentin.mahe92@gmail.com', 69316698, 0),
 (5, 'liamdu92@gmail.com', 77277731, 0),
-(6, 'liam.macquaire2002@gmail.com', 14170334, 0);
+(6, 'liam.macquaire2002@gmail.com', 34056205, 1);
 
 -- --------------------------------------------------------
 
@@ -467,8 +518,19 @@ CREATE TABLE `request_card` (
   `client_id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prénom` varchar(255) NOT NULL,
-  `code` int(11) NOT NULL
+  `code` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `cvc` int(11) NOT NULL,
+  `date_expiry` date DEFAULT NULL,
+  `card_number` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `request_card`
+--
+
+INSERT INTO `request_card` (`id`, `client_id`, `nom`, `prénom`, `code`, `status`, `cvc`, `date_expiry`, `card_number`) VALUES
+(7, 100, 'Liam', 'Macquaire', 2773, 1, 917, '2027-05-03', '9363 0508 3353 028');
 
 -- --------------------------------------------------------
 
@@ -596,7 +658,9 @@ INSERT INTO `transactions` (`id`, `customer_id`, `product`, `amount`, `currency`
 ('ch_3KqMskLvgKkU1KjF077p5zct', 'cus_LXRmlBYnq66Soq', '3,4', 237, 'eur', 'succeeded', '2022-04-19 21:38:39'),
 ('ch_3KqN78LvgKkU1KjF1JDDLwIi', 'cus_LXS1YpgPyZCYK6', '14,15,13', 219, 'eur', 'succeeded', '2022-04-19 21:53:31'),
 ('ch_3KqOUrLvgKkU1KjF10eQ6cz3', 'cus_LXTRfQdVYSUpyq', '3,4', 168, 'eur', 'succeeded', '2022-04-19 23:22:06'),
-('ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'cus_LXt30uItD04zhD', '3,4', 336, 'eur', 'succeeded', '2022-04-21 01:49:59');
+('ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'cus_LXt30uItD04zhD', '3,4', 336, 'eur', 'succeeded', '2022-04-21 01:49:59'),
+('ch_3Kud9QLvgKkU1KjF19rNyMzt', 'cus_LbqrJCmpo0J2dJ', '17,18,3', 1572, 'eur', 'succeeded', '2022-05-01 15:49:29'),
+('ch_3KudGVLvgKkU1KjF1czrewc1', 'cus_Lbqy0otUjpbt8G', '17,18', 72, 'eur', 'succeeded', '2022-05-01 15:56:48');
 
 -- --------------------------------------------------------
 
@@ -623,15 +687,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nom`, `prénom`, `email`, `motDePasse`, `age`, `nationalité`, `confirmKey`, `compteActif`, `point_fidelite`, `role`) VALUES
-(75, 'Macquaire', 'Liam', 'liamdu92@gmail.com', 'ead3dbb0891832c7ab2f41c7fa3cf41a31d16cdc', 19, 'FR', '05438191735734', 1, 0, 'client'),
 (76, 'Macquaire', 'Liam', 'liamdu92@gmail.comsdq', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '82454797582150', 0, 0, 'client'),
-(79, 'Macquaire', 'Liam', 'liamdu92@hotmail.fr', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '06655023069808', 0, 0, 'client'),
-(100, 'Macquaire', 'Liam', 'liam.macquaire2002@gmail.com', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '30477767638756', 1, 0, 'entreprise'),
-(101, 'Deniro', 'Robert', 'patrondisney@disneyland.fr', '3feb1ce9764b33b4b72f25a3dda7c3484511ff41', 44, 'FR', '873732831209', 1, 0, 'partenaire');
+(91, 'Florentin', 'William', 'liamdu92@hotmail.fr', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '06655023069808', 0, 0, 'client'),
+(100, 'Macquaire', 'Liam', 'liam.macquaire2002@gmail.com', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '30477767638756', 1, 16080, 'entreprise'),
+(101, 'Deniro', 'Robert', 'patrondisney@disneyland.fr', '3feb1ce9764b33b4b72f25a3dda7c3484511ff41', 44, 'FR', '873732831209', 1, 0, 'partenaire'),
+(102, 'Axel', 'Cazbar', 'patrongrand-rex@grandrex.fr', '818b13d171898e381c2d7e33ead0aec4557530d1', 56, 'FR', '1275894373', 1, 0, 'partenaire'),
+(103, 'Admin', 'Admin', 'admin@speed-cash.fr', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 19, 'FR', '16749373292013', 1, NULL, 'administrateur'),
+(104, 'Zitouni', 'Maram', 'mzitouni@myges.fr', 'e8b58582ca276f2a077a6b7d162849e0a922d68e', 21, 'TU', '89422762470331', 1, 10000, 'client');
 
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `calcul_cotisation`
+--
+ALTER TABLE `calcul_cotisation`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `cards_client`
@@ -655,8 +727,7 @@ ALTER TABLE `commandes`
 -- Index pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_envoie` (`id_envoie`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `contrat`
@@ -704,12 +775,6 @@ ALTER TABLE `note_produits`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `prestation`
---
-ALTER TABLE `prestation`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `produits`
 --
 ALTER TABLE `produits`
@@ -752,52 +817,58 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT pour la table `calcul_cotisation`
+--
+ALTER TABLE `calcul_cotisation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT pour la table `cards_client`
 --
 ALTER TABLE `cards_client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `code_promo`
 --
 ALTER TABLE `code_promo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `contrat`
 --
 ALTER TABLE `contrat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `entreprise_part`
 --
 ALTER TABLE `entreprise_part`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `facture`
 --
 ALTER TABLE `facture`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `fich_tech`
@@ -812,22 +883,16 @@ ALTER TABLE `note_produits`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT pour la table `prestation`
---
-ALTER TABLE `prestation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT pour la table `produits`
 --
 ALTER TABLE `produits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `produits_commandes`
 --
 ALTER TABLE `produits_commandes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT pour la table `qr_code`
@@ -845,13 +910,13 @@ ALTER TABLE `recuperation`
 -- AUTO_INCREMENT pour la table `request_card`
 --
 ALTER TABLE `request_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- Contraintes pour les tables déchargées

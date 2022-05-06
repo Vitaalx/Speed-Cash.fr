@@ -1,6 +1,7 @@
 <?php
 
 $langue = 0;
+
 if(isset($_GET['lang'])) $langue = $_GET['lang'];
 
 include('./php/traduction_en.php');
@@ -33,7 +34,7 @@ include('./php/traduction_en.php');
         <h3 class="titre-recup"><?php echo $title_recup[$langue]; ?></h3>
         <?php if ($section == "code") { ?>
         <i><?php echo $verif_code[$langue]; ?></i>
-            <form method="post" class="form-recup">
+            <form method="post" class="form-recup" action="">
                 <input type="text" placeholder="<?php echo $verif_code_input[$langue]; ?>" class="code-changemdp" name="verif_code"/><br/>
                 <input type="submit" value="<?php echo $validate_button[$langue]; ?>" class="submit-recup" class="submit-chamgemdp" name="verif_submit"/>
             </form>

@@ -6,6 +6,7 @@ session_start();
 // Paramétres BDD
 include "./php/db.php";
 
+
 if(isset($_GET["section"])) {
     $section = htmlspecialchars($_GET["section"]);
 } else {
@@ -15,6 +16,7 @@ if(isset($_GET["section"])) {
 if(isset($_POST["submit_recup"], $_POST["recup_mail"])) {
     if(!empty($_POST['recup_mail'])) {
         $recup_mail = htmlspecialchars($_POST["recup_mail"]);
+        $_SESSION['recup_mail'] = $recup_mail;
         if(filter_var($recup_mail, FILTER_VALIDATE_EMAIL)){
             try {
                 // Connexion à la BDD
@@ -31,7 +33,6 @@ if(isset($_POST["submit_recup"], $_POST["recup_mail"])) {
                         $nom = $stmt->fetch();
                         $nom = $nom["nom"];
                         //var_dump($nom);
-                        $recup_mail = $_SESSION["email"];
                         $recup_code = "";
                         for ($i = 0; $i < 8; $i++) {
                             $recup_code .= mt_rand(0, 9);
@@ -56,8 +57,10 @@ if(isset($_POST["submit_recup"], $_POST["recup_mail"])) {
                         }
 
 
-                        $url = $_SERVER["HTTP_ORIGIN"].$_SERVER["REQUEST_URI"]."?section=code&code=". $recup_code;
-
+                        $header = "MIME-Version: 1.0\r\n";
+                        $header .= 'From:"Speed-Cash.fr"<support@speed-cash.fr>'."\n";
+                        $header .= 'Content-Type:text/html; charset="utf-8"'."\n";
+                        $header .= 'Content-Transfer-Encoding: 8bit';
                         //var_dump($url);
                         $message = '
                         
@@ -353,9 +356,19 @@ if(isset($_POST["submit_recup"], $_POST["recup_mail"])) {
 
                         ';
 
+                        // Ne veut pas s'envoyer avec le header ne sait pourquoi...
                         mail($recup_mail, "Récupération de mot de passe - Speed-Cash.fr", $message);
                         $url_redirect = $_SERVER["HTTP_ORIGIN"].$_SERVER["REQUEST_URI"];
-                        header("Location: $url_redirect?&section=code");
+                        if($_GET["lang"]) {
+                            $url_redirect = $url_redirect."&section=code";
+                            header("Location: $url_redirect");
+                        } else {
+                            $new_url_redirect = str_replace("?lang=". $_GET["lang"], "?section=code", $url_redirect);
+                            header("Location: $new_url_redirect");
+                        }
+                        if(!isset($_GET["lang"])) {
+                            header("Location: $url_redirect?section=code");
+                        }
                         //var_dump($recup_code);
                     } else {
                         $error = "Cette adresse mail n'est pas enregistrée";
@@ -384,15 +397,21 @@ if(isset($_POST["verif_submit"], $_POST["verif_code"])) {
             $sql = "SELECT id FROM recuperation WHERE mail = ? AND code = ?";
             //echo $sql;
             $stmt = $conn->prepare($sql);
-            //var_dump($_SESSION["recup_mail"]);
-            $stmt->execute(array($_SESSION["email"], $verif_code));
+            var_dump($_SESSION["recup_mail"]);
+            $stmt->execute(array($_SESSION["recup_mail"], $verif_code));
             $nb = $stmt->rowCount();
             //echo $nb;
             if ($nb == 1){
                 $update = "UPDATE recuperation SET confirme = 1 WHERE mail = ?";
                 $stmt = $conn->prepare($update);
-                $stmt->execute(array($_SESSION["email"]));
-                header("Location: $url?&section=changemdp");
+                $url = $_SERVER["HTTP_ORIGIN"].$_SERVER["REQUEST_URI"];
+                $stmt->execute(array($_SESSION["recup_mail"]));
+                if($_GET["lang"]) {
+                    $url .= "&section=changemdp";
+                } else {
+                    $url .= "&section=changemdp";
+                }
+                header("Location: $url");
             } else {
                 $error = "Code invalide";
             }
