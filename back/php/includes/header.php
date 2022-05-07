@@ -510,7 +510,7 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                     </ul>
                 </li>
                 <!-- CLIENT -->
-                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="morph-folder"></i><span style="color: white">Clients et Entreprises</span></a>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="users"></i><span style="color: white">Clients et Entreprises</span></a>
                     <ul class="dropdown-menu" style="background-color: #303030 !important">
                         <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Entreprises</a>
                             <ul class="dropdown-menu" style="background-color: #303030 !important">
@@ -549,7 +549,7 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                     </ul>
                 </li>
                 <!-- DEPOT -->
-                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-big"></i><span style="color: white">Produits et Prestations</span></a>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="shoppingcart"></i><span style="color: white">Produits et Prestations</span></a>
                     <ul class="dropdown-menu" style="background-color: #303030 !important">
                         <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item align-items-center dropdown-toggle" href="#" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Produits</a>
                             <ul class="dropdown-menu" style="background-color: #303030 !important">
@@ -570,7 +570,7 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                     </ul>
                 </li>
                 <!-- Facture -->
-                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-small"></i><span style="color: white">Facture</span></a>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="notebook"></i><span style="color: white">Facture</span></a>
                     <ul class="dropdown-menu" style="background-color: #303030 !important">
                                 <li data-menu=""><a class="dropdown-item align-items-center" href="page-facture-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Liste</a>
                                 </li>
@@ -579,7 +579,7 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                     </ul>
                 </li>
                 <!-- Cartes clients -->
-                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="thumbnails-small"></i><span style="color: white">Cartes</span></a>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="credit-card-in"></i><span style="color: white">Cartes</span></a>
                     <ul class="dropdown-menu" style="background-color: #303030 !important">
                         <li data-menu=""><a class="dropdown-item align-items-center" href="page-cards-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Liste</a>
                         </li>
@@ -588,6 +588,12 @@ if ($_SESSION['user']["role"] != 'administrateur') {header('Location: ../../../p
                                 <li data-menu=""><a class="dropdown-item align-items-center" href="page-request-card-list.php" data-toggle="dropdown"><i class="bx bx-right-arrow-alt" style="color: white"></i>Liste</a>
                                 </li>
                             </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="menu-livicon" data-icon="comments"></i><span style="color: white">Commentaires</span></a>
+                    <ul class="dropdown-menu" style="background-color: #303030 !important">
+                        <li data-menu=""><a class="dropdown-item align-items-center" href="page-comments-list.php" data-toggle="dropdown" style="color: white"><i class="bx bx-right-arrow-alt" style="color: white !important"></i>Liste</a>
                         </li>
                     </ul>
                 </li>

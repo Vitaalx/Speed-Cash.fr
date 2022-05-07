@@ -195,20 +195,24 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             for ($i = 1; $i <= $nb_comment; $i++) {
 
-                echo '<div class="comment-card">';
-                echo '<div class="comment-image">';
-                echo '<span style="color: #15CF74"><i class="uil uil-user"></i>'. $comment[$i - 1]["user"] .' |</span>';
-                echo '<span style="color: #989898">';
-                // <!-- Affichage de la date du message et de l'heure -->
-                echo '<span class="comment-date">';
-                echo '| <i class="uil uil-clock"></i>' . $comment[$i - 1]["date"];
-                echo '</span>';
-                echo '</span>';
-                echo '</div>';
-                echo '<div class="comment-content">';
-                echo '<p>'. $comment[$i - 1]["contenue"] .'</p>';
-                echo '</div>';
-                echo '</div>';
+                if($comment[$i - 1]["signaler"] == 1) {
+
+                } else {
+                    echo '<div class="comment-card">';
+                    echo '<div class="comment-image">';
+                    echo '<span style="color: #15CF74"><i class="uil uil-user"></i>'. $comment[$i - 1]["user"] .' |</span>';
+                    echo '<span style="color: #989898">';
+                    // <!-- Affichage de la date du message et de l'heure -->
+                    echo '<span class="comment-date">';
+                    echo '| <i class="uil uil-clock"></i>' . $comment[$i - 1]["date"];
+                    echo '</span>';
+                    echo '</span>';
+                    echo '</div>';
+                    echo '<div class="comment-content">';
+                    echo '<p>'. $comment[$i - 1]["contenue"] .'</p>';
+                    echo '</div>';
+                    echo '</div>';
+                }
 
             }
 
