@@ -17,7 +17,7 @@
  $email = $POST['email'];
  $token = $POST['stripeToken'];
  $products_id = $POST['ids'];
- $price = $POST['price'];
+ $price = $POST['price'].(0).(0);
 
  echo "alert('$first_name');";
 

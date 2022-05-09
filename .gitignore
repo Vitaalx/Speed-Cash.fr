@@ -1,3 +1,11 @@
 # Ignoring directory "vendor"
 
 vendor/
+
+#Ignoring file "db.php" (bdd front)
+
+php/db.php
+
+#Ignoring file "bdd.php" (bdd back)
+
+back/php/bdd.php

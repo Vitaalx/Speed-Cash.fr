@@ -2,24 +2,24 @@
 
     <div class="footer-container">
         <div class="bloc footer-services">
-            <h3>Nos Services</h3>
+            <h3><?php echo $our_services[$langue]; ?></h3>
             <ul class="services-list" style="padding-left: 0;">
-                <li><a href="#">Livraison</a></li>
-                <li><a href="#">Retour</a></li>
-                <li><a href="#">Assistance</a></li>
-                <li><a href="#">Garantie</a></li>
+                <li><a href="#"><?php echo $delivery_word[$langue]; ?></a></li>
+                <li><a href="#"><?php echo $return_word[$langue]; ?></a></li>
+                <li><a href="#"><?php echo $support_word[$langue]; ?></a></li>
+                <li><a href="#"><?php echo $guarantee_word[$langue]; ?></a></li>
             </ul>
         </div>
         <div class="bloc footer-contact">
-            <h3>Restons en contact</h3>
+            <h3><?php echo $stay_in_contact[$langue]; ?></h3>
             <ul class="contact-list" style="padding-left: 0;">
                 <li><a href="tel:+330782249412">55-55-55-55-55</a></li>
                 <li><a href="mailto:contact@speed-cash.fr">contact@speed-cash.fr</a></li>
-                <li><a href="https://www.google.com/maps?ll=48.849167,2.389734&z=15&t=m&hl=en&gl=FR&mapclient=embed&cid=6382120561375786439" target="_blank">6 rue de l'Invention, Paris VII, 75007</a></li>
+                <li><a href="https://www.google.com/maps?ll=48.849167,2.389734&z=15&t=m&hl=en&gl=FR&mapclient=embed&cid=6382120561375786439" target="_blank"><?php echo $adress_ecole[$langue]; ?></a></li>
             </ul>
         </div>
         <div class="bloc footer-social">
-            <h3>Nos réseaux</h3>
+            <h3><?php echo $our_social_media[$langue]; ?></h3>
             <ul class="social-list" style="padding-left: 0;">
                 <li><a href="#"><img src="../icons/GitHub-icon.svg" alt="Icon GitHub" class="footer-icon-github">GitHub/speed-cash.fr</a></li>
                 <li><a href="#"><img src="../icons/Discord-icon.svg" alt="Icon Discord" class="footer-icon-discord">Discord/speed-cash.fr</a></li>

@@ -27,6 +27,7 @@ $sql = "SELECT pourcentage_cotisation FROM calcul_cotisation WHERE '" . $caCompa
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $nb = $stmt->rowCount();
+    //echo $nb;
 
     if ($nb == 1) {
 

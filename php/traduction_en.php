@@ -106,6 +106,16 @@ $mail_recup_input = array("Votre adresse mail", "Your email");
 
 
 $reserved_rights = array("Tous droit réservés", "All rights reserved");
+$our_services = array("Nos services", "Our services");
+$delivery_word = array("Livraison", "Delivery");
+$return_word = array("Retour", "Return");
+$support_word = array("Assistance", "Support");
+$guarantee_word = array("Garantie", "Guarantee");
+
+$stay_in_contact = array("Restez en contact", "Stay in touch");
+$adress_ecole = array("6 rue de l'Invention, Paris VII, 75007", "6 street of l'Invention, Paris VII, 75007");
+
+$our_social_media = array("Nos réseaux sociaux", "Our social networks");
 
 
 /* Fin traduction page footer.php */
