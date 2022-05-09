@@ -28,7 +28,7 @@
             // Ajout de point de fidélisation au client
             $point_client = $price * 5;
             $update_point = "UPDATE users SET point_fidelite = point_fidelite + ". $point_client ." WHERE id =".$_SESSION['id'];
-            echo $update_point;
+            //echo $update_point;
             $result = $conn->prepare($update_point);
             $result->execute();
 

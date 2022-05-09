@@ -148,7 +148,6 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
         <div class="cart-footer">
             <div class="elements-number">Nombre d'éléments :  <?php echo $elements; ?></div>
             <div class="rowtotal">Grand Total : <span class="total"><?php echo $total_cart; ?> €</span></div>
-            <form role="form" action="paymentCart.php" method="post">
 
                 <input type="hidden" name="price" value="<?= $total_cart; ?>">
                 <input type="hidden" name="products" value="<?php echo implode(",", $ids) ?>">
@@ -156,9 +155,8 @@ if (isset($_GET['lang'])) $langue = $_GET['lang'];
             <?php if($can_paid === "false") { ?>
             <button type="submit" class="button-payment" disabled>Payer</button>
             <?php } else if($can_paid === "true") { ?>
-                <button type="submit" class="button-payment">Payer</button>
+                <a href="node_modules/three/examples/payment-animation-webgl.php?price=<?= $total_cart; ?>&products=<?php echo implode(",", $ids) ?>"><button type="submit" class="button-payment">Payer</button></a>
             <?php } ?>
-            </form>
         </div>
     </div>
 

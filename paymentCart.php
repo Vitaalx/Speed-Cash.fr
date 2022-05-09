@@ -2,9 +2,9 @@
 
 session_start();
 
-$price = $_POST["price"];
+$price = $_GET["price"];
 //echo $price;
-$produits_commandes = $_POST["products"];
+$produits_commandes = $_GET["products"];
 //echo $produits_commandes;
 
 
