@@ -22,7 +22,7 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
                 $sql = "SELECT * FROM produits WHERE marque = '$brand' AND type='produit'";
             } else {
                 $sql = "";
-                die("<span style='color: whitesmoke'>Vous n'avez pas sélectionné de filtrage ! <br/><br/><a href=../" . $page . "' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
+                die("<span style='color: whitesmoke'>Vous n'avez pas sélectionné de filtrage ! <br/><br/><a href='../" . $page . "' style='text-decoration: none; color: #15CF74;'>Retour au catalogue</a></span>");
             }
             //echo $sql;
             $stmt = $conn->prepare($sql);
@@ -30,19 +30,19 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
             $nb = $stmt->rowCount();
 
         if ($nb > 0) {
-            $prestas = $stmt->fetchAll();
+            $produits = $stmt->fetchAll();
             //var_dump($prestas);
 
             for ($i = 1; $i <= $nb; $i++) {
-                echo '<div class="thumbnail"> <a class="thumbnail-info-a" href="./produit.php?id=' . $prestas[$i - 1]['id'] . '">';
+                echo '<div class="thumbnail"> <a class="thumbnail-info-a" href="./produit.php?id=' . $produits[$i - 1]['id'] . '">';
                 echo '<div class="row-left">';
-                echo '<img src="images/produit-' . $prestas[$i - 1]["id"] . '.jpg" class="img-product"
-                 alt="' . $prestas[$i - 1]["nom"] . '">';
-                echo '<p class="text-product">' . $prestas[$i - 1]["nom"] . '</p>';
+                echo '<img src="images/produit-' . $produits[$i - 1]["id"] . '.png" class="img-product"
+                 alt="' . $produits[$i - 1]["nom"] . '">';
+                echo '<p class="text-product">' . $produits[$i - 1]["nom"] . '</p>';
                 echo '<div class="stars">';
-                if ($prestas[$i - 1]["note"] >= 0) {
+                if ($produits[$i - 1]["note"] >= 0) {
                     for ($j = 1; $j <= 5; $j++) {
-                        if ($j <= $prestas[$i - 1]["note"]) {
+                        if ($j <= $produits[$i - 1]["note"]) {
                             echo '<i class="las la-star"></i>';
                         } else {
                             echo '<i class="lar la-star"></i>';
@@ -54,11 +54,11 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
                     }
                 }
                 echo '</div>';
-                echo '<p class="price">' . $prestas[$i - 1]["prix"] . '€</p>';
-                echo '<a class="addPanier" href="addpanier.php?id=' . $prestas[$i - 1]["id"] . '"><i class="uil uil-shopping-cart"></i></a>';
+                echo '<p class="price">' . $produits[$i - 1]["prix"] . '€</p>';
+                echo '<a class="addPanier" href="addpanier.php?id=' . $produits[$i - 1]["id"] . '"><i class="uil uil-shopping-cart"></i></a>';
                 echo '</div>';
                 echo '<div class="row-right">';
-                echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $prestas[$i - 1]["description"] . '</i></desc>';
+                echo '<desc class="desc-product"><i style="color: #dcdcdc;">' . $produits[$i - 1]["description"] . '</i></desc>';
                 echo '<br />';
                 echo '<br />';
                 echo '<form action="php/rating.php" method="post" id="ratingForm">';
@@ -71,7 +71,7 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
                 echo '<i  style="color: #dcdcdc;" class="lar la-star star-form" data-value="5"></i>';
                 echo '</div>';
                 echo '<input type="hidden" id="rate" name="note" value="0">';
-                echo '<input type="hidden" id="product_id" name="produit_id" value="' . $prestas[$i - 1]["id"] . '">';
+                echo '<input type="hidden" id="product_id" name="produit_id" value="' . $produits[$i - 1]["id"] . '">';
                 echo '<button class="rate-form" type="submit">Évaluer le produit</button>';
                 echo '</form>';
                 echo '</div>';
@@ -135,7 +135,7 @@ if(isset($_POST['categorie']) && isset($_POST['brand'])){
                 echo '<img src="images/presta-' . $prestas[$i - 1]["id"] . '.png" class="img-presta-thumbnail"
                  alt="' . $prestas[$i - 1]["nom"] . '">';
                 echo '<p class="text-product">' . $prestas[$i - 1]["nom"] . '<span class="span-remise-presta" style="margin-left: 2%">-' . $remise_on_presta .'%</span></p>';
-                echo '<p class="price">' . $prestas[$i - 1]["prix"]*$prestas[$i - 1]["TVA"] . '€</p>';
+                echo '<p class="price">' . $prestas[$i - 1]["prix"] . '€</p>';
                 echo '</a>';
                 echo '</div>';
                 echo '<div class="row-right">';

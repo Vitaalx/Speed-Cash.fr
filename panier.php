@@ -8,6 +8,10 @@ $cart = new panier();
 $langue = 0;
 if (isset($_GET['lang'])) $langue = $_GET['lang'];
 
+if (!isset($_SESSION["email"])) {
+    header("Location: ./index.php");
+}
+
 
 ?>
 <!DOCTYPE html>

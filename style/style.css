@@ -136,11 +136,13 @@ html, body {
 
 .english-flag {
 
+    border-radius: 0.30rem;
     margin-right: 30%;
 
 }
 
 .french-flag {
+    border-radius: 0.30rem;
     margin-right: 20%;
 }
 
