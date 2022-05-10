@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 06 mai 2022 à 21:36
+-- Généré le : mar. 10 mai 2022 à 16:52
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.4.1
 
@@ -125,7 +125,11 @@ INSERT INTO `commandes` (`id`, `heureCommande`, `dateCommande`, `montant`, `id_c
 (36, '01:54:55', '2022-04-21', 336, 100, 'ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'RF#1241122'),
 (37, '15:49:29', '2022-05-01', 1572, 100, 'ch_3Kud9QLvgKkU1KjF19rNyMzt', 'RF#5505776'),
 (38, '15:49:47', '2022-05-01', 1572, 100, 'ch_3Kud9QLvgKkU1KjF19rNyMzt', 'RF#9367291'),
-(39, '15:56:48', '2022-05-01', 72, 100, 'ch_3KudGVLvgKkU1KjF1czrewc1', 'RF#7339356');
+(39, '15:56:48', '2022-05-01', 72, 100, 'ch_3KudGVLvgKkU1KjF1czrewc1', 'RF#7339356'),
+(40, '15:33:36', '2022-05-08', 238, 100, 'ch_3KxAEtLvgKkU1KjF1vAI0z7M', 'RF#9800981'),
+(41, '15:35:34', '2022-05-08', 17800, 100, 'ch_3KxAGnLvgKkU1KjF0smbmUzg', 'RF#2788271'),
+(42, '23:30:29', '2022-05-09', 39600, 100, 'ch_3Kxe9wLvgKkU1KjF0il8W8RL', 'RF#1599742'),
+(43, '23:30:44', '2022-05-09', 39600, 100, 'ch_3Kxe9wLvgKkU1KjF0il8W8RL', 'RF#6787587');
 
 -- --------------------------------------------------------
 
@@ -198,6 +202,9 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `created_at`) VALUES
 ('cus_LbqrJCmpo0J2dJ', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-01 15:49:29'),
 ('cus_Lbqy0otUjpbt8G', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-01 15:56:48'),
+('cus_LeTBMreyZM1BeJ', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-08 15:33:36'),
+('cus_LeTDT9ymocnXfN', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-08 15:35:34'),
+('cus_Ley6nhAbeoistd', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-09 23:30:29'),
 ('cus_LPxkOn62qHQKA3', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-30 22:09:20'),
 ('cus_LQF3E7A0acAja0', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-31 16:02:15'),
 ('cus_LQF7sbnpBeldYb', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-31 16:05:26'),
@@ -292,7 +299,7 @@ CREATE TABLE `entreprise` (
 --
 
 INSERT INTO `entreprise` (`id`, `id_client`, `nb_siret`, `type_societe`, `tel`, `nom_entreprise`, `adresse_entreprise`, `type_abonnement`, `subscription_end`, `payer_id`, `profile_id`, `chiffre_affaire`, `montant_payé`) VALUES
-(20, 100, '623784623784', 'SARL', '07282932', 'LIAMCORP', '8 avenue leballeur', 'annuel', '2023-05-02', NULL, NULL, 10000000, 30000);
+(21, 100, '623784623784', 'SAS', '07282932', 'MARAMCORP', '8 avenue leballeur', 'annuel', '2023-05-09', NULL, NULL, 150000000, 450000);
 
 -- --------------------------------------------------------
 
@@ -413,17 +420,17 @@ CREATE TABLE `produits` (
 --
 
 INSERT INTO `produits` (`id`, `prix`, `nom`, `note`, `description`, `categorie`, `depot`, `marque`, `ref_fournisseur`, `remise`, `TVA`, `sous_categorie`, `fournisseur`, `modele`, `date_enter`, `stock`, `id_fich_tech`, `date_end`, `id_part`, `type`) VALUES
-(3, 99, 'Souris Razer Basilisk V2', 2, 'Quel que soit le type de jeu ou encore votre style de jeu, la Razer Basilisk V2 répond toujours présente. Sans fil, cette souris dispose de deux modes de fonctionnement pour vous garantir une liberté incroyable.', 'Gamer', 1, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-27', 1000, 123, NULL, NULL, 'produit'),
-(4, 109, 'Souris Razer DeathAdderV2', 2, 'Venez à bout des adversaires les plus coriaces avec la souris Razer DeathAdder v2 Pro et sa double connectivité sans fil RF 2.4 GHz/Bluetooth 5.0. Offrant une totale liberté de mouvement et de contrôle, elle intègre un capteur optique Razer Focus+ de 20000 dpi et 8 boutons programmables.', 'Gamer', 1, 'Razer', NULL, 0, 1.1, 'PC', NULL, NULL, '2022-04-26', 1000, 121, NULL, NULL, 'produit'),
-(5, 129, 'ASUS ROG Spatha X', 0, 'Pour vous mesurer à vos adversaires, la souris ASUS ROG Spatha X sera un allié de poids. Sans fil via la connectivité RF 2.4 GHz ou filaire, cette souris offre 12 boutons programmables, un capteur optique de 12000 DPI et un rétroéclairage RGB personnalisable. ', 'Gamer', 2, 'ASUS', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-29', 1000, 122, NULL, NULL, 'produit'),
-(10, 179, 'Corsair Gaming Nightsword', 2, '8 boutons programmables, éclairage LED RGB  4 zones, poids ajustable de 119 gr à 141 gr et sensibilité réglable au DPI près, la Corsair Nightsword RGB vous permettra de relever tous les défis en s\'adaptant à votre style de jeu. ', 'Gamer', 2, 'Corsair', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-30', 1000, 119, NULL, NULL, 'produit'),
+(3, 99, 'Souris Razer Basilisk V2', 2, 'Quel que soit le type de jeu ou encore votre style de jeu, la Razer Basilisk V2 répond toujours présente. Sans fil, cette souris dispose de deux modes de fonctionnement pour vous garantir une liberté incroyable.', 'Gamer', 1, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-10', 1000, 123, NULL, NULL, 'produit'),
+(4, 109, 'Souris Razer DeathAdderV2', 2, 'Venez à bout des adversaires les plus coriaces avec la souris Razer DeathAdder v2 Pro et sa double connectivité sans fil RF 2.4 GHz/Bluetooth 5.0. Offrant une totale liberté de mouvement et de contrôle, elle intègre un capteur optique Razer Focus+ de 20000 dpi et 8 boutons programmables.', 'Gamer', 1, 'Razer', NULL, 0, 1.1, 'PC', NULL, NULL, '2022-05-07', 1000, 121, NULL, NULL, 'produit'),
+(5, 129, 'ASUS ROG Spatha X', 0, 'Pour vous mesurer à vos adversaires, la souris ASUS ROG Spatha X sera un allié de poids. Sans fil via la connectivité RF 2.4 GHz ou filaire, cette souris offre 12 boutons programmables, un capteur optique de 12000 DPI et un rétroéclairage RGB personnalisable. ', 'Gamer', 2, 'ASUS', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-08', 1000, 122, NULL, NULL, 'produit'),
+(10, 179, 'Corsair Gaming Nightsword', 2, '8 boutons programmables, éclairage LED RGB  4 zones, poids ajustable de 119 gr à 141 gr et sensibilité réglable au DPI près, la Corsair Nightsword RGB vous permettra de relever tous les défis en s\'adaptant à votre style de jeu. ', 'Gamer', 2, 'Corsair', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-09', 1000, 119, NULL, NULL, 'produit'),
 (11, 79, 'Logitech Pro X Superlight', 5, 'Foncez vers la victoire grâce à la souris Logitech Wireless Gaming Pro X Superlight. Nouvelle arme de prédilection des meilleurs athlètes professionnels d\'eSports, elle pèse moins de 63 grammes et offre un glissement sans l moindre friction.', 'Gamer', 2, 'Logitech', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-01', 1000, 120, NULL, NULL, 'produit'),
 (12, 89, 'LogitechG G502 Lightspeed', 0, 'Disposant d\'une conception sans fil avec technologie Lightspeed, la Logitech G502 Lightspeed fera de vous une machine redoutable et redoutée. En effet, elle est équipée d\'un capteur optique HERO de 16000 dpi pour une précision et une réactivité optimale.', 'Gamer', 3, 'Logitech', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-02', 1000, 118, NULL, NULL, 'produit'),
 (13, 59, 'MSI Clutch GM50', 5, 'Gardez la main sur votre jeu avec la souris gaming MSI Clutch GM50 ! Parfaite pour les FPS, elle s\'appuie sur une conception minutieuse pour vous offrir une nouvelle expérience de jeu. Son capteur optique PMW-3330 permet de réaliser des mouvements d\'une très grande précision.', 'Gamer', 4, 'MSI', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 117, NULL, NULL, 'produit'),
 (14, 199, 'Razer Atheris (Mercury)', 0, 'Optimisée à la fois pour le travail et le jeu, la souris sans fil Razer Atheris vous permettra de tirer le meilleur de vous-même. Cette souris de poche vous sera utile pour jongler entre les réunions et le champ de bataille grâce notamment à une double connectivité et à une autonomie longue durée.', 'Gamer', 5, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 116, NULL, NULL, 'produit'),
 (15, 159, 'Razer Basilisk v3', 0, 'Devenez imbattable grâce à la souris pour gamer Razer Basilisk v3. Embarquant un capteur optique Razer Focus+ de 26 000 dpi, elle vous offre une précision féroce afin que vous ne ratiez plus jamais votre cible. Et avec 11 boutons programmables, vous disposez d\'un arsenal de commandes à portée.', 'Gamer', 3, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 115, NULL, NULL, 'produit'),
-(17, 62, 'Billet de DisneyLand', 0, 'Grâce à nous vous pouvez aller voyager dans l\'univers de Mickey', 'Parc Attraction', NULL, NULL, NULL, 0.8, 1.05, NULL, NULL, NULL, '2022-04-27', 10, NULL, '2022-05-11', 1, 'prestation'),
-(18, 10, 'Billet cinéma Grand-Rex', 0, 'Vous pouvez obtenir des places au cinéma le Grand-rex à prix réduit !', 'Cinéma', NULL, NULL, NULL, 0.7, 1.1, NULL, NULL, NULL, '2022-04-28', 10, NULL, '2022-05-12', 2, 'prestation');
+(17, 62, 'Billet de DisneyLand', 0, 'Grâce à nous vous pouvez aller voyager dans l\'univers de Mickey', 'Parc Attraction', NULL, NULL, NULL, 0.8, 1.05, NULL, NULL, NULL, '2022-05-09', 10, NULL, '2022-05-11', 1, 'prestation'),
+(18, 10, 'Billet cinéma Grand-Rex', 0, 'Vous pouvez obtenir des places au cinéma le Grand-rex à prix réduit !', 'Cinéma', NULL, NULL, NULL, 0.7, 1.1, NULL, NULL, NULL, '2022-05-08', 10, NULL, '2022-05-12', 2, 'prestation');
 
 -- --------------------------------------------------------
 
@@ -470,7 +477,18 @@ INSERT INTO `produits_commandes` (`id`, `produit_id`, `commande_id`) VALUES
 (34, 18, 38),
 (35, 3, 38),
 (36, 17, 39),
-(37, 18, 39);
+(37, 18, 39),
+(38, 5, 40),
+(39, 4, 40),
+(40, 12, 41),
+(41, 12, 42),
+(42, 5, 42),
+(43, 3, 42),
+(44, 11, 42),
+(45, 12, 43),
+(46, 5, 43),
+(47, 3, 43),
+(48, 11, 43);
 
 -- --------------------------------------------------------
 
@@ -505,7 +523,7 @@ CREATE TABLE `recuperation` (
 INSERT INTO `recuperation` (`id`, `mail`, `code`, `confirme`) VALUES
 (2, 'quentin.mahe92@gmail.com', 69316698, 0),
 (5, 'liamdu92@gmail.com', 77277731, 0),
-(6, 'liam.macquaire2002@gmail.com', 34056205, 1);
+(6, 'liam.macquaire2002@gmail.com', 98637061, 1);
 
 -- --------------------------------------------------------
 
@@ -660,7 +678,10 @@ INSERT INTO `transactions` (`id`, `customer_id`, `product`, `amount`, `currency`
 ('ch_3KqOUrLvgKkU1KjF10eQ6cz3', 'cus_LXTRfQdVYSUpyq', '3,4', 168, 'eur', 'succeeded', '2022-04-19 23:22:06'),
 ('ch_3KqnHWLvgKkU1KjF0f5QwWu7', 'cus_LXt30uItD04zhD', '3,4', 336, 'eur', 'succeeded', '2022-04-21 01:49:59'),
 ('ch_3Kud9QLvgKkU1KjF19rNyMzt', 'cus_LbqrJCmpo0J2dJ', '17,18,3', 1572, 'eur', 'succeeded', '2022-05-01 15:49:29'),
-('ch_3KudGVLvgKkU1KjF1czrewc1', 'cus_Lbqy0otUjpbt8G', '17,18', 72, 'eur', 'succeeded', '2022-05-01 15:56:48');
+('ch_3KudGVLvgKkU1KjF1czrewc1', 'cus_Lbqy0otUjpbt8G', '17,18', 72, 'eur', 'succeeded', '2022-05-01 15:56:48'),
+('ch_3KxAEtLvgKkU1KjF1vAI0z7M', 'cus_LeTBMreyZM1BeJ', '5,4', 238, 'eur', 'succeeded', '2022-05-08 15:33:36'),
+('ch_3KxAGnLvgKkU1KjF0smbmUzg', 'cus_LeTDT9ymocnXfN', '12', 17800, 'eur', 'succeeded', '2022-05-08 15:35:34'),
+('ch_3Kxe9wLvgKkU1KjF0il8W8RL', 'cus_Ley6nhAbeoistd', '12,5,3,11', 39600, 'eur', 'succeeded', '2022-05-09 23:30:29');
 
 -- --------------------------------------------------------
 
@@ -689,7 +710,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `nom`, `prénom`, `email`, `motDePasse`, `age`, `nationalité`, `confirmKey`, `compteActif`, `point_fidelite`, `role`) VALUES
 (76, 'Macquaire', 'Liam', 'liamdu92@gmail.comsdq', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '82454797582150', 0, 0, 'client'),
 (91, 'Florentin', 'William', 'liamdu92@hotmail.fr', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '06655023069808', 0, 0, 'client'),
-(100, 'Macquaire', 'Liam', 'liam.macquaire2002@gmail.com', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '30477767638756', 1, 16080, 'entreprise'),
+(100, 'Macquaire', 'Liam', 'liam.macquaire2002@gmail.com', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '30477767638756', 1, 502270, 'entreprise'),
 (101, 'Deniro', 'Robert', 'patrondisney@disneyland.fr', '3feb1ce9764b33b4b72f25a3dda7c3484511ff41', 44, 'FR', '873732831209', 1, 0, 'partenaire'),
 (102, 'Axel', 'Cazbar', 'patrongrand-rex@grandrex.fr', '818b13d171898e381c2d7e33ead0aec4557530d1', 56, 'FR', '1275894373', 1, 0, 'partenaire'),
 (103, 'Admin', 'Admin', 'admin@speed-cash.fr', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 19, 'FR', '16749373292013', 1, NULL, 'administrateur'),
@@ -838,7 +859,7 @@ ALTER TABLE `code_promo`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT pour la table `commentaire`
@@ -856,7 +877,7 @@ ALTER TABLE `contrat`
 -- AUTO_INCREMENT pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `entreprise_part`
@@ -892,7 +913,7 @@ ALTER TABLE `produits`
 -- AUTO_INCREMENT pour la table `produits_commandes`
 --
 ALTER TABLE `produits_commandes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT pour la table `qr_code`
