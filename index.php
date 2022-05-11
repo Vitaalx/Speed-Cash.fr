@@ -282,7 +282,7 @@ include('./php/traduction_en.php');
                 $(".container").html("<img src='images/Loading_icon.gif' style='width: 30px; height: 30px; position: relative; z-index: 999; left: 42.3%; top: 250px;'>");
             },
             success: function (text) {
-                alert('-' + text + '-');
+                //alert('-' + text + '-');
                 if (text === "success") {
                     //alert("success");
                     $("#alert-connexion").show();

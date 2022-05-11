@@ -87,7 +87,7 @@ if (!isset($_SESSION["email"])) {
 
                         for ($j = 1; $j <= $nb_products_orderer; $j++) {
                             $products_ids = $stmt->fetch()['produit_id'];
-                            echo '<a href="produit.php?id=' . $products_ids . '">' . $products_ids . '</a>';
+                            echo '<a href="produit.php?id=' . $products_ids . '" class="produit-command-a">'. $products_ids .'</a>';
                             if($j < $nb_products_orderer){
                                 echo ", ";
                             } else {
