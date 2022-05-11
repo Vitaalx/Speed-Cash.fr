@@ -7,6 +7,7 @@ if(isset($_GET['lang'])) $langue = $_GET['lang'];
 
 include('./php/traduction_en.php');
 include ('./php/db.php');
+include ('phpqrcode/qrlib.php');
 
 if (!isset($_SESSION["email"])) {
     header("Location: ./index.php");
@@ -27,6 +28,8 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if ($nb > 0) {
 
         $cards = $stmt->fetchAll();
+        $lien = $cards[0]["id"];
+        QRcode::png($lien, './images/carte-speed-cash/qrcode-'.$lien.'.png');
 
         $sql_card_client = "SELECT * FROM request_card WHERE client_id = '".$_SESSION["id"]."' AND status = 1";
         //echo $sql;
@@ -67,6 +70,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="shortcut icon" type="image/png" href="./icons/favicon.png">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
 
@@ -134,8 +138,12 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     echo '<img src="./images/carte-speed-cash-back.png" alt="Carte de fidélité Speed-Cash">';
                     echo '<p style="color: whitesmoke;">Votre code CVC : <span id="code-card-back">' . $cards[$i - 1]["cvc"] . '</span></p>';
                     echo '</div>';
+                    echo '<img src="images/carte-speed-cash/qrcode-'.$lien.'.png" alt="QRcode carte">';
                     echo '<div class="separator-cards"></div>';
                 }
+
+
+
 
                 if ($nb == 0) echo '<p style="color: whitesmoke;">Vous n\'avez pas encore enregistré de carte sur notre site.</p>';
 

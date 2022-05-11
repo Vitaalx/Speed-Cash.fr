@@ -30,6 +30,7 @@ $id_product = htmlspecialchars($_GET["id"]);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="shortcut icon" type="image/png" href="./icons/favicon.png">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
@@ -116,7 +117,13 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         }
         echo '<div class="product-add-to-cart">';
-        echo '<a class="addPanier"  href="' . $url_add_panier .'"><button class="add-to-card-product" type="submit">Ajouter au panier</button></a>';
+        $quantity = $_POST["quantity"];
+        if($quantity > $produit[0]["stock"] || $produit[0]["stock"] === 0) {
+            echo '<a class="addPanier"  href="' . $url_add_panier .'"><button class="add-to-card-product" type="submit" disabled>Ajouter au panier</button></a>';
+        } else {
+            echo '<a class="addPanier"  href="' . $url_add_panier .'"><button class="add-to-card-product" type="submit">Ajouter au panier</button></a>';
+        }
+
         echo '</div>';
         echo '</div>';
         echo '</div>';

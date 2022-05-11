@@ -3,7 +3,7 @@ session_start();
 require 'panier.class.php';
 include("./php/traduction_en.php");
 $cart = new panier();
-//var_dump($_SESSION);
+var_dump($_SESSION['panier']);
 
 $langue = 0;
 if (isset($_GET['lang'])) $langue = $_GET['lang'];
@@ -26,6 +26,7 @@ if (!isset($_SESSION["email"])) {
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="shortcut icon" type="image/png" href="./icons/favicon.png">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
 
@@ -82,11 +83,11 @@ if (!isset($_SESSION["email"])) {
                     foreach ($products as $product) {
                         echo '<tr>';
                         if($product->type != "produit") {
-                            echo '<td><img src="images/presta-' . $product->id . '.png" class="img-product"
-                        alt="' . $product->nom . '" style="width: 70px; height: 70px;"></td>';
+                            echo '<td><a href="./produit.php?id=' . $product->id . '"><img src="images/presta-' . $product->id . '.png" class="img-product"
+                        alt="' . $product->nom . '" style="width: 70px; height: 70px;"></a></td>';
                         } else {
-                            echo '<td><img src="images/produit-' . $product->id . '.png" class="img-product"
-                        alt="' . $product->nom . '" style="width: 70px; height: 70px;"></td>';
+                            echo '<td><a href="./produit.php?id=' . $product->id . '"><img src="images/produit-' . $product->id . '.png" class="img-product"
+                        alt="' . $product->nom . '" style="width: 70px; height: 70px;"></a></td>';
                         }
                         echo '<td>' . $product->nom . '</td>';
                         $pricewithoutTVA = (1- ($product->TVA - 1)) * $product->prix;

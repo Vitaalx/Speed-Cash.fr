@@ -51,11 +51,38 @@ class panier{
     }
 
     public function add($product_id) {
-        if(isset($_SESSION['panier'][$product_id])) {
-            $_SESSION['panier'][$product_id]++;
-        } else {
-            $_SESSION['panier'][$product_id] = 1;
+        include "./php/db.php";
+        try {
+            // Connexion à la BDD
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "SELECT stock FROM produits WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([
+                $product_id,
+            ]);
+            $stock = $stmt->fetch();
+
+                if ($_SESSION['panier'][$product_id] < $stock['stock']) {
+
+                    if (isset($_SESSION['panier'][$product_id])) {
+                        if ($_SESSION['panier'][$product_id] == 10) {
+
+                        } else {
+                            $_SESSION['panier'][$product_id]++;
+                        }
+                    } else {
+                        $_SESSION['panier'][$product_id] = 1;
+                    }
+                } else {
+
+                }
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
+
     }
 
     public function del($product_id) {

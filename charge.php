@@ -3,7 +3,7 @@
 
   require_once('vendor/autoload.php');
   require_once('config/dbPayment.php');
-  require_once('lib/pdo_db.php');
+  require_once('./lib/pdo_db.php');
   require_once('models/Customer.php');
   require_once('models/Transaction.php');
 
@@ -68,3 +68,4 @@ $transaction->addTransaction($transactionData);
 
 // Redirect to success
 header('Location: /php/success.php?tid='.$charge->id.'&products='.$charge->description.'&amount='.$charge->amount);
+
