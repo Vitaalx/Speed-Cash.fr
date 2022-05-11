@@ -51,6 +51,19 @@ q.send();
         q.send();
     }
 
+    function listCompanyAdmin(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('companyAdminList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listCompanyAdmin.php");
+        q.send();
+    }
+
     function listRequestCard(){
         const q = new XMLHttpRequest();
         q.onreadystatechange = function() {
@@ -83,6 +96,19 @@ q.send();
             if(q.readyState === 4) {
                 const response = q.responseText;
                 const list = document.getElementById('partenaireList');
+                list.innerHTML = response;
+            }
+        };
+        q.open("GET", "../../../php/listPart.php");
+        q.send();
+    }
+
+    function listPartAdmin(){
+        const q = new XMLHttpRequest();
+        q.onreadystatechange = function() {
+            if(q.readyState === 4) {
+                const response = q.responseText;
+                const list = document.getElementById('partenaireAdminList');
                 list.innerHTML = response;
             }
         };
