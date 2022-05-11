@@ -10,7 +10,7 @@ if (isset($_POST['id']) AND !empty($_POST['id'])) {
     $nb = $q->rowCount();
     $r = $q->fetch();
 
-    echo $r["code"] ."-". $r["card_number"] . "-" . $r["date_expiry"] . "-" . $r["cvc"] . "-" . $r["nom"] . "-" . $r["prénom"];
+    echo $r["code"] ."/". $r["card_number"] . "/" . $r["date_expiry"] . "/" . $r["cvc"] . "/" . $r["nom"] . "/" . $r["prénom"];
 
 
 }

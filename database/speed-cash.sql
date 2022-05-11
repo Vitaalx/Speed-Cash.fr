@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 10 mai 2022 à 16:52
+-- Généré le : mer. 11 mai 2022 à 07:22
 -- Version du serveur :  5.7.24
--- Version de PHP : 7.4.1
+-- Version de PHP : 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -113,7 +112,7 @@ INSERT INTO `commandes` (`id`, `heureCommande`, `dateCommande`, `montant`, `id_c
 (1, '19:57:47', '2022-04-14', 49, 91, '0', '0'),
 (2, '17:55:43', '2022-04-17', 99, 0, '0', '0'),
 (3, '17:55:43', '2022-04-17', 189, 91, '0', '0'),
-(22, '21:38:39', '2022-04-19', 237, 92, 'ch_3KqMskLvgKkU1KjF077p5zct', '0'),
+(22, '21:38:39', '2022-04-19', 237, 91, 'ch_3KqMskLvgKkU1KjF077p5zct', '0'),
 (28, '21:53:31', '2022-04-19', 219, 92, 'ch_3KqN78LvgKkU1KjF1JDDLwIi', '0'),
 (29, '23:22:06', '2022-04-19', 168, 92, 'ch_3KqOUrLvgKkU1KjF10eQ6cz3', 'RF#2839931'),
 (30, '23:23:13', '2022-04-19', 168, 92, 'ch_3KqOUrLvgKkU1KjF10eQ6cz3', 'RF#8177581'),
@@ -129,7 +128,34 @@ INSERT INTO `commandes` (`id`, `heureCommande`, `dateCommande`, `montant`, `id_c
 (40, '15:33:36', '2022-05-08', 238, 100, 'ch_3KxAEtLvgKkU1KjF1vAI0z7M', 'RF#9800981'),
 (41, '15:35:34', '2022-05-08', 17800, 100, 'ch_3KxAGnLvgKkU1KjF0smbmUzg', 'RF#2788271'),
 (42, '23:30:29', '2022-05-09', 39600, 100, 'ch_3Kxe9wLvgKkU1KjF0il8W8RL', 'RF#1599742'),
-(43, '23:30:44', '2022-05-09', 39600, 100, 'ch_3Kxe9wLvgKkU1KjF0il8W8RL', 'RF#6787587');
+(43, '23:30:44', '2022-05-09', 39600, 100, 'ch_3Kxe9wLvgKkU1KjF0il8W8RL', 'RF#6787587'),
+(44, '02:23:31', '2022-05-11', 128800, 100, 'ch_3Ky3KwLvgKkU1KjF1tbKNVyK', 'RF#5474450'),
+(45, '02:24:15', '2022-05-11', 128800, 100, 'ch_3Ky3KwLvgKkU1KjF1tbKNVyK', 'RF#7763396'),
+(46, '02:30:31', '2022-05-11', 128800, 100, 'ch_3Ky3KwLvgKkU1KjF1tbKNVyK', 'RF#3619152'),
+(47, '02:33:57', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#6354630'),
+(48, '02:34:49', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#8222956'),
+(49, '02:34:52', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#1664505'),
+(50, '02:35:01', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#8117651'),
+(51, '02:35:01', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#2000265'),
+(52, '02:35:04', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#5814910'),
+(53, '02:35:11', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#5168080'),
+(54, '02:35:14', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#4057148'),
+(55, '02:36:11', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#6550502'),
+(56, '02:36:17', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#8250640'),
+(57, '02:36:28', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#5034310'),
+(58, '02:36:37', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#4734673'),
+(59, '02:36:40', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#2806633'),
+(60, '02:36:42', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#2291090'),
+(61, '02:37:18', '2022-05-11', 30700, 100, 'ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'RF#7303390'),
+(83, '03:12:10', '2022-05-11', 30700, 100, 'ch_3Ky44sLvgKkU1KjF0W65Na7e', 'RF#1828019'),
+(84, '03:13:29', '2022-05-11', 30700, 100, 'ch_3Ky47ILvgKkU1KjF0CmPuxk1', 'RF#4222299'),
+(85, '03:13:39', '2022-05-11', 30700, 100, 'ch_3Ky47ILvgKkU1KjF0CmPuxk1', 'RF#5727878'),
+(86, '03:14:00', '2022-05-11', 30700, 100, 'ch_3Ky47ILvgKkU1KjF0CmPuxk1', 'RF#3843573'),
+(87, '03:14:17', '2022-05-11', 30700, 100, 'ch_3Ky47ILvgKkU1KjF0CmPuxk1', 'RF#7119981'),
+(88, '03:15:01', '2022-05-11', 30700, 100, 'ch_3Ky47ILvgKkU1KjF0CmPuxk1', 'RF#9772981'),
+(89, '03:15:16', '2022-05-11', 30700, 100, 'ch_3Ky47ILvgKkU1KjF0CmPuxk1', 'RF#1664735'),
+(90, '03:18:01', '2022-05-11', 30700, 100, 'ch_3Ky4BgLvgKkU1KjF0N1ofGBs', 'RF#4824754'),
+(91, '03:19:08', '2022-05-11', 51600, 100, 'ch_3Ky4ClLvgKkU1KjF0lUZgSSa', 'RF#4784153');
 
 -- --------------------------------------------------------
 
@@ -166,20 +192,28 @@ INSERT INTO `commentaire` (`id`, `id_produit`, `contenue`, `date`, `user`, `sign
 
 CREATE TABLE `contrat` (
   `id` int(11) NOT NULL,
-  `id_entreprise_part` int(11) NOT NULL,
   `date_crea` text NOT NULL,
   `date_fin` text NOT NULL,
-  `type` int(11) NOT NULL,
-  `path_contrat` text NOT NULL
+  `type` int(11) DEFAULT NULL,
+  `path_contrat` text,
+  `ref` text NOT NULL,
+  `content` text NOT NULL,
+  `mail` text NOT NULL,
+  `id_entreprise_part` int(11) NOT NULL,
+  `valid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `contrat`
 --
 
-INSERT INTO `contrat` (`id`, `id_entreprise_part`, `date_crea`, `date_fin`, `type`, `path_contrat`) VALUES
-(1, 1, '2022-04-30', '2023-04-30', 12, 'contrat/entreprise-disney.png'),
-(2, 2, '2022-04-28', '2023-04-28', 7, '../path/contrat');
+INSERT INTO `contrat` (`id`, `date_crea`, `date_fin`, `type`, `path_contrat`, `ref`, `content`, `mail`, `id_entreprise_part`, `valid`) VALUES
+(1, '2022-04-30', '2023-04-30', 12, 'contrat/entreprise-disney.png', '', '', '', 1, NULL),
+(2, '2022-04-28', '2023-04-28', 7, '../path/contrat', '', '', '', 2, NULL),
+(3, '2022-05-06', '2023-05-06', 8, 'contrat/bowling-pdg', '162748724', 'yguegrehr', 'bowling-pdg@gmail.com', 3, 1),
+(4, '2022-05-09', '2023-05-09', 7, 'contrat/aquaboulvard-pdg', '32683724', 'ezezrezfezf', 'aquaboulvard-pdg@gmail.com', 4, 1),
+(7, '2022-05-11', '05/17/2022', NULL, NULL, '131312', 'sdfsdfdfsf', 'azerty@gmail.com', 1, NULL),
+(8, '2022-05-11', '09/15/2023', NULL, NULL, '1431243', 'iuzedhzuierhrzrezeze', 'williamflorentin@outlook.com', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -205,6 +239,20 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `created_at`)
 ('cus_LeTBMreyZM1BeJ', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-08 15:33:36'),
 ('cus_LeTDT9ymocnXfN', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-08 15:35:34'),
 ('cus_Ley6nhAbeoistd', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-09 23:30:29'),
+('cus_LfO7gXcPJzEZU1', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 02:23:31'),
+('cus_LfOgoZRqFWjqKE', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 02:58:56'),
+('cus_LfOh3CUiMqDq7a', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 02:59:45'),
+('cus_LfOHdtAscACeAj', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 02:33:57'),
+('cus_LfOig0k83YwfTU', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:01:15'),
+('cus_LfOo9NLYCmg8PM', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:06:28'),
+('cus_LfOoF2goNE2zVF', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:07:17'),
+('cus_LfOonsz7amUFtP', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:06:47'),
+('cus_LfOrD1VCoOMI4P', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:10:13'),
+('cus_LfOs1ZiM4UQS7K', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:10:59'),
+('cus_LfOsdSiC2zCPnP', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:10:31'),
+('cus_LfOv2JJimtadeJ', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:13:29'),
+('cus_LfOzla0kHf2duv', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:18:01'),
+('cus_LfP0CBVk62UJaB', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-05-11 03:19:08'),
 ('cus_LPxkOn62qHQKA3', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-30 22:09:20'),
 ('cus_LQF3E7A0acAja0', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-31 16:02:15'),
 ('cus_LQF7sbnpBeldYb', 'Liam', 'Macquaire', 'liamdu92@gmail.com', '2022-03-31 16:05:26'),
@@ -320,7 +368,9 @@ CREATE TABLE `entreprise_part` (
 
 INSERT INTO `entreprise_part` (`id`, `id_user_part`, `nom`, `id_contrat_part`) VALUES
 (1, 101, 'Disney', 1),
-(2, 102, 'Grand-Rex', 2);
+(2, 102, 'Grand-Rex', 2),
+(5, 105, 'Aquaboulvard PDG', 4),
+(6, 106, 'Bowling PDG', 3);
 
 -- --------------------------------------------------------
 
@@ -339,7 +389,7 @@ CREATE TABLE `facture` (
 --
 
 INSERT INTO `facture` (`id`, `ref_article`, `id_commande`) VALUES
-(1, 'RF#FR100001', 3);
+(1, 'RFFR100001', 22);
 
 -- --------------------------------------------------------
 
@@ -384,7 +434,8 @@ INSERT INTO `note_produits` (`id`, `user_id`, `produit_id`, `note`) VALUES
 (25, 74, 10, 2),
 (26, 74, 13, 5),
 (27, 74, 11, 5),
-(28, 89, 4, 0);
+(28, 89, 4, 0),
+(29, 100, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -420,17 +471,19 @@ CREATE TABLE `produits` (
 --
 
 INSERT INTO `produits` (`id`, `prix`, `nom`, `note`, `description`, `categorie`, `depot`, `marque`, `ref_fournisseur`, `remise`, `TVA`, `sous_categorie`, `fournisseur`, `modele`, `date_enter`, `stock`, `id_fich_tech`, `date_end`, `id_part`, `type`) VALUES
-(3, 99, 'Souris Razer Basilisk V2', 2, 'Quel que soit le type de jeu ou encore votre style de jeu, la Razer Basilisk V2 répond toujours présente. Sans fil, cette souris dispose de deux modes de fonctionnement pour vous garantir une liberté incroyable.', 'Gamer', 1, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-10', 1000, 123, NULL, NULL, 'produit'),
-(4, 109, 'Souris Razer DeathAdderV2', 2, 'Venez à bout des adversaires les plus coriaces avec la souris Razer DeathAdder v2 Pro et sa double connectivité sans fil RF 2.4 GHz/Bluetooth 5.0. Offrant une totale liberté de mouvement et de contrôle, elle intègre un capteur optique Razer Focus+ de 20000 dpi et 8 boutons programmables.', 'Gamer', 1, 'Razer', NULL, 0, 1.1, 'PC', NULL, NULL, '2022-05-07', 1000, 121, NULL, NULL, 'produit'),
-(5, 129, 'ASUS ROG Spatha X', 0, 'Pour vous mesurer à vos adversaires, la souris ASUS ROG Spatha X sera un allié de poids. Sans fil via la connectivité RF 2.4 GHz ou filaire, cette souris offre 12 boutons programmables, un capteur optique de 12000 DPI et un rétroéclairage RGB personnalisable. ', 'Gamer', 2, 'ASUS', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-08', 1000, 122, NULL, NULL, 'produit'),
-(10, 179, 'Corsair Gaming Nightsword', 2, '8 boutons programmables, éclairage LED RGB  4 zones, poids ajustable de 119 gr à 141 gr et sensibilité réglable au DPI près, la Corsair Nightsword RGB vous permettra de relever tous les défis en s\'adaptant à votre style de jeu. ', 'Gamer', 2, 'Corsair', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-09', 1000, 119, NULL, NULL, 'produit'),
+(3, 99, 'Souris Razer Basilisk V2', 1.5, 'Quel que soit le type de jeu ou encore votre style de jeu, la Razer Basilisk V2 répond toujours présente. Sans fil, cette souris dispose de deux modes de fonctionnement pour vous garantir une liberté incroyable.', 'Gamer', 1, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-10', 999, 123, NULL, NULL, 'produit'),
+(4, 109, 'Souris Razer DeathAdderV2', 2, 'Venez à bout des adversaires les plus coriaces avec la souris Razer DeathAdder v2 Pro et sa double connectivité sans fil RF 2.4 GHz/Bluetooth 5.0. Offrant une totale liberté de mouvement et de contrôle, elle intègre un capteur optique Razer Focus+ de 20000 dpi et 8 boutons programmables.', 'Gamer', 1, 'Razer', NULL, 0, 1.1, 'PC', NULL, NULL, '2022-05-07', 999, 121, NULL, NULL, 'produit'),
+(5, 129, 'ASUS ROG Spatha X', 0, 'Pour vous mesurer à vos adversaires, la souris ASUS ROG Spatha X sera un allié de poids. Sans fil via la connectivité RF 2.4 GHz ou filaire, cette souris offre 12 boutons programmables, un capteur optique de 12000 DPI et un rétroéclairage RGB personnalisable. ', 'Gamer', 2, 'ASUS', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-08', 999, 122, NULL, NULL, 'produit'),
+(10, 179, 'Corsair Gaming Nightsword', 2, '8 boutons programmables, éclairage LED RGB  4 zones, poids ajustable de 119 gr à 141 gr et sensibilité réglable au DPI près, la Corsair Nightsword RGB vous permettra de relever tous les défis en s\'adaptant à votre style de jeu. ', 'Gamer', 2, 'Corsair', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-09', 999, 119, NULL, NULL, 'produit'),
 (11, 79, 'Logitech Pro X Superlight', 5, 'Foncez vers la victoire grâce à la souris Logitech Wireless Gaming Pro X Superlight. Nouvelle arme de prédilection des meilleurs athlètes professionnels d\'eSports, elle pèse moins de 63 grammes et offre un glissement sans l moindre friction.', 'Gamer', 2, 'Logitech', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-01', 1000, 120, NULL, NULL, 'produit'),
 (12, 89, 'LogitechG G502 Lightspeed', 0, 'Disposant d\'une conception sans fil avec technologie Lightspeed, la Logitech G502 Lightspeed fera de vous une machine redoutable et redoutée. En effet, elle est équipée d\'un capteur optique HERO de 16000 dpi pour une précision et une réactivité optimale.', 'Gamer', 3, 'Logitech', NULL, 0, 1, 'PC', NULL, NULL, '2022-05-02', 1000, 118, NULL, NULL, 'produit'),
 (13, 59, 'MSI Clutch GM50', 5, 'Gardez la main sur votre jeu avec la souris gaming MSI Clutch GM50 ! Parfaite pour les FPS, elle s\'appuie sur une conception minutieuse pour vous offrir une nouvelle expérience de jeu. Son capteur optique PMW-3330 permet de réaliser des mouvements d\'une très grande précision.', 'Gamer', 4, 'MSI', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 117, NULL, NULL, 'produit'),
 (14, 199, 'Razer Atheris (Mercury)', 0, 'Optimisée à la fois pour le travail et le jeu, la souris sans fil Razer Atheris vous permettra de tirer le meilleur de vous-même. Cette souris de poche vous sera utile pour jongler entre les réunions et le champ de bataille grâce notamment à une double connectivité et à une autonomie longue durée.', 'Gamer', 5, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 116, NULL, NULL, 'produit'),
 (15, 159, 'Razer Basilisk v3', 0, 'Devenez imbattable grâce à la souris pour gamer Razer Basilisk v3. Embarquant un capteur optique Razer Focus+ de 26 000 dpi, elle vous offre une précision féroce afin que vous ne ratiez plus jamais votre cible. Et avec 11 boutons programmables, vous disposez d\'un arsenal de commandes à portée.', 'Gamer', 3, 'Razer', NULL, 0, 1, 'PC', NULL, NULL, '2022-04-06', 1000, 115, NULL, NULL, 'produit'),
 (17, 62, 'Billet de DisneyLand', 0, 'Grâce à nous vous pouvez aller voyager dans l\'univers de Mickey', 'Parc Attraction', NULL, NULL, NULL, 0.8, 1.05, NULL, NULL, NULL, '2022-05-09', 10, NULL, '2022-05-11', 1, 'prestation'),
-(18, 10, 'Billet cinéma Grand-Rex', 0, 'Vous pouvez obtenir des places au cinéma le Grand-rex à prix réduit !', 'Cinéma', NULL, NULL, NULL, 0.7, 1.1, NULL, NULL, NULL, '2022-05-08', 10, NULL, '2022-05-12', 2, 'prestation');
+(18, 10, 'Billet cinéma Grand-Rex', 0, 'Vous pouvez obtenir des places au cinéma le Grand-rex à prix réduit !', 'Cinéma', NULL, NULL, NULL, 0.7, 1.1, NULL, NULL, NULL, '2022-05-08', 10, NULL, '2022-05-12', 2, 'prestation'),
+(20, 5, 'Billet pour Bowling', 0, 'Passez un super moment avec vos amis en jouant au Bowling grâce à Bowling', 'Loisirs', NULL, NULL, NULL, 0.7, 1.05, NULL, NULL, NULL, '2022-05-11', 20, NULL, '2022-05-28', 3, 'prestation'),
+(21, 12, 'Billet pour Aquaboulevard', 0, 'Passez un super moment à la piscine avec vos amis, parfait pour un anniversaire !', 'Loisirs', NULL, NULL, NULL, 0.8, 1.1, NULL, NULL, NULL, '2022-05-12', 100, NULL, '2022-05-28', 4, 'prestation');
 
 -- --------------------------------------------------------
 
@@ -488,7 +541,63 @@ INSERT INTO `produits_commandes` (`id`, `produit_id`, `commande_id`) VALUES
 (45, 12, 43),
 (46, 5, 43),
 (47, 3, 43),
-(48, 11, 43);
+(48, 11, 43),
+(49, 3, 44),
+(50, 4, 44),
+(51, 3, 45),
+(52, 4, 45),
+(53, 3, 46),
+(54, 4, 46),
+(55, 4, 47),
+(56, 3, 47),
+(57, 4, 48),
+(58, 3, 48),
+(59, 4, 49),
+(60, 3, 49),
+(61, 4, 50),
+(62, 3, 50),
+(63, 4, 51),
+(64, 3, 51),
+(65, 4, 52),
+(66, 3, 52),
+(67, 4, 53),
+(68, 3, 53),
+(69, 4, 54),
+(70, 3, 54),
+(71, 4, 55),
+(72, 3, 55),
+(73, 4, 56),
+(74, 3, 56),
+(75, 4, 57),
+(76, 3, 57),
+(77, 4, 58),
+(78, 3, 58),
+(79, 4, 59),
+(80, 3, 59),
+(81, 4, 60),
+(82, 3, 60),
+(83, 4, 61),
+(84, 3, 61),
+(85, 3, 83),
+(86, 4, 83),
+(87, 3, 84),
+(88, 4, 84),
+(89, 3, 85),
+(90, 4, 85),
+(91, 3, 86),
+(92, 4, 86),
+(93, 3, 87),
+(94, 4, 87),
+(95, 3, 88),
+(96, 4, 88),
+(97, 3, 89),
+(98, 4, 89),
+(99, 3, 90),
+(100, 4, 90),
+(101, 3, 91),
+(102, 4, 91),
+(103, 10, 91),
+(104, 5, 91);
 
 -- --------------------------------------------------------
 
@@ -681,7 +790,21 @@ INSERT INTO `transactions` (`id`, `customer_id`, `product`, `amount`, `currency`
 ('ch_3KudGVLvgKkU1KjF1czrewc1', 'cus_Lbqy0otUjpbt8G', '17,18', 72, 'eur', 'succeeded', '2022-05-01 15:56:48'),
 ('ch_3KxAEtLvgKkU1KjF1vAI0z7M', 'cus_LeTBMreyZM1BeJ', '5,4', 238, 'eur', 'succeeded', '2022-05-08 15:33:36'),
 ('ch_3KxAGnLvgKkU1KjF0smbmUzg', 'cus_LeTDT9ymocnXfN', '12', 17800, 'eur', 'succeeded', '2022-05-08 15:35:34'),
-('ch_3Kxe9wLvgKkU1KjF0il8W8RL', 'cus_Ley6nhAbeoistd', '12,5,3,11', 39600, 'eur', 'succeeded', '2022-05-09 23:30:29');
+('ch_3Kxe9wLvgKkU1KjF0il8W8RL', 'cus_Ley6nhAbeoistd', '12,5,3,11', 39600, 'eur', 'succeeded', '2022-05-09 23:30:29'),
+('ch_3Ky3KwLvgKkU1KjF1tbKNVyK', 'cus_LfO7gXcPJzEZU1', '3,4', 128800, 'eur', 'succeeded', '2022-05-11 02:23:31'),
+('ch_3Ky3V2LvgKkU1KjF1bKUqVq6', 'cus_LfOHdtAscACeAj', '4,3', 30700, 'eur', 'succeeded', '2022-05-11 02:33:57'),
+('ch_3Ky3tDLvgKkU1KjF0SgE7H8Y', 'cus_LfOgoZRqFWjqKE', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 02:58:56'),
+('ch_3Ky3u0LvgKkU1KjF12Jrk4Q5', 'cus_LfOh3CUiMqDq7a', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 02:59:45'),
+('ch_3Ky3vSLvgKkU1KjF1yVKuq2n', 'cus_LfOig0k83YwfTU', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:01:15'),
+('ch_3Ky40VLvgKkU1KjF1egx5jGg', 'cus_LfOo9NLYCmg8PM', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:06:28'),
+('ch_3Ky40oLvgKkU1KjF15bFXhJe', 'cus_LfOonsz7amUFtP', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:06:47'),
+('ch_3Ky41ILvgKkU1KjF1Z5Emcs6', 'cus_LfOoF2goNE2zVF', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:07:17'),
+('ch_3Ky448LvgKkU1KjF0Eo0G5mL', 'cus_LfOrD1VCoOMI4P', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:10:13'),
+('ch_3Ky44QLvgKkU1KjF0MJU1kOB', 'cus_LfOsdSiC2zCPnP', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:10:31'),
+('ch_3Ky44sLvgKkU1KjF0W65Na7e', 'cus_LfOs1ZiM4UQS7K', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:10:59'),
+('ch_3Ky47ILvgKkU1KjF0CmPuxk1', 'cus_LfOv2JJimtadeJ', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:13:29'),
+('ch_3Ky4BgLvgKkU1KjF0N1ofGBs', 'cus_LfOzla0kHf2duv', '3,4', 30700, 'eur', 'succeeded', '2022-05-11 03:18:01'),
+('ch_3Ky4ClLvgKkU1KjF0lUZgSSa', 'cus_LfP0CBVk62UJaB', '3,4,10,5', 51600, 'eur', 'succeeded', '2022-05-11 03:19:08');
 
 -- --------------------------------------------------------
 
@@ -710,11 +833,13 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `nom`, `prénom`, `email`, `motDePasse`, `age`, `nationalité`, `confirmKey`, `compteActif`, `point_fidelite`, `role`) VALUES
 (76, 'Macquaire', 'Liam', 'liamdu92@gmail.comsdq', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '82454797582150', 0, 0, 'client'),
 (91, 'Florentin', 'William', 'liamdu92@hotmail.fr', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '06655023069808', 0, 0, 'client'),
-(100, 'Macquaire', 'Liam', 'liam.macquaire2002@gmail.com', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '30477767638756', 1, 502270, 'entreprise'),
+(100, 'Macquaire', 'Liam', 'liam.macquaire2002@gmail.com', '9127f6312222c4eb70a02281ec830c4e9524a760', 19, 'FR', '30477767638756', 1, 9446270, 'entreprise'),
 (101, 'Deniro', 'Robert', 'patrondisney@disneyland.fr', '3feb1ce9764b33b4b72f25a3dda7c3484511ff41', 44, 'FR', '873732831209', 1, 0, 'partenaire'),
 (102, 'Axel', 'Cazbar', 'patrongrand-rex@grandrex.fr', '818b13d171898e381c2d7e33ead0aec4557530d1', 56, 'FR', '1275894373', 1, 0, 'partenaire'),
 (103, 'Admin', 'Admin', 'admin@speed-cash.fr', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 19, 'FR', '16749373292013', 1, NULL, 'administrateur'),
-(104, 'Zitouni', 'Maram', 'mzitouni@myges.fr', 'e8b58582ca276f2a077a6b7d162849e0a922d68e', 21, 'TU', '89422762470331', 1, 10000, 'client');
+(104, 'Zitouni', 'Maram', 'mzitouni@myges.fr', 'e8b58582ca276f2a077a6b7d162849e0a922d68e', 21, 'TU', '89422762470331', 1, 10000, 'client'),
+(105, 'PDG Aquaboulvard', 'PDG', 'AquaBoulvard', '7d63c13c50c384a52e9859d5e1129f0375de00b9', 57, 'SU', '75859039342', 1, NULL, 'partenaire'),
+(106, 'PDG Bowling', 'PDG', 'Bowling', 'c3999cf1e9213dd16b93b170d098d6a9b800f7d9', 65, 'FR', '67480932930', 1, NULL, 'partenaire');
 
 --
 -- Index pour les tables déchargées
@@ -754,8 +879,7 @@ ALTER TABLE `commentaire`
 -- Index pour la table `contrat`
 --
 ALTER TABLE `contrat`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_entreprise_part` (`id_entreprise_part`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `customers`
@@ -859,7 +983,7 @@ ALTER TABLE `code_promo`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT pour la table `commentaire`
@@ -871,7 +995,7 @@ ALTER TABLE `commentaire`
 -- AUTO_INCREMENT pour la table `contrat`
 --
 ALTER TABLE `contrat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `entreprise`
@@ -883,7 +1007,7 @@ ALTER TABLE `entreprise`
 -- AUTO_INCREMENT pour la table `entreprise_part`
 --
 ALTER TABLE `entreprise_part`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `facture`
@@ -901,19 +1025,19 @@ ALTER TABLE `fich_tech`
 -- AUTO_INCREMENT pour la table `note_produits`
 --
 ALTER TABLE `note_produits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT pour la table `produits`
 --
 ALTER TABLE `produits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `produits_commandes`
 --
 ALTER TABLE `produits_commandes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT pour la table `qr_code`
@@ -937,7 +1061,7 @@ ALTER TABLE `request_card`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- Contraintes pour les tables déchargées

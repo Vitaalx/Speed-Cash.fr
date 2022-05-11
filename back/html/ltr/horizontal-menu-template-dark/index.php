@@ -100,7 +100,6 @@ include '../../../php/bdd.php';
 
                         } catch (PDOException $e) {
                             echo $e->getMessage();
-                            header('location: ../html/ltr/horizontal-menu-template-dark/page-facture-list.php?message=error');
                         }
 
                         ?>
