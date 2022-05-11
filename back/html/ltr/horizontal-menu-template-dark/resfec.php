@@ -99,16 +99,30 @@ try {
 		page{
 			max-width: 100%;
 		}
-		table {
-			width: 100%;
-			color: #717375;
-			font-family: helvetica;
-			line-height: 5mm;
-			border-collapse: collapse;
-		}
+
 		img{
 			width: 100%;
 		}
+
+        .table-header {
+            position: relative;
+            left: 520px;
+            top: -80px;
+        }
+
+        .table-container {
+            position: relative;
+            top: 200px;
+            left: 160px;
+            text-align: left;
+        }
+
+        .table-footer {
+            position: relative;
+            top: 400px;
+            left: 600px;
+        }
+
 		h2 { margin: 0; padding: 0; }
 		p { margin: 5px; color: #717375; }
 		.border th {
@@ -122,7 +136,7 @@ try {
 		}
 		.border td {
 			border: 1px solid #CFD1D2;
-			padding: 5px 10px;
+			padding: 5px 12px;
 			text-align: center;
 		}
 		.no-border {
@@ -135,25 +149,31 @@ try {
 		.p-33 { width: 33%; } .p-45 { width: 45%; }
 	</style>
     <page_header>
-		<table>
+        <table>
+            <tr>
+                <td style="text-align: left;">
+                <img src="https://i.imgur.com/IvZsNIG.png" width="280" alt="Logo Speed-Cash.fr"><br /><br /><br />
+                </td>
+            </tr>
+        </table>
+		<table class="table-header">
 			<tr>
 				<td>
 					<b>SPEED-CASH</b><br /><br /><br />
-					<img src="https://i.imgur.com/IvZsNIG.png" width="280" border="0" alt="Logo Speed-Cash.fr">
 				</td>
 			</tr>
             <tr>
                 <td>
 					<b>Détails :</b><br />
 					Date de facturation : <?php echo $commandeinfo["dateCommande"] ?><br />
-					Numéro de facture : <?php echo $ref ?>
+					Numéro de facture : <?php echo $ref ?><br />
 				</td>
 			</tr>
             <tr>
                 <td>
 					<b>Facturer :</b><br />
 					<?php echo $clientinfo["nom"] . " " . $clientinfo["prénom"] ?><br />
-					Adresse mail : <?php echo $clientinfo["email"]; ?>
+					Adresse mail : <?php echo $clientinfo["email"]; ?><br />
 				</td>
 			</tr>
 		</table>
@@ -163,10 +183,10 @@ try {
 			SPEED-CASH, SARL<br />
 			120 rue du marechal foch 75012<br />
 			Matricule 21665747645<br />
-			TVA intracommunautaire : FR <?php echo $relTVA ?>%
+			TVA intracommunautaire : FR <?php echo $relTVA ?>%<br />
 		</p>
     </page_footer>
-    <table>
+    <table class="table-container">
 		<thead>
 			<tr>
 				<th>
@@ -215,34 +235,31 @@ try {
             ?>
 			<!-- fin de la boucle -->
             <br />
+        </tbody>
+    </table>
+    <table class="table-footer">
+        <tbody>
             <tr>
-                <td colspan="3" class="no-border">
+                <th colspan="3">
                     Detail facture:
-                </td>
+                </th>
             </tr>
+            <br />
 			<tr>
-                
-				<td colspan="3"></td>
-				<td>
+				<td colspan="3">
 					Total HT
-				</td>
-				<td>
+                </td>
+                <td>
                 <?php echo somme($prodinfo, $nbCommande) ?>€
 				</td>
 			</tr>
 			<tr>
-                
-				<td colspan="3"></td>
-				<td>
+				<td colspan="3">
 					TVA (<?php echo $relTVA; ?>%)
-				</td>
-				<td>
 				</td>
 			</tr>
 			<tr>
-                
-				<td colspan="3"></td>
-				<td>
+				<td colspan="3">
 					Total TTC
 				</td>
 				<td>
