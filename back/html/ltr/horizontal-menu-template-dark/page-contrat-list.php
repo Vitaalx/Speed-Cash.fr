@@ -108,22 +108,6 @@
 
         }
     </script>
-
-    <script>
-        function confirmDelete() {
-            if ( confirm( "Êtes vous sûr de vouloir supprimer cet entreprise ?" ) ) {
-                // Code à éxécuter si le l'utilisateur clique sur "OK"
-
-                location.href = "deleteCompany.php";
-                return true;
-            } else {
-                // Code à éxécuter si l'utilisateur clique sur "Annuler"
-                //alert("Suppression annulée");
-                return false;
-            }
-
-        }
-    </script>
     
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>

@@ -18,7 +18,7 @@ foreach($responses as $response) {
   echo '<td>' . $response['id_user_part'] . '</td>';
   echo "<td>" . $response['nom'] . "</td>";
   echo "<td>" . $response['id_contrat_part'] . "</td>";
-  echo '<td><a href="../../../html/ltr/horizontal-menu-template-dark/page-partenaire-edit.php?id='.$response['id'].'"><i class="bx bx-edit-alt"></i></a><a href="../../../php/deletePart.php?id=' . $response['id'] . '"><i class="bx bxs-trash" onclick="return confirmDelete()"></i></a></td>';
+  echo '<td><a href="../../../php/deletePart.php?id=' . $response['id'] . '"><i class="bx bxs-trash" onclick="return confirmDelete()"></i></a></td>';
   echo "</tr>";
 }
 
